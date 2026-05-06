@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader">
+        <div class="loader-logo">Proovia</div>
+        <div class="loader-bar">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-overlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#coverage">Coverage</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+       <button class="btn-nav" 
+    onclick="window.location.href='log.html'">
+    My Account
+</button>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="photo/logo.png" alt="Proovia Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#coverage">Coverage</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+
+        </ul>
+        <!-- Hamburger -->
+        <button id="hamburger" class="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                <div class="theme-toggle-thumb" id="themeThumb">☀️</div>
+            </div>
+          <button class="btn-nav" onclick="window.location.href='log.html'">My Account
+</button>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-pill">
+                <div class="hero-pill-dot"></div>
+                Delivering across all of England — always on time
+            </div>
+
+            <h1>ACROSS<br>THE <span>MILES</span>WITH A SMILE</h1>
+            <br>
+            <p class="hero-sub">Your trusted furniture and courier delivery partner. Two-man team included.
+                Room-to-room. Always on time, always with care.</p>
+            <br>
+            <div class="hero-search-bar">
+                <div class="search-field">
+                    <div class="search-label">📍 Pick Up</div>
+                    <input type="text" placeholder="Enter pickup address">
+                </div>
+                <div class="search-divider"></div>
+                <div class="search-field">
+                    <div class="search-label">🏁 Drop Off</div>
+                    <input type="text" placeholder="Enter delivery address">
+                </div>
+                <button class="btn-search">Get Quote →</button>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-num">55<span>K+</span></div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <div class="stat-num">160<span>+</span></div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <div class="stat-num">50<span>+</span></div>
+                    <div class="stat-label">Vans on the Road</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <div class="stat-num">4.7<span>★</span></div>
+                    <div class="stat-label">Trustpilot Rating</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- page 2 -->
+    <div class="trust-bar">
+        <div class="trust-item">🔒 Fully Insured Deliveries</div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">👥 Two-Man Team Always</div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">📍 Live GPS Tracking</div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">🏴 All of England Covered</div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">⭐ 4.7 on Trustpilot</div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <div class="services-header">
+            <div>
+                <div class="section-eyebrow reveal">Our Services</div>
+                <h2 class="section-title reveal">WE MOVE EVERYTHING<br>EVERYWHERE</h2>
+            </div>
+            <p class="section-desc reveal">From a single sofa to a full house move — we handle it all with our
+                professional two-man team, delivering room-to-room across England.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon-wrap">🪑</div>
+                <h3>Single Items</h3>
+                <p>Sofa, wardrobe, armchair, fridge — any single piece moved with care and precision. Our team wraps,
+                    carries, and places it exactly where you want it.</p>
+                <div class="service-arrow">Learn more →</div>
+            </div>
+            <div class="service-card reveal" style="transition-delay:0.1s">
+                <div class="service-icon-wrap">🏠</div>
+                <h3>Residential Removals</h3>
+                <p>Full home removals made simple. We organise the entire move — packing, loading, transport, and
+                    placement — so you don't have to stress a thing.</p>
+                <div class="service-arrow">Learn more →</div>
+            </div>
+            <div class="service-card reveal" style="transition-delay:0.2s">
+                <div class="service-icon-wrap">🏢</div>
+                <h3>Commercial & Office</h3>
+                <p>Office relocations, furniture delivery for businesses, retail stock, and custom equipment — all
+                    handled with the same care and professionalism.</p>
+                <div class="service-arrow">Learn more →</div>
+            </div>
+            <div class="service-card reveal" style="transition-delay:0.3s">
+                <div class="service-icon-wrap">📦</div>
+                <h3>Courier Deliveries</h3>
+                <p>Need a parcel, large box, or awkward item shipped across the country? We've got the vans, the team,
+                    and the system to make it happen fast.</p>
+                <div class="service-arrow">Learn more →</div>
+            </div>
+            <div class="service-card reveal" style="transition-delay:0.4s">
+                <div class="service-icon-wrap">🛋️</div>
+                <h3>Furniture Assembly</h3>
+                <p>We don't just deliver — our team assembles your furniture on-site, setting up beds, wardrobes,
+                    shelves and more so you can settle in immediately.</p>
+                <div class="service-arrow">Learn more →</div>
+            </div>
+            <div class="service-card reveal" style="transition-delay:0.5s">
+                <div class="service-icon-wrap">🔧</div>
+                <h3>Awkward & Specialist</h3>
+                <p>Piano, safe, gym equipment, antiques — we love a challenge. With specialist equipment and experienced
+                    crews, nothing is too awkward for Proovia.</p>
+                <div class="service-arrow">Learn more →</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why" style="padding: 100px 48px;">
+        <div class="why">
+            <div class="reveal-left">
+                <div class="section-eyebrow">Why Choose Us</div>
+                <h2 class="section-title">THE PROOVIA<br>DIFFERENCE</h2>
+                <p class="section-desc" style="margin-bottom:32px">We're not just a delivery company — we're your moving
+                    partners. Every job, big or small, gets the full Proovia treatment.</p>
+                <button class="btn-submit" style="text-decoration:none; display:inline-block; font-size:15px;"
+                    onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Delivery
+                    →</button>
+            </div>
+            <div class="why-grid reveal-right">
+                <div class="why-card">
+                    <div class="why-card-icon">⏰</div>
+                    <h4>3-Hour Time Slots</h4>
+                    <p>We give you a precise 3-hour window so you're never waiting around all day.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon">🛡️</div>
+                    <h4>Moving Blankets & Straps</h4>
+                    <p>Every item is covered with professional blankets and secured with straps.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon">📡</div>
+                    <h4>Live Tracking</h4>
+                    <p>Follow your delivery in real-time. Know exactly where your items are.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon">😊</div>
+                    <h4>Friendly Drivers</h4>
+                    <p>Our team always smiles. Floor access? No charge. We go the extra mile.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon">🔄</div>
+                    <h4>Room to Room</h4>
+                    <p>We don't stop at your door. Your item goes exactly where you want it.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon">📞</div>
+                    <h4>Full Support</h4>
+                    <p>Dispatchers, customer support, and automated systems working for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COVERAGE -->
+    <section class="coverage" id="coverage">
+        <div class="coverage-inner">
+            <div class="section-eyebrow reveal">Coverage</div>
+            <h2 class="section-title reveal">ALL OF ENGLAND.<br>NO EXCEPTIONS.</h2>
+            <p class="section-desc reveal" style="margin: 0 auto 0; text-align:center;">Based in Birmingham — the heart
+                of England — we cover the entire country from Newcastle to London, Bristol to Norwich. If it's in
+                England, we deliver there.</p>
+
+            <!-- England Map SVG -->
+            <div class="england-map reveal">
+                <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                    <path class="map-outline"
+                        d="M100,8 L108,12 L118,10 L130,18 L135,28 L128,38 L132,50 L125,58 L130,70 L138,78 L140,90 L132,98 L140,110 L138,122 L130,132 L135,145 L128,158 L120,165 L115,178 L108,188 L100,195 L92,188 L85,178 L80,165 L72,158 L65,145 L70,132 L62,122 L60,110 L68,98 L60,90 L62,78 L70,70 L75,58 L68,50 L72,38 L65,28 L70,18 L82,10 L92,12 Z"
+                        stroke-linejoin="round" />
+                    <!-- City dots -->
+                    <circle cx="100" cy="158" r="5" fill="#B22222" opacity="0.9">
+                        <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="100" cy="190" r="4" fill="#D94040" opacity="0.8">
+                        <animate attributeName="r" values="4;6;4" dur="2.5s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="85" cy="130" r="3.5" fill="#B22222" opacity="0.7">
+                        <animate attributeName="r" values="3;5;3" dur="3s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="115" cy="110" r="3" fill="#B22222" opacity="0.7">
+                        <animate attributeName="r" values="3;5;3" dur="2.2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="100" cy="80" r="3" fill="#B22222" opacity="0.6">
+                        <animate attributeName="r" values="3;4;3" dur="2.8s" repeatCount="indefinite" />
+                    </circle>
+                    <!-- Labels -->
+                    <text x="108" y="161" fill="white" font-size="7" font-family="DM Sans"
+                        font-weight="600">Birmingham</text>
+                    <text x="104" y="193" fill="white" font-size="6" font-family="DM Sans">London</text>
+                    <text x="64" y="133" fill="white" font-size="6" font-family="DM Sans">Bristol</text>
+                    <text x="118" y="113" fill="white" font-size="6" font-family="DM Sans">Leicester</text>
+                    <text x="90" y="77" fill="white" font-size="6" font-family="DM Sans">Manchester</text>
+                </svg>
+            </div>
+
+            <div class="coverage-cities reveal">
+                <div class="city-tag">London</div>
+                <div class="city-tag">Birmingham</div>
+                <div class="city-tag">Manchester</div>
+                <div class="city-tag">Leeds</div>
+                <div class="city-tag">Sheffield</div>
+                <div class="city-tag">Liverpool</div>
+                <div class="city-tag">Bristol</div>
+                <div class="city-tag">Nottingham</div>
+                <div class="city-tag">Leicester</div>
+                <div class="city-tag">Newcastle</div>
+                <div class="city-tag">Southampton</div>
+                <div class="city-tag">Oxford</div>
+                <div class="city-tag">Cambridge</div>
+                <div class="city-tag">York</div>
+                <div class="city-tag">Exeter</div>
+                <div class="city-tag">Plymouth</div>
+                <div class="city-tag">Norwich</div>
+                <div class="city-tag">Brighton</div>
+                <div class="city-tag">+ Every City More</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUMBERS -->
+    <section class="numbers" style="padding: 100px 48px;">
+        <div class="section-eyebrow reveal">Our Track Record</div>
+        <h2 class="section-title reveal">NUMBERS THAT<br>SPEAK FOR THEMSELVES</h2>
+        <div class="numbers-grid reveal">
+            <div class="number-block">
+                <div class="number-val">55<span>K+</span></div>
+                <div class="number-label">Reviews on Trustpilot</div>
+            </div>
+            <div class="number-block">
+                <div class="number-val">12<span>+</span></div>
+                <div class="number-label">Years of Experience</div>
+            </div>
+            <div class="number-block">
+                <div class="number-val">50<span>+</span></div>
+                <div class="number-label">Vans on the Road Daily</div>
+            </div>
+            <div class="number-block">
+                <div class="number-val">160<span>+</span></div>
+                <div class="number-label">Team Members</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+        <div class="section-eyebrow reveal">Process</div>
+        <h2 class="section-title reveal">HOW IT WORKS</h2>
+        <p class="section-desc reveal" style="margin: 0 auto 0; text-align:center;">Four simple steps stand between you
+            and a stress-free delivery.</p>
+
+        <div class="how-steps">
+            <div class="step reveal">
+                <div class="step-num">01</div>
+                <h4>Get a Quote</h4>
+                <p>Enter your pickup and drop-off address for an instant price.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step reveal" style="transition-delay:0.15s">
+                <div class="step-num">02</div>
+                <h4>Book Online</h4>
+                <p>Choose your date, time slot, and confirm your order.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step reveal" style="transition-delay:0.3s">
+                <div class="step-num">03</div>
+                <h4>We Collect</h4>
+                <p>Our two-man team arrives in your 3-hour window, ready to go.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step reveal" style="transition-delay:0.45s">
+                <div class="step-num">04</div>
+                <h4>Delivered!</h4>
+                <p>Your item is placed exactly where you want it. Job done.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="reviews" style="padding: 100px 0 100px 48px; overflow:hidden;">
+        <div class="testimonials-header">
+            <div class="section-eyebrow">Reviews</div>
+            <h2 class="section-title">WHAT OUR<br>CUSTOMERS SAY</h2>
+        </div>
+
+        <div style="overflow:hidden; margin-left:-48px">
+            <div class="reviews-track">
+                <!-- Set 1 -->
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Absolutely brilliant service! The two-man team were friendly, fast, and
+                        placed the sofa exactly where I needed. Will use again!"</div>
+                    <div class="review-author">
+                        <div class="review-avatar">SM</div>
+                        <div>
+                            <div class="review-name">Sarah M.</div>
+                            <div class="review-loc">London</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Moved my entire flat with Proovia. No stress, no damage, no issues. The
+                        tracking system is a game-changer — I knew exactly when they'd arrive."</div>
+                    <div class="review-author">
+                        <div class="review-avatar">JT</div>
+                        <div>
+                            <div class="review-name">James T.</div>
+                            <div class="review-loc">Manchester</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"They moved my piano without a scratch! The team were professional and
+                        extremely careful. Highly recommend for specialist items."</div>
+                    <div class="review-author">
+                        <div class="review-avatar">EC</div>
+                        <div>
+                            <div class="review-name">Emma C.</div>
+                            <div class="review-loc">Bristol</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Best courier service I've used. Great pricing, amazing team, and the
+                        3-hour time slot meant I didn't have to take the whole day off work."</div>
+                    <div class="review-author">
+                        <div class="review-avatar">RK</div>
+                        <div>
+                            <div class="review-name">Robert K.</div>
+                            <div class="review-loc">Leeds</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Used Proovia three times now. Always on time, always careful, always
+                        smiling. The boys even helped disassemble a wardrobe we forgot to do beforehand!"</div>
+                    <div class="review-author">
+                        <div class="review-avatar">LB</div>
+                        <div>
+                            <div class="review-name">Laura B.</div>
+                            <div class="review-loc">Birmingham</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Absolutely brilliant service! The two-man team were friendly, fast, and
+                        placed the sofa exactly where I needed. Will use again!"</div>
+                    <div class="review-author">
+                        <div class="review-avatar">SM</div>
+                        <div>
+                            <div class="review-name">Sarah M.</div>
+                            <div class="review-loc">London</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Moved my entire flat with Proovia. No stress, no damage, no issues. The
+                        tracking system is a game-changer — I knew exactly when they'd arrive."</div>
+                    <div class="review-author">
+                        <div class="review-avatar">JT</div>
+                        <div>
+                            <div class="review-name">James T.</div>
+                            <div class="review-loc">Manchester</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"They moved my piano without a scratch! The team were professional and
+                        extremely careful. Highly recommend for specialist items."</div>
+                    <div class="review-author">
+                        <div class="review-avatar">EC</div>
+                        <div>
+                            <div class="review-name">Emma C.</div>
+                            <div class="review-loc">Bristol</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Best courier service I've used. Great pricing, amazing team, and the
+                        3-hour time slot meant I didn't have to take the whole day off work."</div>
+                    <div class="review-author">
+                        <div class="review-avatar">RK</div>
+                        <div>
+                            <div class="review-name">Robert K.</div>
+                            <div class="review-loc">Leeds</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">"Used Proovia three times now. Always on time, always careful, always
+                        smiling. The boys even helped disassemble a wardrobe we forgot to do beforehand!"</div>
+                    <div class="review-author">
+                        <div class="review-avatar">LB</div>
+                        <div>
+                            <div class="review-name">Laura B.</div>
+                            <div class="review-loc">Birmingham</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRACK SECTION -->
+    <div class="track-section">
+        <h2>TRACK YOUR ORDER</h2>
+        <p>Enter your tracking number below for real-time delivery updates</p>
+        <div class="track-bar">
+            <input type="text" placeholder="e.g. 246310002304801">
+            <button class="track-btn">Track Now 🔍</button>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="reveal-left">
+            <div class="section-eyebrow">Get in Touch</div>
+            <h2 class="section-title">LET'S GET<br>MOVING</h2>
+            <p class="section-desc" style="margin-bottom:40px">Have a question or ready to book? Our team is here to
+                help you every step of the way.</p>
+
+            <div class="contact-info">
+                <div class="contact-detail">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <div class="contact-detail-label">Call Us Toll Free</div>
+                        <div class="contact-detail-val">(+44) 121 314 9848</div>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <div class="contact-detail-label">Email</div>
+                        <div class="contact-detail-val">support@proovia.co.uk</div>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <div class="contact-detail-label">Head Office & Warehouse</div>
+                        <div class="contact-detail-val" style="font-size:14px">Fort Dunlop Office 110, Fort
+                            Parkway,<br>Birmingham, B24 9FE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form reveal-right">
+            <div class="form-row">
+                <div class="form-field">
+                    <label>First Name</label>
+                    <input type="text" placeholder="John">
+                </div>
+                <div class="form-field">
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Smith">
+                </div>
+            </div>
+            <div class="form-field">
+                <label>Email Address</label>
+                <input type="email" placeholder="john@example.com">
+            </div>
+            <div class="form-field">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="+44 7700 900000">
+            </div>
+            <div class="form-field">
+                <label>Service Type</label>
+                <select>
+                    <option>Single Item Delivery</option>
+                    <option>Residential Removal</option>
+                    <option>Commercial / Office</option>
+                    <option>Specialist / Awkward</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label>Message</label>
+                <textarea placeholder="Tell us about your delivery..."></textarea>
+            </div>
+            <button class="btn-submit">Send Message →</button>
+        </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard-section" id="dashboard">
+        <div style="text-align:center; margin-bottom:48px;" class="reveal">
+            <div class="section-eyebrow">Customer Portal</div>
+            <h2 class="section-title">YOUR DASHBOARD</h2>
+            <p class="section-desc" style="margin: 0 auto; text-align:center;">Manage orders, track deliveries, and view
+                your history — all in one place.</p>
+        </div>
+
+        <div class="dashboard-wrap reveal">
+            <!-- Sidebar -->
+            <div class="dash-sidebar">
+                <div class="dash-user">
+                    <div class="dash-avatar">TS</div>
+                    <div class="dash-user-name">Test Snow</div>
+                    <div class="dash-user-sub">Verified Customer</div>
+                </div>
+
+                <div class="dash-nav">
+                    <button class="dash-nav-item active">
+                        <span class="dash-nav-icon">🏠</span> Home
+                    </button>
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">➕</span> Create Order
+                    </button>
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">🚚</span> Active Orders
+                    </button>
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">📋</span> Orders History
+                    </button>
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">📍</span> My Addresses
+                    </button>
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">⭐</span> My Discounts
+                    </button>
+
+                    <div class="dash-nav-sep"></div>
+
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">🛡️</span> Report a Claim
+                    </button>
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">💬</span> Support
+                    </button>
+                    <button class="dash-nav-item">
+                        <span class="dash-nav-icon">⚙️</span> Settings
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="dash-main">
+                <div class="dash-header">
+                    <div>
+                        <div class="dash-greeting">Great to see you, <span>Test Snow!</span></div>
+                        <div style="font-size:13px; color:var(--text2); margin-top:4px;">Track, Manage, and Forecast
+                            Deliveries with Ease.</div>
+                    </div>
+                    <button class="btn-new-order">➕ Create New Order</button>
+                </div>
+
+                <div class="dash-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">📦</div>
+                        <div class="summary-val">3</div>
+                        <div class="summary-label">Total Orders</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">🚚</div>
+                        <div class="summary-val" style="color:var(--red)">0</div>
+                        <div class="summary-label">Active Deliveries</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">💷</div>
+                        <div class="summary-val">£<span>254</span></div>
+                        <div class="summary-label">Total Spent</div>
+                    </div>
+                </div>
+
+                <div class="dash-tab-row">
+                    <button class="dash-tab active">All Orders</button>
+                    <button class="dash-tab">Active</button>
+                    <button class="dash-tab">History</button>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-icon">🪑</div>
+                    <div class="order-info">
+                        <div class="order-id">#839085 — Sofa Chair</div>
+                        <div class="order-meta">📅 28 Nov 2025 &nbsp;·&nbsp; 📦 1 item &nbsp;·&nbsp; 🔍
+                            24631000230480105</div>
+                        <div style="display:flex;gap:8px;margin-top:6px;">
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Invoice</a>
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Package
+                                Label</a>
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Package Slip</a>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                        <span class="order-status status-cancelled">Cancelled</span>
+                        <div class="order-price">£84.82</div>
+                        <div class="order-paid" style="color:var(--red-light)">Not Paid</div>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-icon">🛋️</div>
+                    <div class="order-info">
+                        <div class="order-id">#837029 — Sofa Chair</div>
+                        <div class="order-meta">📅 25 Nov 2025 &nbsp;·&nbsp; 📦 1 item &nbsp;·&nbsp; 🔍
+                            24631000229898365</div>
+                        <div style="display:flex;gap:8px;margin-top:6px;">
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Invoice</a>
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Package
+                                Label</a>
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Package Slip</a>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                        <span class="order-status status-cancelled">Cancelled</span>
+                        <div class="order-price">£84.82</div>
+                        <div class="order-paid" style="color:var(--red-light)">Not Paid</div>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-icon">📦</div>
+                    <div class="order-info">
+                        <div class="order-id">#836996 — Sofa Chair</div>
+                        <div class="order-meta">📅 25 Nov 2025 &nbsp;·&nbsp; 📦 1 item &nbsp;·&nbsp; 🔍
+                            24631000229886954</div>
+                        <div style="display:flex;gap:8px;margin-top:6px;">
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Invoice</a>
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Package
+                                Label</a>
+                            <a href="#" style="font-size:11px;color:var(--text3);text-decoration:none;">Package Slip</a>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                        <span class="order-status status-delivered">Delivered</span>
+                        <div class="order-price">£84.82</div>
+                        <div class="order-paid" style="color:#22c55e">Paid</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-badge" style="display:inline-block">Proovia</div>
+                <p>Your trustworthy delivery partner across all of England. Two brave men team included. ALWAYS. Founded
+                    2014 in Birmingham.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-btn">in</a>
+                    <a href="#" class="social-btn">f</a>
+                    <a href="#" class="social-btn">▶</a>
+                    <a href="#" class="social-btn">G</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Services</h5>
+                <ul>
+                    <li><a href="#">Single Items</a></li>
+                    <li><a href="#">Residential Removals</a></li>
+                    <li><a href="#">Commercial Moves</a></li>
+                    <li><a href="#">Courier Delivery</a></li>
+                    <li><a href="#">Specialist Items</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Useful Links</h5>
+                <ul>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Track My Order</a></li>
+                    <li><a href="#">API Integration</a></li>
+                    <li><a href="ter">Terms & Conditions</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="tel:+441213149848">(+44) 121 314 9848</a></li>
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+                    <li><a href="#">Fort Dunlop Office 110,<br>Birmingham B24 9FE</a></li>
+                    <li><a href="#">Company: 13009883</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Proovia Couriers LTD. All rights reserved.</p>
+            <p>Part of the <strong style="color:var(--red)">Proovia</strong> group</p>
+        </div>
+    </footer>
+
+    <button class="floating-cta" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})">
+        🚚 Get a Free Quote
+    </button>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" class="cookie-banner">
+  <p>
+    We use cookies to enhance your experience, analyze traffic, and personalize content.
+  </p>
+
+  <div class="cookie-actions">
+    <button id="acceptAll" class="btn-primary">Accept All</button>
+    <button id="customizeBtn" class="btn-outline">Customize</button>
+    <button id="declineAll" class="btn-ghost">Decline</button>
+  </div>
+</div>
+
+<!-- COOKIE MODAL -->
+<div id="cookie-modal" class="cookie-modal">
+  <div class="cookie-box">
+
+    <h3>Cookie Preferences</h3>
+    <p>
+      Choose what cookies you want to allow.
+    </p>
+
+    <div class="cookie-option">
+      <div>
+        <h4>Essential Cookies</h4>
+        <p>Required for the website to function.</p>
+      </div>
+      <input type="checkbox" checked disabled>
+    </div>
+
+    <div class="cookie-option">
+      <div>
+        <h4>Analytics Cookies</h4>
+        <p>Help us understand usage.</p>
+      </div>
+      <input type="checkbox" id="analyticsToggle">
+    </div>
+
+    <div class="cookie-option">
+      <div>
+        <h4>Marketing Cookies</h4>
+        <p>Used for ads and personalization.</p>
+      </div>
+      <input type="checkbox" id="marketingToggle">
+    </div>
+
+    <div class="cookie-modal-actions">
+      <button id="savePrefs" class="btn-primary">Save Preferences</button>
+      <button id="rejectAllModal" class="btn-ghost">Reject All</button>
+    </div>
+
+  </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
