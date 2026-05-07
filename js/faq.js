@@ -2,7 +2,6 @@
 const html = document.documentElement;
 
 
-
 window.addEventListener("DOMContentLoaded", () => {
 
     const thumb = document.getElementById("themeThumb");

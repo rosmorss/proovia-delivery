@@ -1,6 +1,3 @@
-/* ========================= */
-/* REVEAL ANIMATION */
-/* ========================= */
 
 const revealCards = document.querySelectorAll(".terms-card");
 
@@ -22,10 +19,6 @@ revealCards.forEach(card => {
     observer.observe(card);
 });
 
-/* ========================= */
-/* SMOOTH SIDEBAR LINKS */
-/* ========================= */
-
 const sidebarLinks = document.querySelectorAll(".sidebar-card a");
 
 sidebarLinks.forEach(link => {
@@ -46,10 +39,6 @@ sidebarLinks.forEach(link => {
 
 });
 
-/* ========================= */
-/* HERO PARALLAX */
-/* ========================= */
-
 window.addEventListener("mousemove", (e) => {
 
     const glow1 = document.querySelector(".glow-1");
@@ -65,10 +54,6 @@ window.addEventListener("mousemove", (e) => {
         `translate(${-x * 40}px, ${-y * 40}px)`;
 
 });
-
-/* ========================= */
-/* ACTIVE SIDEBAR LINK */
-/* ========================= */
 
 window.addEventListener("scroll", () => {
 
