@@ -10,6 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style/infod.css">
+    <link rel="stylesheet" href="style/theme.css">
 </head>
 
 <body>
@@ -59,8 +60,15 @@
     <p>Full routes. Predictable income. Zero stress.</p>
 
     <div class="hero-buttons">
-      <button class="btn-primary">Apply Now</button>
-      <button class="btn-outline">Learn More</button>
+      <button class="btn-primary"
+    onclick="document.getElementById('apply').scrollIntoView({ behavior: 'smooth' })">
+    Apply Now
+</button>
+
+<button class="btn-outline"
+    onclick="document.querySelector('.benefits').scrollIntoView({ behavior: 'smooth' })">
+    Learn More
+</button>
     </div>
   </div>
 </section>
