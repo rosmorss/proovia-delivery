@@ -239,7 +239,7 @@ nav {
     position: relative;
     overflow: hidden;
 
-    background: url("photo/driverbg.png") center center / cover no-repeat;
+    background: url("../photo/driverbg.png") center center / cover no-repeat;
 
     color: #fff;
 }
