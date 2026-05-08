@@ -70,7 +70,7 @@ border: 1px solid var(--border);
   padding: 12px;
   background: var(--red);
   border: none;
-  color: var(--text);
+  color: white;
   border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
