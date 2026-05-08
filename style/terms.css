@@ -9,7 +9,7 @@
     background:
         radial-gradient(circle at top left, rgba(255,0,0,0.15), transparent 40%),
         radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 40%),
-        #0d0d0d;
+        var(--bg);
 }
 
 .terms-hero-overlay {
@@ -156,7 +156,7 @@
     grid-template-columns: 300px 1fr;
     gap: 40px;
     padding: 80px 7%;
-    background: #111;
+    background: var(--bg2);
 }
 
 
@@ -167,8 +167,8 @@
 }
 
 .sidebar-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
     border-radius: 28px;
     padding: 30px;
     backdrop-filter: blur(20px);
@@ -188,18 +188,18 @@
 }
 
 .sidebar-card a {
-    color: #d4d4d4;
+    color: var(--text-soft);
     text-decoration: none;
     transition: 0.3s;
 }
 
 .sidebar-card a:hover {
-    color: red;
+    color: var(--red);
     padding-left: 6px;
 }
 
 .sidebar-card a.active {
-    color: white;
+    color: var(--button-text);
     padding-left: 10px;
 } 
 .terms-content {
@@ -217,8 +217,8 @@ nav.scrolled {
 }
 .terms-card {
     position: relative;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
     border-radius: 30px;
     padding: 50px;
     overflow: hidden;
@@ -240,7 +240,8 @@ nav.scrolled {
     right: 40px;
     font-size: 70px;
     font-weight: 900;
-    color: rgba(255,255,255,0.05);
+     opacity: 0.2;
+color: var(--text);
 }
 
 .terms-card h2 {
@@ -249,7 +250,7 @@ nav.scrolled {
 }
 
 .terms-card p {
-    color: #d0d0d0;
+    color: var(--text-soft);
     line-height: 1.8;
     font-size: 17px;
 }
@@ -263,11 +264,11 @@ nav.scrolled {
 }
 
 .coverage-box {
-    background: rgba(255,255,255,0.05);
+    background: var(--card-bg);
     border-radius: 24px;
     padding: 30px;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid var(--border);
     transition: 0.4s;
 }
 
@@ -281,12 +282,12 @@ nav.scrolled {
 }
 
 .coverage-box span {
-    color: #cfcfcf;
+    color: var(--text-soft);
 }
 
 .coverage-box.premium {
-    border: 1px solid red;
-    box-shadow: 0 0 30px rgba(255,0,0,0.25);
+    border: 1px solid var(--red);
+    box-shadow: 0 0 30px var(--red-glow);
 }
 
 /* ========================= */
