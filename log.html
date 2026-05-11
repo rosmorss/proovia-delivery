@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
+        <script>
+const savedTheme = localStorage.getItem("theme") || "dark";
+document.documentElement.setAttribute("data-theme", savedTheme);
+</script>
     <link rel="stylesheet" href="style/log.css">
     <link rel="stylesheet" href="style/theme.css">
 
@@ -165,7 +169,8 @@
 onclick="document.querySelector('.auth-section').scrollIntoView({behavior:'smooth'})">
     🚚 Get a Free Quote
 </button>
-        
+            <script src="js/theme.js"></script>
+
     <script src="js/log.js"></script>
 </body>
 </html>

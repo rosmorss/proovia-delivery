@@ -9,6 +9,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
+        <script>
+const savedTheme = localStorage.getItem("theme") || "dark";
+document.documentElement.setAttribute("data-theme", savedTheme);
+</script>
     <link rel="stylesheet" href="style/faq.css">
     <link rel="stylesheet" href="style/theme.css">
 
@@ -286,6 +290,7 @@
     <button class="floating-cta" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})">
         🚚 Get a Free Quote
     </button>
+    <script src="js/theme.js"></script>
 <script src="js/faq.js"></script>
 </body>
 </html>

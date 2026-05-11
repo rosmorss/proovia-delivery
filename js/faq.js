@@ -1,66 +1,19 @@
+const navbar = document.getElementById("navbar");
+const hamburger = document.getElementById("hamburger");
+const mobileMenu = document.getElementById("mobile-menu");
+const overlay = document.getElementById("mobile-overlay");
 
-const html = document.documentElement;
+const faqItems = document.querySelectorAll(".faq-item");
+const faqHeader = document.querySelector(".faq-header");
 
+const cta = document.querySelector(".floating-cta");
+const footer = document.querySelector("footer");
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    const thumb = document.getElementById("themeThumb");
-    const navbar = document.getElementById("navbar");
-    const hamburger = document.getElementById("hamburger");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const overlay = document.getElementById("mobile-overlay");
-    const faqItems = document.querySelectorAll(".faq-item");
-    const faqHeader = document.querySelector(".faq-header");
-    const cta = document.querySelector(".floating-cta");
-    const footer = document.querySelector("footer");
-
-
-   
-    const savedTheme = localStorage.getItem("theme") || "dark";
-
-    html.setAttribute("data-theme", savedTheme);
-
-    if (savedTheme === "light") {
-        thumb.textContent = "🌙";
-    } else {
-        thumb.textContent = "☀️";
-    }
-
-
-    window.toggleTheme = function () {
-
-        const currentTheme = html.getAttribute("data-theme");
-
-        if (currentTheme === "dark") {
-
-            html.setAttribute("data-theme", "light");
-            localStorage.setItem("theme", "light");
-            thumb.textContent = "🌙";
-
-        } else {
-
-            html.setAttribute("data-theme", "dark");
-            localStorage.setItem("theme", "dark");
-            thumb.textContent = "☀️";
-        }
-    };
-
-
-    window.addEventListener("load", () => {
-
-        const loader = document.getElementById("page-loader");
-
-        setTimeout(() => {
-
-            loader.style.opacity = "0";
-            loader.style.visibility = "hidden";
-
-            document.body.style.overflow = "visible";
-
-        }, 1200);
-
-    });
-
+    // =========================
+    // FAQ ACCORDION
+    // =========================
 
     faqItems.forEach(item => {
 
@@ -84,14 +37,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
             item.classList.toggle("active");
 
-            if (item.classList.contains("active")) {
-                icon.textContent = "−";
-            } else {
-                icon.textContent = "+";
-            }
+            icon.textContent =
+                item.classList.contains("active")
+                    ? "−"
+                    : "+";
         });
     });
 
+    // =========================
+    // NAVBAR SCROLL
+    // =========================
 
     window.addEventListener("scroll", () => {
 
@@ -103,6 +58,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // =========================
+    // MOBILE MENU
+    // =========================
 
     hamburger.addEventListener("click", () => {
 
@@ -120,14 +78,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // =========================
+    // FAQ HEADER ANIMATION
+    // =========================
+
     setTimeout(() => {
 
         faqHeader.style.opacity = "1";
         faqHeader.style.transform = "translateY(0)";
 
-    }, 400);
+    }, 250);
+
+    // =========================
+    // FLOATING CTA
+    // =========================
 
     window.addEventListener("scroll", () => {
+
+        if (!footer || !cta) return;
 
         const footerTop = footer.getBoundingClientRect().top;
         const screenHeight = window.innerHeight;
@@ -147,6 +115,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // =========================
+    // PARALLAX EFFECT
+    // =========================
+
     window.addEventListener("mousemove", (e) => {
 
         const x = e.clientX / window.innerWidth;
@@ -159,7 +131,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// =========================
+// PAGE LOADED
+// =========================
+
 document.body.classList.add("page-loaded");
+
+// =========================
+// REVEAL ANIMATION
+// =========================
 
 const revealElements = document.querySelectorAll(
     ".faq-item, .faq-header, .footer-col, .footer-brand"
@@ -178,12 +158,12 @@ const revealObserver = new IntersectionObserver((entries) => {
     });
 
 }, {
-    threshold: 0.12
+    threshold: 0.08
 });
 
 revealElements.forEach((el, index) => {
 
-    el.style.transitionDelay = `${index * 70}ms`;
+    el.style.transitionDelay = `${index * 60}ms`;
 
     revealObserver.observe(el);
 

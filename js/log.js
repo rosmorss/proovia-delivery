@@ -1,72 +1,31 @@
-
-const html = document.documentElement;
 const cta = document.querySelector(".floating-cta");
-const footer = document.querySelector("footer"); 
+const footer = document.querySelector("footer");
 
-window.addEventListener("DOMContentLoaded", () => {
+// =========================
+// FLOATING CTA
+// =========================
 
-    const thumb = document.getElementById("themeThumb");
+window.addEventListener("scroll", () => {
 
-    // =========================
-    // LOAD SAVED THEME
-    // =========================
+    if (!footer || !cta) return;
 
-    const savedTheme = localStorage.getItem("theme") || "dark";
+    const footerTop =
+        footer.getBoundingClientRect().top;
 
-    html.setAttribute("data-theme", savedTheme);
+    const screenHeight =
+        window.innerHeight;
 
-    updateThemeIcon(savedTheme);
+    if (footerTop < screenHeight - 100) {
 
-    // =========================
-    // TOGGLE THEME
-    // =========================
+        cta.style.opacity = "0";
+        cta.style.pointerEvents = "none";
+        cta.style.transform = "translateY(20px)";
 
-    window.toggleTheme = function () {
+    } else {
 
-        const currentTheme = html.getAttribute("data-theme");
-
-        const newTheme =
-            currentTheme === "dark"
-                ? "light"
-                : "dark";
-
-        html.setAttribute("data-theme", newTheme);
-
-        localStorage.setItem("theme", newTheme);
-
-        updateThemeIcon(newTheme);
-    };
-
-    // =========================
-    // ICON UPDATE
-    // =========================
-
-    function updateThemeIcon(theme) {
-
-        if (!thumb) return;
-
-        thumb.textContent =
-            theme === "dark"
-                ? "☀️"
-                : "🌙";
+        cta.style.opacity = "1";
+        cta.style.pointerEvents = "auto";
+        cta.style.transform = "translateY(0)";
     }
+
 });
- window.addEventListener("scroll", () => {
-
-        const footerTop = footer.getBoundingClientRect().top;
-        const screenHeight = window.innerHeight;
-
-        if (footerTop < screenHeight - 100) {
-
-            cta.style.opacity = "0";
-            cta.style.pointerEvents = "none";
-            cta.style.transform = "translateY(20px)";
-
-        } else {
-
-            cta.style.opacity = "1";
-            cta.style.pointerEvents = "auto";
-            cta.style.transform = "translateY(0)";
-        }
-
-    });
