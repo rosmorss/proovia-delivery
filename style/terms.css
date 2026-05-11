@@ -55,7 +55,7 @@
 }
 
 .terms-hero h1 {
-    font-size: clamp(49px, 9vw, 100px);
+    font-size: clamp(32px, 6vw, 72px);
     font-weight: 600;
     line-height: 1;
     margin-bottom: 24px;
@@ -238,21 +238,21 @@ nav.scrolled {
     position: absolute;
     top: 30px;
     right: 40px;
-    font-size: 70px;
+    font-size: 60px;
     font-weight: 900;
      opacity: 0.2;
 color: var(--text);
 }
 
 .terms-card h2 {
-    font-size: 34px;
+    font-size: 29px;
     margin-bottom: 20px;
 }
 
 .terms-card p {
     color: var(--text-soft);
     line-height: 1.8;
-    font-size: 17px;
+    font-size: 15px;
 }
 
 
@@ -317,4 +317,18 @@ color: var(--text);
         font-size: 48px;
     }
 
+}
+
+
+.terms-list li {
+    margin-bottom: 10px;
+    color: var(--text-soft);
+    line-height: 1.7;
+}
+
+.coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+    gap: 20px;
+    margin-top: 30px;
 }
