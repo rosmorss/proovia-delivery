@@ -120,26 +120,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     });
 
-
-    const observer = new IntersectionObserver((entries) => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-                entry.target.classList.add("faq-show");
-            }
-
-        });
-
-    }, {
-        threshold: 0.15
-    });
-
-    faqItems.forEach(item => {
-        observer.observe(item);
-    });
-
-
     setTimeout(() => {
 
         faqHeader.style.opacity = "1";
@@ -203,7 +183,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 revealElements.forEach((el, index) => {
 
-    el.style.transitionDelay = `${index * 100}ms`;
+    el.style.transitionDelay = `${index * 70}ms`;
 
     revealObserver.observe(el);
 
