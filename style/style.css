@@ -15,7 +15,7 @@
             rgba(10, 10, 10, 0.6) 40%,
             rgba(10, 10, 10, 0.3) 70%,
             rgba(10, 10, 10, 0.1) 100%),
-        url('photo/herobg.png');
+        url('../photo/herobg.png');
 
     background-size: cover;
     background-position: center;
