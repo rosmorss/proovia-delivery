@@ -178,3 +178,33 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+document.body.classList.add("page-loaded");
+
+const revealElements = document.querySelectorAll(
+    ".faq-item, .faq-header, .footer-col, .footer-brand"
+);
+
+const revealObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add("show-element");
+
+        }
+
+    });
+
+}, {
+    threshold: 0.12
+});
+
+revealElements.forEach((el, index) => {
+
+    el.style.transitionDelay = `${index * 100}ms`;
+
+    revealObserver.observe(el);
+
+});
