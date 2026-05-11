@@ -1,5 +1,3 @@
-const html = document.documentElement;
-
 const cta = document.querySelector(".floating-cta");
 const footer = document.querySelector("footer");
 
@@ -7,67 +5,32 @@ const footer = document.querySelector("footer");
 // REGISTER FORM
 // =========================
 
-document.getElementById("registerForm").addEventListener("submit", function(e) {
+const registerForm =
+    document.getElementById("registerForm");
 
-    e.preventDefault();
+if (registerForm) {
 
-    const password =
-        document.getElementById("password").value;
+    registerForm.addEventListener("submit", function (e) {
 
-    const confirm =
-        document.getElementById("confirmPassword").value;
+        e.preventDefault();
 
-    if (password !== confirm) {
+        const password =
+            document.getElementById("password").value;
 
-        alert("Passwords do not match!");
-        return;
-    }
+        const confirm =
+            document.getElementById("confirmPassword").value;
 
-    alert("Account created successfully 🚀");
-});
+        if (password !== confirm) {
 
-// =========================
-// THEME
-// =========================
+            alert("Passwords do not match!");
+            return;
+        }
 
-window.addEventListener("DOMContentLoaded", () => {
+        alert("Account created successfully 🚀");
 
-    const thumb = document.getElementById("themeThumb");
+    });
 
-    const savedTheme =
-        localStorage.getItem("theme") || "dark";
-
-    html.setAttribute("data-theme", savedTheme);
-
-    updateThemeIcon(savedTheme);
-
-    window.toggleTheme = function () {
-
-        const currentTheme =
-            html.getAttribute("data-theme");
-
-        const newTheme =
-            currentTheme === "dark"
-                ? "light"
-                : "dark";
-
-        html.setAttribute("data-theme", newTheme);
-
-        localStorage.setItem("theme", newTheme);
-
-        updateThemeIcon(newTheme);
-    };
-
-    function updateThemeIcon(theme) {
-
-        if (!thumb) return;
-
-        thumb.textContent =
-            theme === "dark"
-                ? "☀️"
-                : "🌙";
-    }
-});
+}
 
 // =========================
 // FLOATING CTA HIDE
@@ -95,4 +58,5 @@ window.addEventListener("scroll", () => {
         cta.style.pointerEvents = "auto";
         cta.style.transform = "translateY(0)";
     }
+
 });

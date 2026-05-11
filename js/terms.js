@@ -1,18 +1,24 @@
-
 const revealCards = document.querySelectorAll(".terms-card");
+const sidebarLinks = document.querySelectorAll(".sidebar-card a");
+
 const cta = document.querySelector(".floating-cta");
-const footer = document.querySelector("footer");    
+const footer = document.querySelector("footer");
+
+// =========================
+// REVEAL CARDS
+// =========================
+
 const observer = new IntersectionObserver((entries) => {
 
     entries.forEach(entry => {
 
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
             entry.target.classList.add("show");
         }
 
     });
 
-},{
+}, {
     threshold: 0.15
 });
 
@@ -20,7 +26,9 @@ revealCards.forEach(card => {
     observer.observe(card);
 });
 
-const sidebarLinks = document.querySelectorAll(".sidebar-card a");
+// =========================
+// SIDEBAR SMOOTH SCROLL
+// =========================
 
 sidebarLinks.forEach(link => {
 
@@ -32,6 +40,8 @@ sidebarLinks.forEach(link => {
             link.getAttribute("href")
         );
 
+        if (!target) return;
+
         target.scrollIntoView({
             behavior: "smooth"
         });
@@ -40,10 +50,16 @@ sidebarLinks.forEach(link => {
 
 });
 
+// =========================
+// HERO GLOW EFFECT
+// =========================
+
 window.addEventListener("mousemove", (e) => {
 
     const glow1 = document.querySelector(".glow-1");
     const glow2 = document.querySelector(".glow-2");
+
+    if (!glow1 || !glow2) return;
 
     let x = e.clientX / window.innerWidth;
     let y = e.clientY / window.innerHeight;
@@ -56,9 +72,14 @@ window.addEventListener("mousemove", (e) => {
 
 });
 
+// =========================
+// ACTIVE SIDEBAR LINK
+// =========================
+
 window.addEventListener("scroll", () => {
 
-    let sections = document.querySelectorAll(".terms-card");
+    let sections =
+        document.querySelectorAll(".terms-card");
 
     sections.forEach(section => {
 
@@ -67,7 +88,7 @@ window.addEventListener("scroll", () => {
         let height = section.offsetHeight;
         let id = section.getAttribute("id");
 
-        if(top >= offset && top < offset + height){
+        if (top >= offset && top < offset + height) {
 
             sidebarLinks.forEach(link => {
                 link.classList.remove("active");
@@ -77,81 +98,41 @@ window.addEventListener("scroll", () => {
                 `.sidebar-card a[href="#${id}"]`
             );
 
-            if(activeLink){
+            if (activeLink) {
                 activeLink.classList.add("active");
             }
+
         }
 
     });
 
 });
 
-const html = document.documentElement;
+// =========================
+// FLOATING CTA HIDE
+// =========================
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("scroll", () => {
 
-    const thumb = document.getElementById("themeThumb");
+    if (!cta || !footer) return;
 
-    // =========================
-    // LOAD SAVED THEME
-    // =========================
+    const footerTop =
+        footer.getBoundingClientRect().top;
 
-    const savedTheme = localStorage.getItem("theme") || "dark";
+    const screenHeight =
+        window.innerHeight;
 
-    html.setAttribute("data-theme", savedTheme);
+    if (footerTop < screenHeight - 100) {
 
-    updateThemeIcon(savedTheme);
+        cta.style.opacity = "0";
+        cta.style.pointerEvents = "none";
+        cta.style.transform = "translateY(20px)";
 
-    // =========================
-    // TOGGLE THEME
-    // =========================
+    } else {
 
-    window.toggleTheme = function () {
-
-        const currentTheme = html.getAttribute("data-theme");
-
-        const newTheme =
-            currentTheme === "dark"
-                ? "light"
-                : "dark";
-
-        html.setAttribute("data-theme", newTheme);
-
-        localStorage.setItem("theme", newTheme);
-
-        updateThemeIcon(newTheme);
-    };
-
-    // =========================
-    // ICON UPDATE
-    // =========================
-
-    function updateThemeIcon(theme) {
-
-        if (!thumb) return;
-
-        thumb.textContent =
-            theme === "dark"
-                ? "☀️"
-                : "🌙";
+        cta.style.opacity = "1";
+        cta.style.pointerEvents = "auto";
+        cta.style.transform = "translateY(0)";
     }
+
 });
- window.addEventListener("scroll", () => {
-
-        const footerTop = footer.getBoundingClientRect().top;
-        const screenHeight = window.innerHeight;
-
-        if (footerTop < screenHeight - 100) {
-
-            cta.style.opacity = "0";
-            cta.style.pointerEvents = "none";
-            cta.style.transform = "translateY(20px)";
-
-        } else {
-
-            cta.style.opacity = "1";
-            cta.style.pointerEvents = "auto";
-            cta.style.transform = "translateY(0)";
-        }
-
-    });
