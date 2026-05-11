@@ -9,10 +9,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
-        <script>
-const savedTheme = localStorage.getItem("theme") || "dark";
-document.documentElement.setAttribute("data-theme", savedTheme);
-</script>
             <link rel="stylesheet" href="style/theme.css">
     <link rel="stylesheet" href="style/terms.css">
 </head>
@@ -33,7 +29,9 @@ document.documentElement.setAttribute("data-theme", savedTheme);
             <li><a href="index.html#reviews">Reviews</a></li>
             <li><a href="infod.html">Drive with us</a></li>
         </ul>
-      <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
+        <a href="log.html" class="mobile-menu-account">
+    👤 My Account
+</a>
     </div>
 
     <!-- NAVBAR -->

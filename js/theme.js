@@ -24,6 +24,14 @@ window.addEventListener("DOMContentLoaded", () => {
     const loader =
         document.getElementById("page-loader");
 
+const hamburger =
+    document.getElementById("hamburger");
+
+const mobileMenu =
+    document.getElementById("mobile-menu");
+
+const overlay =
+    document.getElementById("mobile-overlay");
     // =========================
     // UPDATE ICON
     // =========================
@@ -99,4 +107,32 @@ window.addEventListener("DOMContentLoaded", () => {
 
         });
     }
+    // =========================
+// MOBILE MENU
+// =========================
+
+if (hamburger && mobileMenu && overlay) {
+
+    hamburger.addEventListener("click", () => {
+
+        hamburger.classList.toggle("open");
+
+        mobileMenu.classList.toggle("open");
+
+        overlay.classList.toggle("show");
+
+        document.body.classList.toggle("menu-open");
+    });
+
+    overlay.addEventListener("click", () => {
+
+        hamburger.classList.remove("open");
+
+        mobileMenu.classList.remove("open");
+
+        overlay.classList.remove("show");
+
+        document.body.classList.remove("menu-open");
+    });
+}
 });
