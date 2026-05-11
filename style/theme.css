@@ -859,8 +859,8 @@ footer {
     color: var(--text3);
 }
 .hero-logo {
-    width: 200px;
-    height: auto;
+    width: auto;
+    height: 40px;
     display: block;
     filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
     transition: transform 0.3s ease;
