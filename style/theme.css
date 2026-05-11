@@ -660,7 +660,7 @@ body.menu-open {
     top: 0;
     right: -320px;
 
-    width: 290px;
+    width: 210px;
     height: 100vh;
 
     background: var(--surface);
