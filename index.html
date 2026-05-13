@@ -9,31 +9,31 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
-        <script>
-const savedTheme = localStorage.getItem("theme") || "dark";
-document.documentElement.setAttribute("data-theme", savedTheme);
-</script>
+    <script>
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/theme.css">
 </head>
 
 <body>
-   <!-- MOBILE OVERLAY -->
+    <!-- MOBILE OVERLAY -->
     <div id="mobile-overlay"></div>
 
     <!-- MOBILE MENU -->
     <div id="mobile-menu">
         <ul>
-           <li><a href="index.html#">Home</a></li>
+            <li><a href="index.html#">Home</a></li>
             <li><a href="index.html#services">Services</a></li>
             <li><a href="index.html#coverage">Coverage</a></li>
             <li><a href="index.html#how">How It Works</a></li>
             <li><a href="index.html#contact">Contact</a></li>
             <li><a href="index.html#reviews">Reviews</a></li>
             <li><a href="infod.html">Drive with us</a></li>
-             <a href="log.html" class="mobile-menu-account">
-    👤 My Account
-</a>
+            <a href="log.html" class="mobile-menu-account">
+                👤 My Account
+            </a>
         </ul>
     </div>
 
@@ -573,138 +573,137 @@ document.documentElement.setAttribute("data-theme", savedTheme);
     </section>
 
 
-      <footer>
-    <div class="footer-top">
+    <footer>
+        <div class="footer-top">
 
-        <div class="footer-brand">
-         <a href="index.html">
-             <img src="photo/logo.png" alt="Proovia Logo" class="hero-logo">
-         </a>
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="photo/logo.png" alt="Proovia Logo" class="hero-logo">
+                </a>
+
+                <p>
+                    Reliable nationwide delivery and moving services across England.
+                    Founded in Birmingham in 2014.
+                </p>
+
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/company/proovia-couriers" class="social-btn">in</a>
+
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" class="social-btn">f</a>
+
+                    <a href="https://www.instagram.com/proovia.couriers/" class="social-btn">ig</a>
+
+                    <a href="https://maps.app.goo.gl/aRXeHiQcLu9KFJcKA" class="social-btn">G</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+
+                <ul>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#coverage">Coverage</a></li>
+                    <li><a href="index.html#how">How It Works</a></li>
+                    <li><a href="index.html#reviews">Reviews</a></li>
+                    <li><a href="infod.html">Drivers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Support</h5>
+
+                <ul>
+                    <li><a href="log.html">My Account</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact</h5>
+
+                <ul>
+                    <a href="tel:+441213149848">(+44) 121 314 9848</a>
+
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+
+                    <li>
+                        <a href="https://maps.app.goo.gl/6gp5m9FH1mfmsye67">
+                            Office, Fort Dunlop, 110 Fort Pkwy, Birmingham B24 9FE, United Kingdom
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Proovia Couriers LTD. All rights reserved.</p>
 
             <p>
-                Reliable nationwide delivery and moving services across England.
-                Founded in Birmingham in 2014.
+                Built for fast, secure and reliable delivery across England.
+            </p>
+        </div>
+    </footer>
+
+    <!-- COOKIE BANNER -->
+    <div id="cookie-banner" class="cookie-banner">
+        <p>
+            We use cookies to enhance your experience, analyze traffic, and personalize content.
+        </p>
+
+        <div class="cookie-actions">
+            <button id="acceptAll" class="btn-primary">Accept All</button>
+            <button id="customizeBtn" class="btn-outline">Customize</button>
+            <button id="declineAll" class="btn-ghost">Decline</button>
+        </div>
+    </div>
+
+    <!-- COOKIE MODAL -->
+    <div id="cookie-modal" class="cookie-modal">
+        <div class="cookie-box">
+
+            <h3>Cookie Preferences</h3>
+            <p>
+                Choose what cookies you want to allow.
             </p>
 
-            <div class="footer-socials">
-                <a href="https://www.linkedin.com/company/proovia-couriers" class="social-btn">in</a>
-
-                <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" class="social-btn">f</a>
-
-                <a href="https://www.instagram.com/proovia.couriers/" class="social-btn">ig</a>
-
-                <a href="https://maps.app.goo.gl/aRXeHiQcLu9KFJcKA" class="social-btn">G</a>
+            <div class="cookie-option">
+                <div>
+                    <h4>Essential Cookies</h4>
+                    <p>Required for the website to function.</p>
+                </div>
+                <input type="checkbox" checked disabled>
             </div>
+
+            <div class="cookie-option">
+                <div>
+                    <h4>Analytics Cookies</h4>
+                    <p>Help us understand usage.</p>
+                </div>
+                <input type="checkbox" id="analyticsToggle">
+            </div>
+
+            <div class="cookie-option">
+                <div>
+                    <h4>Marketing Cookies</h4>
+                    <p>Used for ads and personalization.</p>
+                </div>
+                <input type="checkbox" id="marketingToggle">
+            </div>
+
+            <div class="cookie-modal-actions">
+                <button id="savePrefs" class="btn-primary">Save Preferences</button>
+                <button id="rejectAllModal" class="btn-ghost">Reject All</button>
+            </div>
+
         </div>
-
-        <div class="footer-col">
-            <h5>Company</h5>
-
-            <ul>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#coverage">Coverage</a></li>
-                <li><a href="index.html#how">How It Works</a></li>
-                <li><a href="index.html#reviews">Reviews</a></li>
-                <li><a href="infod.html">Drivers</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h5>Support</h5>
-
-            <ul>
-                <li><a href="log.html">My Account</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="terms.html">Terms & Conditions</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h5>Contact</h5>
-
-            <ul>
-                <a href="tel:+441213149848">(+44) 121 314 9848</a>
-
-                <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
-                
-                <li>
-                    <a href="https://maps.app.goo.gl/6gp5m9FH1mfmsye67">
-                        Office, Fort Dunlop, 110 Fort Pkwy, Birmingham B24 9FE, United Kingdom
-                    </a>
-                </li>
-            </ul>
-        </div>
-
     </div>
-
-    <div class="footer-bottom">
-        <p>© 2026 Proovia Couriers LTD. All rights reserved.</p>
-
-        <p>
-            Built for fast, secure and reliable delivery across England.
-        </p>
-    </div>
-</footer>
-
-<!-- COOKIE BANNER -->
-<div id="cookie-banner" class="cookie-banner">
-  <p>
-    We use cookies to enhance your experience, analyze traffic, and personalize content.
-  </p>
-
-  <div class="cookie-actions">
-    <button id="acceptAll" class="btn-primary">Accept All</button>
-    <button id="customizeBtn" class="btn-outline">Customize</button>
-    <button id="declineAll" class="btn-ghost">Decline</button>
-  </div>
-</div>
-
-<!-- COOKIE MODAL -->
-<div id="cookie-modal" class="cookie-modal">
-  <div class="cookie-box">
-
-    <h3>Cookie Preferences</h3>
-    <p>
-      Choose what cookies you want to allow.
-    </p>
-
-    <div class="cookie-option">
-      <div>
-        <h4>Essential Cookies</h4>
-        <p>Required for the website to function.</p>
-      </div>
-      <input type="checkbox" checked disabled>
-    </div>
-
-    <div class="cookie-option">
-      <div>
-        <h4>Analytics Cookies</h4>
-        <p>Help us understand usage.</p>
-      </div>
-      <input type="checkbox" id="analyticsToggle">
-    </div>
-
-    <div class="cookie-option">
-      <div>
-        <h4>Marketing Cookies</h4>
-        <p>Used for ads and personalization.</p>
-      </div>
-      <input type="checkbox" id="marketingToggle">
-    </div>
-
-    <div class="cookie-modal-actions">
-      <button id="savePrefs" class="btn-primary">Save Preferences</button>
-      <button id="rejectAllModal" class="btn-ghost">Reject All</button>
-    </div>
-
-  </div>
-</div>
-<button class="floating-cta"
-onclick="document.querySelector('.terms-hero').scrollIntoView({behavior:'smooth'})">       
- 🚚 Get a Free Quote
+    <button class="floating-cta" onclick="window.location.href='index.html#home'">
+        🚚 Get a Free Quote
     </button>
 
-        <script src="js/theme.js"></script>
+    <script src="js/theme.js"></script>
     <script src="js/script.js"></script>
 </body>
 
