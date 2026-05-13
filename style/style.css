@@ -203,7 +203,7 @@
 }
 
 .hero-pill {
-    color: rgba(255, 255, 255, 0.9);
+    color: white;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -241,6 +241,10 @@
     box-shadow: 0 0 0 rgba(217, 64, 64, 0.7);
     animation: pulse 2s infinite;
 }
+.hero-pill {
+    color: #fff;
+}
+
 
 @keyframes pulse {
     0% {
@@ -260,7 +264,7 @@
 }
 
 .dark .hero-pill {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: white;
     background: rgba(217, 64, 64, 0.12);
     border: 1px solid rgba(217, 64, 64, 0.35);
 
