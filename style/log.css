@@ -5,6 +5,9 @@
   align-items: center;
   justify-content: center;
   padding: 120px 20px 60px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 /* CARD */
@@ -15,7 +18,7 @@
   padding: 40px;
   border-radius: 20px;
   border: 1px solid var(--border);
-    box-shadow: var(--shadow-lg); 
+  box-shadow: var(--shadow-lg);
   margin: 0 auto;
   animation: fadeUp 0.6s ease;
 }
@@ -61,7 +64,7 @@
 
 .form-group input:focus {
   border-color: var(--red);
-border: 1px solid var(--border);
+  border: 1px solid var(--border);
 }
 
 /* BUTTON */
@@ -93,4 +96,49 @@ border: 1px solid var(--border);
 .auth-link a {
   color: var(--red);
   text-decoration: none;
+}
+
+.terms-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  filter: blur(140px);
+
+  opacity: 0.25;
+
+  animation: glowMove 10s ease-in-out infinite;
+
+  z-index: -1;
+
+  pointer-events: none;
+}
+
+.glow-1 {
+  background: red;
+  top: -100px;
+  left: -100px;
+}
+
+.glow-2 {
+  background: white;
+  bottom: -200px;
+  right: -100px;
+}
+
+@keyframes glowMove {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  50% {
+    transform: scale(1.08) translate(20px, -20px);
+  }
+
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
 }
