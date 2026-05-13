@@ -42,6 +42,20 @@ html[data-theme="dark"] {
     --red-glow: rgba(178,34,34,0.25);
     --surface2: rgba(255,255,255,0.06);
 --text2: #cfcfcf;
+
+    --coverage-light-glow: rgba(255, 255, 255, 0.05);
+
+    --coverage-grid: rgba(255, 255, 255, 0.06);
+
+    --coverage-white-glow: rgba(255, 255, 255, 0.8);
+
+    --coverage-badge-bg: rgba(255, 255, 255, 0.06);
+
+    --coverage-badge-border: rgba(255, 255, 255, 0.08);
+
+    --coverage-card-border: rgba(255, 255, 255, 0.08);
+
+    --coverage-map-shadow: rgba(0, 0, 0, 0.45);
 }
 
 /* ── LIGHT THEME ── */
@@ -69,6 +83,19 @@ html[data-theme="light"] {
     --red-glow: rgba(178,34,34,0.12);
     --surface2: rgba(0,0,0,0.04);
 --text2: #5f5f5f;
+-coverage-light-glow: rgba(255, 255, 255, 0.4);
+
+    --coverage-grid: rgba(0, 0, 0, 0.05);
+
+    --coverage-white-glow: rgba(255, 255, 255, 0.5);
+
+    --coverage-badge-bg: rgba(255, 255, 255, 0.7);
+
+    --coverage-badge-border: rgba(0, 0, 0, 0.06);
+
+    --coverage-card-border: rgba(0, 0, 0, 0.08);
+
+    --coverage-map-shadow: rgba(0, 0, 0, 0.18);
 }
 /* =========================================
    PREVENT FLASH ON LOAD
