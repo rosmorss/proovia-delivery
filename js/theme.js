@@ -17,6 +17,7 @@ html.classList.add("theme-preload");
 // =========================
 
 window.addEventListener("DOMContentLoaded", () => {
+    
 
     const thumb =
         document.getElementById("themeThumb");
