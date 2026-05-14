@@ -65,10 +65,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+function initReveal() {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
+        .forEach(el => revealObserver.observe(el));
+}
 
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
-        revealObserver.observe(el);
+initReveal();
+const mapObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            mapObserver.unobserve(entry.target);
+        }
     });
+}, { threshold: 0.3 });
+
+const map = document.querySelector(".coverage-map-card");
+if (map) mapObserver.observe(map);
 
     /* ── COUNTER ANIMATION ── */
     function animateCounter(el, target, suffix) {
@@ -212,45 +225,6 @@ function showToast(message, type = 'success') {
     }, 3500);
 }
 
-/* page faq*/
-const items = document.querySelectorAll(".faq-item");
-
-items.forEach(item => {
-  const question = item.querySelector(".faq-question");
-  if (!question) return;
-
-  question.onclick = () => {
-    items.forEach(i => {
-      if(i !== item){
-        i.classList.remove("active");
-        const span = i.querySelector("span");
-        if (span) span.textContent = "+";
-      }
-    });
-
-    item.classList.toggle("active");
-
-    const icon = item.querySelector("span");
-    if (icon) {
-      icon.textContent = item.classList.contains("active") ? "−" : "+";
-    }
-  };
-});
-
-//terms
-document.querySelectorAll(".faq-question").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const item = btn.parentElement;
-
-    // close others
-    document.querySelectorAll(".faq-item").forEach(i => {
-      if (i !== item) i.classList.remove("active");
-    });
-
-    item.classList.toggle("active");
-  });
-});
-
 // cookie
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -324,69 +298,3 @@ window.addEventListener("load", () => {
   }
 });
 
-//log
-const form = document.getElementById("loginForm");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  const user = {
-    email: "driver@proovia.co.uk",
-    password: "123456"
-  };
-
-  if (email === user.email && password === user.password) {
-
-    localStorage.setItem("loggedIn", "true");
-
-    showToast("Login successful 🚚", "success");
-
-    setTimeout(() => {
-      window.location.href = "dashboard.html";
-    }, 1000);
-
-  } else {
-    showToast("Invalid credentials ❌", "error");
-  }
-});
-
-function showToast(message, type) {
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = message;
-
-  toast.style.position = "fixed";
-  toast.style.bottom = "20px";
-  toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
-  toast.style.background = type === "success" ? "#22c55e" : "#ef4444";
-  toast.style.color = "white";
-  toast.style.padding = "12px 20px";
-  toast.style.borderRadius = "8px";
-
-  document.body.appendChild(toast);
-
-  setTimeout(() => toast.remove(), 2500);
-}
- window.addEventListener("scroll", () => {
-
-        const footerTop = footer.getBoundingClientRect().top;
-        const screenHeight = window.innerHeight;
-
-        if (footerTop < screenHeight - 100) {
-
-            cta.style.opacity = "0";
-            cta.style.pointerEvents = "none";
-            cta.style.transform = "translateY(20px)";
-
-        } else {
-
-            cta.style.opacity = "1";
-            cta.style.pointerEvents = "auto";
-            cta.style.transform = "translateY(0)";
-        }
-
-    });
