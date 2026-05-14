@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,7 +14,7 @@
         document.documentElement.setAttribute("data-theme", _savedTheme);
     </script>
     <link rel="stylesheet" href="style/theme.css">
-    <link rel="stylesheet" href="style/service.css">
+    <link rel="stylesheet" href="style/details.css">
 </head>
 
 <body>
@@ -63,175 +63,108 @@
             <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
         </div>
     </nav>
-<section class="program-page">
+  <section class="order-page">
 
-    <aside class="program-summary reveal-program">
-        <div class="summary-plan">
-            <h3>Proovia Standard</h3>
-            <span>£239.85</span>
-        </div>
+    <div class="order-glow glow-left"></div>
+    <div class="order-glow glow-right"></div>
 
-        <p class="summary-title">The program include:</p>
+    <div class="order-container">
 
-        <ul class="summary-list">
-            <li>Delivery timescale 2-4 working days</li>
-            <li>State of the art service</li>
-            <li>Two men team</li>
-            <li>Careful protection</li>
-            <li>In time delivery</li>
-            <li>Level of service room of choice</li>
-            <li>Damage cover up to £300</li>
-            <li>Time slot 2 hours</li>
-            <li>Tracking basic</li>
-            <li>Time slot the day before</li>
-            <li>Real time tracking</li>
-            <li>SMS updates</li>
-        </ul>
+        <div class="order-header">
+            <span class="order-badge">Checkout</span>
+            <h1>Order Details</h1>
 
-        <div class="fuel-card">
-            <span>Temporary Fuel Surcharge</span>
-            <strong>+ £8.87</strong>
-        </div>
-
-        <div class="summary-bottom">
-            <div class="total-row">
-                <span>Total price:</span>
-                <strong>£248.72</strong>
+            <div class="order-steps">
+                <div class="step active">1</div>
+                <div class="step-line"></div>
+                <div class="step">2</div>
             </div>
-
-            <button class="continue-btn"onclick="window.location.href='details.html'">Continue</button>
-        </div>
-    </aside>
-
-    <main class="program-main">
-
-        <div class="program-header reveal-program">
-            <span class="program-badge">Booking details</span>
-            <h1>Program details</h1>
-            <p>Review your collection and delivery information before continuing.</p>
         </div>
 
-        <div class="route-card reveal-program">
+        <form class="order-form">
 
-            <div class="route-point">
-                <span>Collection</span>
-                <div class="route-box">
-                    <strong>15 May 2026</strong>
-                    <p>BN3 2WB</p>
+            <div class="order-section">
+                <div class="section-title">
+                    <h2>Customer Details</h2>
+                    <span>Main contact information</span>
+                </div>
+
+                <div class="input-grid">
+                    <input type="text" placeholder="Full name" >
+                    <input type="email" placeholder="Email address" >
+                    <input type="tel" placeholder="Phone number">
                 </div>
             </div>
 
-            <div class="route-line">
-                <a href="#">Change dates</a>
-                <div class="line">
+            <div class="order-section">
+                <div class="section-title with-action">
+                    <div>
+                        <h2>Collection Details</h2>
+                        <span>Who should we contact at collection?</span>
+                    </div>
+
+                    <label class="custom-check">
+                        <input type="checkbox" class="same-customer" data-target="collection">
+                        <span></span>
+                        Same as Customer
+                    </label>
+                </div>
+
+                <div class="input-grid collection-fields">
+                    <input type="text" placeholder="Full name">
+                    <input type="email" placeholder="Email address">
+                    <input type="tel" placeholder="Phone number">
+                </div>
+
+                <label class="notes-toggle">
+                    <input type="checkbox" class="notes-check" data-target="collection-notes">
                     <span></span>
-                </div>
+                    Collection Notes
+                </label>
+
+                <textarea id="collection-notes" class="notes-area" placeholder="Add collection instructions..."></textarea>
             </div>
 
-            <div class="route-point">
-                <span>Delivery</span>
-                <div class="route-box">
-                    <strong class="green">16 May 2026</strong>
-                    <p>WA14 5RF</p>
+            <div class="order-section">
+                <div class="section-title with-action">
+                    <div>
+                        <h2>Delivery Details</h2>
+                        <span>Who should we contact at delivery?</span>
+                    </div>
+
+                    <label class="custom-check">
+                        <input type="checkbox" class="same-customer" data-target="delivery">
+                        <span></span>
+                        Same as Customer
+                    </label>
                 </div>
+
+                <div class="input-grid delivery-fields">
+                    <input type="text" placeholder="Full name">
+                    <input type="email" placeholder="Email address">
+                    <input type="tel" placeholder="Phone number">
+                </div>
+
+                <label class="notes-toggle">
+                    <input type="checkbox" class="notes-check" data-target="delivery-notes">
+                    <span></span>
+                    Delivery Notes
+                </label>
+
+                <textarea id="delivery-notes" class="notes-area" placeholder="Add delivery instructions..."></textarea>
             </div>
 
-        </div>
-
-        <div class="details-grid">
-
-            <div class="details-card reveal-program">
-                <h3>Collection details</h3>
-
-                <div class="form-group">
-                    <label>Is parking available?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn">No</button>
-                        <button class="choice-btn active">Space outside</button>
-                        <button class="choice-btn">On street</button>
-                        <button class="choice-btn">Nearby</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>What floor are you on?</label>
-                    <select>
-                        <option>Ground</option>
-                        <option>First floor</option>
-                        <option>Second floor</option>
-                        <option>Third floor</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Are there any entrance steps?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn active">No</button>
-                        <button class="choice-btn">Yes</button>
-                    </div>
-                </div>
+            <div class="order-actions">
+                <button type="button" class="back-btn"onclick="window.location.href='service.html'">Back</button>
+                <button type="submit" class="next-btn"onclick="window.location.href='checkout.html'">Continue</button>
             </div>
 
-            <div class="details-card reveal-program">
-                <h3>Delivery details</h3>
-
-                <div class="form-group">
-                    <label>Is parking available?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn">No</button>
-                        <button class="choice-btn">Space outside</button>
-                        <button class="choice-btn">On street</button>
-                        <button class="choice-btn active">Nearby</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>What floor are you on?</label>
-                    <select>
-                        <option>Ground</option>
-                        <option>First floor</option>
-                        <option>Second floor</option>
-                        <option>Third floor</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Are there any entrance steps?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn active">No</button>
-                        <button class="choice-btn">Yes</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </main>
-<div class="dates-modal" id="datesModal">
-    <div class="dates-overlay"></div>
-
-    <div class="dates-box">
-
-        <div class="calendar-block">
-            <h3>Collection date</h3>
-            <div class="calendar-card" id="collectionCalendar"></div>
-        </div>
-
-        <div class="calendar-block">
-            <h3>Delivery date</h3>
-            <div class="calendar-card" id="deliveryCalendar"></div>
-        </div>
-
-        <div class="dates-actions">
-            <button class="cancel-dates">Cancel</button>
-            <button class="save-dates">Save</button>
-        </div>
+        </form>
 
     </div>
-</div>
-</section>
 
-    <footer>
+</section>
+  <footer>
         <div class="footer-top">
 
             <div class="footer-brand">
@@ -309,7 +242,7 @@
     </button>
     <script src="js/theme.js"></script>
 
-    <script src="js/service.js"></script>
+    <script src="js/details.js"></script>
 </body>
 
 </html>
