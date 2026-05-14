@@ -677,7 +677,35 @@ section {
     color: var(--text2);
     line-height: 1.6;
 }
+.section-connector-glow {
+    position: relative;
+    height: 0;
+    z-index: 1;
+}
 
+.section-connector-glow::before {
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    border-radius: 50%;
+
+    background: #b22222;
+
+    filter: blur(110px);
+
+    opacity: 0.16;
+
+    left: -140px;
+    top: -240px;
+
+    animation: glowMove 10s ease-in-out infinite;
+
+    pointer-events: none;
+}
 /* ========================= */
 /* COVERAGE SECTION */
 /* ========================= */
@@ -687,16 +715,6 @@ section {
     overflow: hidden;
     padding: 140px 6% 120px;
 
-     background:
-        radial-gradient(circle at top left,
-            rgba(178, 34, 34, 0.14),
-            transparent 35%),
-
-        radial-gradient(circle at bottom right,
-            var(--coverage-light-glow),
-            transparent 35%),
-
-        var(--bg);
 }
 
 /* particles */
@@ -904,7 +922,40 @@ section {
     filter:
           drop-shadow(0 30px 50px var(--coverage-map-shadow));
 }
+#why,
+.coverage {
+    position: relative;
+    overflow: hidden;
 
+    background:
+        radial-gradient(
+            circle at bottom right,
+            var(--coverage-light-glow),
+            transparent 35%
+        ),
+        var(--bg);
+}
+#why::before,
+.coverage::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            var(--coverage-grid) 1px,
+            transparent 1px
+        );
+
+    background-size: 42px 42px;
+
+    opacity: 0.22;
+
+    animation: moveParticles 40s linear infinite;
+
+    pointer-events: none;
+}
 /* ========================= */
 /* RESPONSIVE */
 /* ========================= */
