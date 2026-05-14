@@ -796,3 +796,12 @@
     margin: auto;
     font-size: 14px;
 }
+.apply-form input::placeholder,
+.apply-form textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.apply-form select {
+    color: var(--text-muted);
+}
