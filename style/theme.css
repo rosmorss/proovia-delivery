@@ -83,7 +83,7 @@ html[data-theme="light"] {
     --red-glow: rgba(178,34,34,0.12);
     --surface2: rgba(0,0,0,0.04);
 --text2: #5f5f5f;
--coverage-light-glow: rgba(255, 255, 255, 0.4);
+--coverage-light-glow: rgba(255, 255, 255, 0.4);
 
     --coverage-grid: rgba(0, 0, 0, 0.05);
 
