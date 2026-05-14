@@ -55,7 +55,7 @@ html[data-theme="dark"] {
 
     --coverage-card-border: rgba(255, 255, 255, 0.08);
 
-    --coverage-map-shadow: rgba(0, 0, 0, 0.45);
+    --coverage-map-shadow: rgba(240, 8, 8, 0.363);
 }
 
 /* ── LIGHT THEME ── */

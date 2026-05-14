@@ -868,21 +868,34 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    right: -120px;
 }
 
 .coverage-map-card {
     position: relative;
 
     width: 100%;
-    max-width: 620px;
-
-    padding: 30px;
-
+    max-width: 690px;
+    padding: 20px;
     border-radius: 38px;
-
+        opacity: 0;
+    transform: translateX(60px) scale(0.95);
+    transition: all 0.9s ease;
+    will-change: transform, opacity;
 
 }
+.coverage-map-hover {
+    display: inline-block;
+}
 
+.coverage-map-hover:hover .coverage-map-card {
+    transform: translateY(-10px);
+    transition: transform 0.35s ease;
+}
+.coverage-map-card.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
 .coverage-map-card img {
     width: 100%;
     display: block;
