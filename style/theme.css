@@ -490,7 +490,7 @@ nav.scrolled {
 
     text-decoration: none;
 
-    color: var(--text-soft);
+    color: white;
 
     font-size: 15px;
 
@@ -553,12 +553,7 @@ body.menu-open {
     right: 0;
 }
 
-.mobile-menu-account:hover {
 
-    background: var(--red-light);
-
-    transform: translateY(-2px);
-}
 /* ═══════════════════════════════════════
    HAMBURGER
 ═══════════════════════════════════════ */
@@ -733,7 +728,9 @@ body.menu-open {
 
     transition: all 0.25s ease;
 }
-
+.mobile-menu-account {
+    color: white !important;
+}
 #mobile-menu a:hover {
     background: var(--surface2);
 
@@ -744,56 +741,6 @@ body.menu-open {
     padding-left: 22px;
 }
 
-/* ───────── HAMBURGER ───────── */
-.hamburger {
-    display: none;
-
-    flex-direction: column;
-    justify-content: center;
-
-    gap: 5px;
-
-    width: 40px;
-    height: 40px;
-
-    background: none;
-    border: none;
-
-    cursor: pointer;
-
-    padding: 6px;
-
-    border-radius: 8px;
-
-    transition: background 0.2s ease;
-}
-
-.hamburger:hover {
-    background: var(--surface2);
-}
-
-.hamburger span {
-    width: 100%;
-    height: 2px;
-
-    background: var(--text);
-
-    border-radius: 2px;
-
-    transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
-}
-
-.hamburger.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.hamburger.open span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
 
 /* ════════════════════════════════════════
    BUTTONS
