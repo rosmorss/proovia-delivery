@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <script>
+        const _savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", _savedTheme);
+    </script>
+    <link rel="stylesheet" href="style/theme.css">
+    <link rel="stylesheet" href="style/plans.css">
+</head>
+
+<body>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-overlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="index.html#">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <a href="log.html" class="mobile-menu-account">
+            👤 My Account
+        </a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="photo/logo.png" alt="Proovia Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <!-- Hamburger -->
+        <button id="hamburger" class="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                <div class="theme-toggle-thumb" id="themeThumb">☀️</div>
+            </div>
+            <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
+        </div>
+    </nav>
+<section class="plans-section">
+    <div class="plans-bg-glow glow-left"></div>
+    <div class="plans-bg-glow glow-right"></div>
+
+    <div class="plans-header">
+        <span class="plans-badge">Delivery Plans</span>
+        <h1>Select Your Preferred Delivery Option</h1>
+        <p>Choose the right Proovia service level for your delivery needs.</p>
+    </div>
+
+    <div class="plans-wrapper">
+
+        <div class="plan-card">
+            <h3>Proovia Eco</h3>
+            <div class="plan-price">£213.20</div>
+
+            <div class="plan-date">
+                <span>Collection</span>
+                <strong>15 May</strong>
+            </div>
+
+            <div class="plan-date">
+                <span>Delivery</span>
+                <strong class="green">16 May</strong>
+            </div>
+
+            <ul>
+                <li><span>Delivery timescale</span><b>7-10 working days</b></li>
+                <li><span>Exclusivity</span><b class="no">—</b></li>
+                <li><span>Two men team</span><b class="yes">✓</b></li>
+                <li><span>Careful protection</span><b class="yes">✓</b></li>
+                <li><span>Level of service</span><b>door to door</b></li>
+                <li><span>Damage cover</span><b>£0</b></li>
+                <li><span>Time slot</span><b>whole day</b></li>
+                <li><span>Tracking</span><b class="no">—</b></li>
+                <li><span>SMS updates</span><b class="no">—</b></li>
+            </ul>
+
+            <button>Select Plan</button>
+            <button class="more-details-btn" type="button">
+    More details
+</button>
+        </div>
+
+        <div class="plan-card">
+            <h3>Proovia Eco Plus</h3>
+            <div class="plan-price">£230.03</div>
+
+            <div class="plan-date">
+                <span>Collection</span>
+                <strong>15 May</strong>
+            </div>
+
+            <div class="plan-date">
+                <span>Delivery</span>
+                <strong class="green">16 May</strong>
+            </div>
+
+            <ul>
+                <li><span>Delivery timescale</span><b>5-7 working days</b></li>
+                <li><span>Exclusivity</span><b class="no">—</b></li>
+                <li><span>Two men team</span><b class="yes">✓</b></li>
+                <li><span>Careful protection</span><b class="yes">✓</b></li>
+                <li><span>Level of service</span><b>ground floor</b></li>
+                <li><span>Damage cover</span><b>up to £100</b></li>
+                <li><span>Time slot</span><b>4 hours</b></li>
+                <li><span>Tracking</span><b class="yes">✓</b></li>
+                <li><span>SMS updates</span><b class="no">—</b></li>
+            </ul>
+
+            <button>Select Plan</button>
+            <button class="more-details-btn" type="button">
+    More details
+</button>
+        </div>
+
+        <div class="plan-card featured">
+            <div class="popular-label">Most Popular</div>
+            <h3>Proovia Standard</h3>
+            <div class="plan-price">£248.72</div>
+
+            <div class="plan-date">
+                <span>Collection</span>
+                <strong>15 May</strong>
+            </div>
+
+            <div class="plan-date">
+                <span>Delivery</span>
+                <strong class="green">16 May</strong>
+            </div>
+
+            <ul>
+                <li><span>Delivery timescale</span><b>2-4 working days</b></li>
+                <li><span>Exclusivity</span><b class="no">—</b></li>
+                <li><span>Two men team</span><b class="yes">✓</b></li>
+                <li><span>Careful protection</span><b class="yes">✓</b></li>
+                <li><span>Level of service</span><b>room of choice</b></li>
+                <li><span>Damage cover</span><b>up to £300</b></li>
+                <li><span>Time slot</span><b>2 hours</b></li>
+                <li><span>Real time tracking</span><b class="yes">✓</b></li>
+                <li><span>SMS updates</span><b class="yes">✓</b></li>
+            </ul>
+
+            <button>Select Plan</button>
+            <button class="more-details-btn" type="button">
+    More details
+</button>
+        </div>
+
+        <div class="plan-card">
+            <h3>Proovia Premium</h3>
+            <div class="plan-price">£263.69</div>
+
+            <div class="plan-date">
+                <span>Collection</span>
+                <strong>15 May</strong>
+            </div>
+
+            <div class="plan-date">
+                <span>Delivery</span>
+                <strong class="green">16 May</strong>
+            </div>
+
+            <ul>
+                <li><span>Delivery timescale</span><b>1-2 business days</b></li>
+                <li><span>Exclusivity</span><b class="no">—</b></li>
+                <li><span>Two men team</span><b class="yes">✓</b></li>
+                <li><span>Careful protection</span><b class="yes">✓</b></li>
+                <li><span>Level of service</span><b>room of choice</b></li>
+                <li><span>Damage cover</span><b>up to purchase / market / repair cost</b></li>
+                <li><span>Time slot</span><b>2 hours</b></li>
+                <li><span>Real time tracking</span><b class="yes">✓</b></li>
+                <li><span>SMS updates</span><b class="yes">✓</b></li>
+            </ul>
+
+            <button>Select Plan</button>
+            <button class="more-details-btn" type="button">
+    More details
+</button>
+        </div>
+
+        <div class="plan-card first-class">
+            <h3>Proovia First Class</h3>
+            <div class="plan-price">£527.38</div>
+
+            <div class="plan-date">
+                <span>Collection</span>
+                <strong>15 May</strong>
+            </div>
+
+            <div class="plan-date">
+                <span>Delivery</span>
+                <strong class="green">within 36 hours</strong>
+            </div>
+
+            <ul>
+                <li><span>Delivery timescale</span><b>1-2 business days</b></li>
+                <li><span>Exclusivity</span><b class="yes">✓</b></li>
+                <li><span>Two men team</span><b class="yes">✓</b></li>
+                <li><span>Careful protection</span><b>up to 3 orders in the van</b></li>
+                <li><span>Level of service</span><b>room of choice</b></li>
+                <li><span>Damage cover</span><b>up to purchase / market / repair cost</b></li>
+                <li><span>Time slot</span><b>2 hours</b></li>
+                <li><span>Real time tracking</span><b class="yes">✓</b></li>
+                <li><span>SMS updates</span><b class="yes">✓</b></li>
+            </ul>
+
+            <button>Select Plan</button>
+            <button class="more-details-btn" type="button">
+    More details
+</button>
+        </div>
+
+    </div>
+</section>
+    
+    <footer>
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="photo/logo.png" alt="Proovia Logo" class="hero-logo">
+                </a>
+
+                <p>
+                    Reliable nationwide delivery and moving services across England.
+                    Founded in Birmingham in 2014.
+                </p>
+
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/company/proovia-couriers" class="social-btn">in</a>
+
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" class="social-btn">f</a>
+
+                    <a href="https://www.instagram.com/proovia.couriers/" class="social-btn">ig</a>
+
+                    <a href="https://maps.app.goo.gl/aRXeHiQcLu9KFJcKA" class="social-btn">G</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+
+                <ul>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#coverage">Coverage</a></li>
+                    <li><a href="index.html#how">How It Works</a></li>
+                    <li><a href="index.html#reviews">Reviews</a></li>
+                    <li><a href="infod.html">Drivers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Support</h5>
+
+                <ul>
+                    <li><a href="log.html">My Account</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact</h5>
+
+                <ul>
+                    <a href="tel:+441213149848">(+44) 121 314 9848</a>
+
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+
+                    <li>
+                        <a href="https://maps.app.goo.gl/6gp5m9FH1mfmsye67">
+                            Office, Fort Dunlop, 110 Fort Pkwy, Birmingham B24 9FE, United Kingdom
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Proovia Couriers LTD. All rights reserved.</p>
+
+            <p>
+                Built for fast, secure and reliable delivery across England.
+            </p>
+        </div>
+    </footer>
+
+    <button class="floating-cta" onclick="window.location.href='index.html#home'">
+        🚚 Get a Free Quote
+    </button>
+    <script src="js/theme.js"></script>
+
+    <script src="js/plans.js"></script>
+</body>
+
+</html>
