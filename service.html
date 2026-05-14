@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <script>
+        const _savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", _savedTheme);
+    </script>
+    <link rel="stylesheet" href="style/theme.css">
+    <link rel="stylesheet" href="style/service.css">
+</head>
+
+<body>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-overlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="index.html#">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <a href="log.html" class="mobile-menu-account">
+            👤 My Account
+        </a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="photo/logo.png" alt="Proovia Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <!-- Hamburger -->
+        <button id="hamburger" class="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                <div class="theme-toggle-thumb" id="themeThumb">☀️</div>
+            </div>
+            <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
+        </div>
+    </nav>
+<section class="program-page">
+
+    <aside class="program-summary reveal-program">
+        <div class="summary-plan">
+            <h3>Proovia Standard</h3>
+            <span>£239.85</span>
+        </div>
+
+        <p class="summary-title">The program include:</p>
+
+        <ul class="summary-list">
+            <li>Delivery timescale 2-4 working days</li>
+            <li>State of the art service</li>
+            <li>Two men team</li>
+            <li>Careful protection</li>
+            <li>In time delivery</li>
+            <li>Level of service room of choice</li>
+            <li>Damage cover up to £300</li>
+            <li>Time slot 2 hours</li>
+            <li>Tracking basic</li>
+            <li>Time slot the day before</li>
+            <li>Real time tracking</li>
+            <li>SMS updates</li>
+        </ul>
+
+        <div class="fuel-card">
+            <span>Temporary Fuel Surcharge</span>
+            <strong>+ £8.87</strong>
+        </div>
+
+        <div class="summary-bottom">
+            <div class="total-row">
+                <span>Total price:</span>
+                <strong>£248.72</strong>
+            </div>
+
+            <button class="continue-btn">Continue</button>
+        </div>
+    </aside>
+
+    <main class="program-main">
+
+        <div class="program-header reveal-program">
+            <span class="program-badge">Booking details</span>
+            <h1>Program details</h1>
+            <p>Review your collection and delivery information before continuing.</p>
+        </div>
+
+        <div class="route-card reveal-program">
+
+            <div class="route-point">
+                <span>Collection</span>
+                <div class="route-box">
+                    <strong>15 May 2026</strong>
+                    <p>BN3 2WB</p>
+                </div>
+            </div>
+
+            <div class="route-line">
+                <a href="#">Change dates</a>
+                <div class="line">
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="route-point">
+                <span>Delivery</span>
+                <div class="route-box">
+                    <strong class="green">16 May 2026</strong>
+                    <p>WA14 5RF</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="details-grid">
+
+            <div class="details-card reveal-program">
+                <h3>Collection details</h3>
+
+                <div class="form-group">
+                    <label>Is parking available?</label>
+                    <div class="choice-group">
+                        <button class="choice-btn">No</button>
+                        <button class="choice-btn active">Space outside</button>
+                        <button class="choice-btn">On street</button>
+                        <button class="choice-btn">Nearby</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>What floor are you on?</label>
+                    <select>
+                        <option>Ground</option>
+                        <option>First floor</option>
+                        <option>Second floor</option>
+                        <option>Third floor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Are there any entrance steps?</label>
+                    <div class="choice-group">
+                        <button class="choice-btn active">No</button>
+                        <button class="choice-btn">Yes</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-card reveal-program">
+                <h3>Delivery details</h3>
+
+                <div class="form-group">
+                    <label>Is parking available?</label>
+                    <div class="choice-group">
+                        <button class="choice-btn">No</button>
+                        <button class="choice-btn">Space outside</button>
+                        <button class="choice-btn">On street</button>
+                        <button class="choice-btn active">Nearby</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>What floor are you on?</label>
+                    <select>
+                        <option>Ground</option>
+                        <option>First floor</option>
+                        <option>Second floor</option>
+                        <option>Third floor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Are there any entrance steps?</label>
+                    <div class="choice-group">
+                        <button class="choice-btn active">No</button>
+                        <button class="choice-btn">Yes</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+<div class="dates-modal" id="datesModal">
+    <div class="dates-overlay"></div>
+
+    <div class="dates-box">
+
+        <div class="calendar-block">
+            <h3>Collection date</h3>
+            <div class="calendar-card" id="collectionCalendar"></div>
+        </div>
+
+        <div class="calendar-block">
+            <h3>Delivery date</h3>
+            <div class="calendar-card" id="deliveryCalendar"></div>
+        </div>
+
+        <div class="dates-actions">
+            <button class="cancel-dates">Cancel</button>
+            <button class="save-dates">Save</button>
+        </div>
+
+    </div>
+</div>
+</section>
+
+    <footer>
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="photo/logo.png" alt="Proovia Logo" class="hero-logo">
+                </a>
+
+                <p>
+                    Reliable nationwide delivery and moving services across England.
+                    Founded in Birmingham in 2014.
+                </p>
+
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/company/proovia-couriers" class="social-btn">in</a>
+
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" class="social-btn">f</a>
+
+                    <a href="https://www.instagram.com/proovia.couriers/" class="social-btn">ig</a>
+
+                    <a href="https://maps.app.goo.gl/aRXeHiQcLu9KFJcKA" class="social-btn">G</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+
+                <ul>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#coverage">Coverage</a></li>
+                    <li><a href="index.html#how">How It Works</a></li>
+                    <li><a href="index.html#reviews">Reviews</a></li>
+                    <li><a href="infod.html">Drivers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Support</h5>
+
+                <ul>
+                    <li><a href="log.html">My Account</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact</h5>
+
+                <ul>
+                    <a href="tel:+441213149848">(+44) 121 314 9848</a>
+
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+
+                    <li>
+                        <a href="https://maps.app.goo.gl/6gp5m9FH1mfmsye67">
+                            Office, Fort Dunlop, 110 Fort Pkwy, Birmingham B24 9FE, United Kingdom
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Proovia Couriers LTD. All rights reserved.</p>
+
+            <p>
+                Built for fast, secure and reliable delivery across England.
+            </p>
+        </div>
+    </footer>
+
+    <button class="floating-cta" onclick="window.location.href='index.html#home'">
+        🚚 Get a Free Quote
+    </button>
+    <script src="js/theme.js"></script>
+
+    <script src="js/service.js"></script>
+</body>
+
+</html>
