@@ -103,30 +103,6 @@ buttons.forEach((btn) => {
 });
 
 // =========================
-// STEP HOVER EFFECT
-// =========================
-
-const steps = document.querySelectorAll(".step");
-
-steps.forEach((step) => {
-
-  step.addEventListener("mouseenter", () => {
-
-    step.style.transform =
-      "translateY(-8px) scale(1.03)";
-
-  });
-
-  step.addEventListener("mouseleave", () => {
-
-    step.style.transform =
-      "translateY(0) scale(1)";
-
-  });
-
-});
-
-// =========================
 // APPLY FORM
 // =========================
 
