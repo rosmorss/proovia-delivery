@@ -1079,3 +1079,27 @@ footer {
     transform: translateY(16px) !important;
     pointer-events: none;
 }
+/* MOBILE FLOATING CTA */
+
+@media (max-width: 700px) {
+    .floating-cta {
+        bottom: 14px;
+        right: 14px;
+
+        padding: 10px 14px;
+        gap: 7px;
+
+        font-size: 11px;
+        font-weight: 700;
+
+        border-radius: 999px;
+
+        box-shadow: 0 8px 24px rgba(178, 34, 34, 0.35);
+
+        backdrop-filter: blur(10px);
+    }
+
+    .floating-cta:hover {
+        box-shadow: 0 10px 26px rgba(178, 34, 34, 0.4);
+    }
+}
