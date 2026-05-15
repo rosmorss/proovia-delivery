@@ -225,76 +225,96 @@ function showToast(message, type = 'success') {
     }, 3500);
 }
 
-// cookie
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
+    const banner = document.getElementById("cookieBanner");
+    const modal = document.getElementById("cookieModal");
 
-  const banner = document.getElementById("cookie-banner");
-  const modal = document.getElementById("cookie-modal");
+    const acceptBtn = document.getElementById("cookieAccept");
+    const rejectBtn = document.getElementById("cookieReject");
+    const customizeBtn = document.getElementById("cookieCustomize");
 
-  const acceptAll = document.getElementById("acceptAll");
-  const declineAll = document.getElementById("declineAll");
-  const customizeBtn = document.getElementById("customizeBtn");
+    const closeBtn = document.getElementById("cookieClose");
+    const saveBtn = document.getElementById("cookieSave");
+    const rejectModalBtn = document.getElementById("cookieRejectModal");
+    const acceptAllModalBtn = document.getElementById("cookieAcceptAll");
 
-  const savePrefs = document.getElementById("savePrefs");
-  const rejectAllModal = document.getElementById("rejectAllModal");
+    const analytics = document.getElementById("cookieAnalytics");
+    const marketing = document.getElementById("cookieMarketing");
 
-  const analyticsToggle = document.getElementById("analyticsToggle");
-  const marketingToggle = document.getElementById("marketingToggle");
+    if (!banner || !modal) return;
 
-  if (!banner) return; // protecție
+    const savedConsent = localStorage.getItem("cookieConsent");
 
-  if (localStorage.getItem("cookieConsent")) {
-    banner.style.display = "none";
-  }
+    if (savedConsent) {
+        banner.classList.add("hide");
 
-  acceptAll.onclick = () => {
-    localStorage.setItem("cookieConsent", "all");
-    banner.style.display = "none";
-  };
+        const prefs = JSON.parse(savedConsent);
+        if (analytics) analytics.checked = prefs.analytics;
+        if (marketing) marketing.checked = prefs.marketing;
 
-  declineAll.onclick = () => {
-    localStorage.setItem("cookieConsent", "none");
-    banner.style.display = "none";
-  };
+        return;
+    }
 
-  customizeBtn.onclick = () => {
-    modal.classList.add("active");
-  };
+    function openModal() {
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
 
-  savePrefs.onclick = () => {
-    const prefs = {
-      analytics: analyticsToggle.checked,
-      marketing: marketingToggle.checked
+    function closeModal() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+    function saveConsent(analyticsValue, marketingValue) {
+        const preferences = {
+            essential: true,
+            analytics: analyticsValue,
+            marketing: marketingValue,
+            savedAt: new Date().toISOString()
+        };
+
+        localStorage.setItem("cookieConsent", JSON.stringify(preferences));
+
+        banner.classList.add("hide");
+        closeModal();
+
+        console.log("Saved cookie preferences:", preferences);
+    }
+
+    acceptBtn.onclick = () => saveConsent(true, true);
+    rejectBtn.onclick = () => saveConsent(false, false);
+
+    customizeBtn.onclick = () => {
+        const saved = localStorage.getItem("cookieConsent");
+
+        if (saved) {
+            const prefs = JSON.parse(saved);
+            analytics.checked = prefs.analytics;
+            marketing.checked = prefs.marketing;
+        }
+
+        openModal();
     };
 
-    localStorage.setItem("cookieConsent", JSON.stringify(prefs));
+    acceptAllModalBtn.onclick = () => {
+        analytics.checked = true;
+        marketing.checked = true;
+        saveConsent(true, true);
+    };
 
-    modal.classList.remove("active");
-    banner.style.display = "none";
-  };
+    saveBtn.onclick = () => {
+        saveConsent(analytics.checked, marketing.checked);
+    };
 
-  rejectAllModal.onclick = () => {
-    localStorage.setItem("cookieConsent", "none");
+    rejectModalBtn.onclick = () => {
+        analytics.checked = false;
+        marketing.checked = false;
+        saveConsent(false, false);
+    };
 
-    analyticsToggle.checked = false;
-    marketingToggle.checked = false;
+    closeBtn.onclick = closeModal;
 
-    modal.classList.remove("active");
-    banner.style.display = "none";
-  };
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("active");
-    }
-  });
-
+    modal.onclick = (e) => {
+        if (e.target === modal) closeModal();
+    };
 });
-window.addEventListener("load", () => {
-  const loader = document.getElementById("page-loader");
-  if (loader) {
-    loader.style.opacity = "0";
-    setTimeout(() => loader.style.display = "none", 400);
-  }
-});
-
