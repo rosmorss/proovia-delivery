@@ -2357,3 +2357,164 @@ section {
         flex-direction: column-reverse;
     }
 }
+
+/* ───────────────── HERO ANIMATIONS ───────────────── */
+
+.hero-content > * {
+    opacity: 0;
+    animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-pill {
+    animation-delay: 0.3s;
+}
+
+.hero h1 {
+    animation-delay: 0.25s;
+}
+
+.hero-sub {
+    animation-delay: 0.4s;
+}
+
+.hero-search-bar {
+    animation-delay: 0.55s;
+}
+
+.hero-stats {
+    animation-delay: 0.7s;
+}
+
+
+/* SEARCH BAR FLOAT */
+
+.hero-search-bar {
+    animation:
+        heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        heroFloat 5s ease-in-out 2s infinite;
+}
+
+/* STATS STAGGER */
+
+.hero-stats .stat {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: statReveal 0.7s ease forwards;
+}
+
+.hero-stats .stat:nth-child(1) {
+    animation-delay: 1s;
+}
+
+.hero-stats .stat:nth-child(3) {
+    animation-delay: 1.15s;
+}
+
+.hero-stats .stat:nth-child(5) {
+    animation-delay: 1.3s;
+}
+
+.hero-stats .stat:nth-child(7) {
+    animation-delay: 1.45s;
+}
+
+/* BUTTON MICRO INTERACTION */
+
+.btn-search {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-search::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.25),
+        transparent
+    );
+
+    transition: 0.7s ease;
+}
+
+.btn-search:hover::before {
+    left: 120%;
+}
+
+/* KEYFRAMES */
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes heroShine {
+    0% {
+        transform: translateX(-120%);
+    }
+
+    100% {
+        transform: translateX(120%);
+    }
+}
+
+@keyframes statReveal {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+    .hero-content > * {
+        animation-duration: 0.7s;
+    }
+
+    .hero h1::after {
+        display: none;
+    }
+
+    .hero-search-bar {
+        animation:
+            heroFadeUp 0.7s ease forwards;
+    }
+
+    .hero-stats {
+        gap: 24px;
+    }
+
+    .stat-num {
+        font-size: 32px;
+    }
+}
