@@ -1,5 +1,5 @@
 const bookingItems = document.getElementById("bookingItems");
-const categoriesContainer = document.getElementById("categories");
+const categoriesContainer = document.getElementById("categoriesList");
 const searchInput = document.getElementById("searchItems");
 const categoriesList = document.getElementById("categoriesList");
 let allProducts = [];
@@ -125,6 +125,17 @@ products.slice(0, 10).forEach(product => {
         </div>
 
         `;
+        setTimeout(() => {
+
+    document.querySelectorAll(".booking-item").forEach((item, index) => {
+
+        setTimeout(() => {
+            item.classList.add("show");
+        }, index * 70);
+
+    });
+
+}, 50);
 
     });
 
@@ -243,3 +254,30 @@ function addToCart(id) {
     console.log("Cart:", cart);
 
 }
+/* ------------------------ */
+/* REVEAL */
+/* ------------------------ */
+
+const revealElements = document.querySelectorAll(
+    ".booking-categories, .booking-top, .booking-actions"
+);
+
+const revealObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+}, {
+    threshold: 0.12
+});
+
+revealElements.forEach(el => {
+    revealObserver.observe(el);
+}); 
