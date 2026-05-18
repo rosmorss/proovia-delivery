@@ -8,7 +8,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style/dashboard.css">
+    <script>
+    const _savedTheme = localStorage.getItem("theme") || "dark";
+    document.documentElement.setAttribute("data-theme", _savedTheme);
+</script>
+
+<link rel="stylesheet" href="style/dashboard.css">
 </head>
 
 <body>
@@ -120,6 +125,9 @@
                     <p id="topbar-sub">Track, Manage, and Forecast Deliveries with Ease.</p>
                 </div>
                 <div class="topbar-right">
+                    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+    <div class="theme-toggle-thumb" id="themeThumb">☀️</div>
+</div>
                     <div class="topbar-search">
                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <circle cx="11" cy="11" r="8" />
@@ -869,6 +877,7 @@
     <!-- TOAST -->
     <div class="toast" id="toast"></div>
     <script src="js/dashboard.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 
 </html>
