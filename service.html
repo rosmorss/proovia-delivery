@@ -71,9 +71,12 @@
             <span>£239.85</span>
         </div>
 
-        <p class="summary-title">The program include:</p>
+        <button class="summary-toggle" type="button">
+    See all details
+    <span>+</span>
+</button>
 
-        <ul class="summary-list">
+<ul class="summary-list summary-hidden">
             <li>Delivery timescale 2-4 working days</li>
             <li>State of the art service</li>
             <li>Two men team</li>
@@ -159,12 +162,12 @@
 
                 <div class="form-group">
                     <label>What floor are you on?</label>
-                    <select>
-                        <option>Ground</option>
-                        <option>First floor</option>
-                        <option>Second floor</option>
-                        <option>Third floor</option>
-                    </select>
+                    <div class="floor-options">
+    <button class="floor-btn active">Ground</button>
+    <button class="floor-btn">First floor</button>
+    <button class="floor-btn">Second floor</button>
+    <button class="floor-btn">Third floor</button>
+</div>
                 </div>
 
                 <div class="form-group">
@@ -191,12 +194,12 @@
 
                 <div class="form-group">
                     <label>What floor are you on?</label>
-                    <select>
-                        <option>Ground</option>
-                        <option>First floor</option>
-                        <option>Second floor</option>
-                        <option>Third floor</option>
-                    </select>
+                    <div class="floor-options">
+    <button class="floor-btn active">Ground</button>
+    <button class="floor-btn">First floor</button>
+    <button class="floor-btn">Second floor</button>
+    <button class="floor-btn">Third floor</button>
+</div>
                 </div>
 
                 <div class="form-group">
@@ -309,9 +312,6 @@
         </div>
     </footer>
 
-    <button class="floating-cta" onclick="window.location.href='index.html#home'">
-        🚚 Get a Free Quote
-    </button>
     <script src="js/theme.js"></script>
 
     <script src="js/service.js"></script>
