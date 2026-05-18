@@ -13,6 +13,11 @@
         const savedTheme = localStorage.getItem("theme") || "dark";
         document.documentElement.setAttribute("data-theme", savedTheme);
     </script>
+    <script>
+        if (window.location.hash) {
+            document.documentElement.classList.add("no-smooth-scroll");
+        }
+    </script>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/theme.css">
 </head>
@@ -130,48 +135,48 @@
     </div>
 
     <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="services-header">
-        <div>
-            <div class="section-eyebrow reveal">Our Services</div>
-            <h2 class="section-title reveal">We provide room-to-room delivery service</h2>
-        </div>
+    <section class="services" id="services">
+        <div class="services-header">
+            <div>
+                <div class="section-eyebrow reveal">Our Services</div>
+                <h2 class="section-title reveal">We provide room-to-room delivery service</h2>
+            </div>
 
-        <p class="section-desc reveal">
-            Whether you need to move one item, a full home, or office equipment,
-            our team delivers safely, carefully, and directly to the room you choose.
-        </p>
-    </div>
-
-    <div class="services-grid">
-        <div class="service-card reveal">
-            <div class="service-icon-wrap">🪑</div>
-            <h3>Single Items</h3>
-            <p>
-                We can help you move a wardrobe, armchair, sofa, fridge, or even a small box.
-                Whatever the item, you can count on a professional service with a personal touch.
+            <p class="section-desc reveal">
+                Whether you need to move one item, a full home, or office equipment,
+                our team delivers safely, carefully, and directly to the room you choose.
             </p>
         </div>
 
-        <div class="service-card reveal" style="transition-delay:0.1s">
-            <div class="service-icon-wrap">🏠</div>
-            <h3>Residential Removals</h3>
-            <p>
-                Moving home can feel stressful, but we make it simple. Our dependable team provides
-                a quick, affordable, and stress-free removal service tailored to your needs.
-            </p>
-        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon-wrap">🪑</div>
+                <h3>Single Items</h3>
+                <p>
+                    We can help you move a wardrobe, armchair, sofa, fridge, or even a small box.
+                    Whatever the item, you can count on a professional service with a personal touch.
+                </p>
+            </div>
 
-        <div class="service-card reveal" style="transition-delay:0.2s">
-            <div class="service-icon-wrap">🚚</div>
-            <h3>Moves</h3>
-            <p>
-                We serve both commercial and residential clients. From office equipment to custom
-                furniture or printers, we help transfer your items safely and efficiently.
-            </p>
+            <div class="service-card reveal" style="transition-delay:0.1s">
+                <div class="service-icon-wrap">🏠</div>
+                <h3>Residential Removals</h3>
+                <p>
+                    Moving home can feel stressful, but we make it simple. Our dependable team provides
+                    a quick, affordable, and stress-free removal service tailored to your needs.
+                </p>
+            </div>
+
+            <div class="service-card reveal" style="transition-delay:0.2s">
+                <div class="service-icon-wrap">🚚</div>
+                <h3>Moves</h3>
+                <p>
+                    We serve both commercial and residential clients. From office equipment to custom
+                    furniture or printers, we help transfer your items safely and efficiently.
+                </p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- WHY US -->
     <section id="why" style="padding: 100px 48px;">
@@ -219,69 +224,69 @@
             </div>
         </div>
     </section>
-<div class="section-connector-glow"></div>
+    <div class="section-connector-glow"></div>
     <!-- COVERAGE -->
-<section class="coverage reveal" id="coverage">
- 
+    <section class="coverage reveal" id="coverage">
 
-    <div class="coverage-inner">
 
-        <!-- LEFT -->
-        <div class="coverage-content">
+        <div class="coverage-inner">
 
-            <div class="coverage-badge">
-                Nationwide Coverage
+            <!-- LEFT -->
+            <div class="coverage-content">
+
+                <div class="coverage-badge">
+                    Nationwide Coverage
+                </div>
+
+                <h2 class="coverage-title">
+                    ALL OF <span>ENGLAND.</span><br>
+                    NO EXCEPTIONS.
+                </h2>
+
+                <p class="coverage-text">
+                    Based in Birmingham — the heart of England —
+                    we cover the entire country from Newcastle to London,
+                    Bristol to Norwich.
+                    <strong>If it's in England, we deliver there.</strong>
+                </p>
+
+                <div class="coverage-features">
+
+                    <div class="coverage-feature">
+                        <h4>Nationwide</h4>
+                        <span>Full England Coverage</span>
+                    </div>
+
+                    <div class="coverage-feature">
+                        <h4>Fast Delivery</h4>
+                        <span>Reliable Every Day</span>
+                    </div>
+
+                    <div class="coverage-feature">
+                        <h4>Local Experts</h4>
+                        <span>Professional Drivers</span>
+                    </div>
+
+                    <div class="coverage-feature">
+                        <h4>Secure Service</h4>
+                        <span>Handled With Care</span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <h2 class="coverage-title">
-                ALL OF <span>ENGLAND.</span><br>
-                NO EXCEPTIONS.
-            </h2>
+            <!-- RIGHT -->
+            <div class="coverage-map-wrap">
 
-            <p class="coverage-text">
-                Based in Birmingham — the heart of England —
-                we cover the entire country from Newcastle to London,
-                Bristol to Norwich.
-                <strong>If it's in England, we deliver there.</strong>
-            </p>
-
-            <div class="coverage-features">
-
-                <div class="coverage-feature">
-                    <h4>Nationwide</h4>
-                    <span>Full England Coverage</span>
+                <div class="coverage-map-hover">
+                    <div class="coverage-map-card">
+                        <img src="photo/map.png" alt="England Coverage Map">
+                    </div>
                 </div>
-
-                <div class="coverage-feature">
-                    <h4>Fast Delivery</h4>
-                    <span>Reliable Every Day</span>
-                </div>
-
-                <div class="coverage-feature">
-                    <h4>Local Experts</h4>
-                    <span>Professional Drivers</span>
-                </div>
-
-                <div class="coverage-feature">
-                    <h4>Secure Service</h4>
-                    <span>Handled With Care</span>
-                </div>
-
             </div>
-
         </div>
-
-        <!-- RIGHT -->
-        <div class="coverage-map-wrap">
-
-           <div class="coverage-map-hover">
-    <div class="coverage-map-card">
-        <img src="photo/map.png" alt="England Coverage Map">
-    </div>
-</div>
-    </div>
-
-</section>
+    </section>
 
     <!-- NUMBERS -->
     <section class="numbers" style="padding: 100px 48px;">
@@ -305,6 +310,7 @@
                 <div class="number-label">Team Members</div>
             </div>
         </div>
+    </section>
     </section>
 
     <!-- HOW IT WORKS -->
@@ -572,9 +578,11 @@
                 </p>
 
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank" class="social-btn">in</a>
+                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank"
+                        class="social-btn">in</a>
 
-                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank" class="social-btn">f</a>
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank"
+                        class="social-btn">f</a>
 
                     <a href="https://www.instagram.com/proovia.couriers/" target="_blank" class="social-btn">ig</a>
 
@@ -631,70 +639,70 @@
         </div>
     </footer>
 
-    
-<div id="cookieBanner" class="cookie-banner">
-    <div class="cookie-text">
-        <span class="cookie-icon">🍪</span>
-        <div>
-            <h3>We use cookies</h3>
-            <p>We use cookies to improve your experience on our website.</p>
+
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-text">
+            <span class="cookie-icon">🍪</span>
+            <div>
+                <h3>We use cookies</h3>
+                <p>We use cookies to improve your experience on our website.</p>
+            </div>
+        </div>
+
+        <div class="cookie-actions">
+            <button id="cookieReject">Reject</button>
+            <button id="cookieCustomize">Customize</button>
+            <button id="cookieAccept">Accept</button>
         </div>
     </div>
 
-    <div class="cookie-actions">
-        <button id="cookieReject">Reject</button>
-        <button id="cookieCustomize">Customize</button>
-        <button id="cookieAccept">Accept</button>
-    </div>
-</div>
+    <div id="cookieModal" class="cookie-modal">
+        <div class="cookie-box">
+            <button id="cookieClose" class="cookie-close">×</button>
 
-<div id="cookieModal" class="cookie-modal">
-    <div class="cookie-box">
-        <button id="cookieClose" class="cookie-close">×</button>
+            <h3>Cookie Preferences</h3>
+            <p>
+                We use cookies to enhance your browsing experience, serve personalized content,
+                and analyze our traffic. Choose which cookies you want to allow.
+            </p>
 
-        <h3>Cookie Preferences</h3>
-        <p>
-            We use cookies to enhance your browsing experience, serve personalized content,
-            and analyze our traffic. Choose which cookies you want to allow.
-        </p>
+            <label class="cookie-option">
+                <span>
+                    <b>Essential Cookies <small>(Required)</small></b>
+                    <small>
+                        These cookies are necessary for the website to function and cannot be switched off.
+                    </small>
+                </span>
+                <input type="checkbox" checked disabled>
+            </label>
 
-        <label class="cookie-option">
-            <span>
-                <b>Essential Cookies <small>(Required)</small></b>
-                <small>
-                    These cookies are necessary for the website to function and cannot be switched off.
-                </small>
-            </span>
-            <input type="checkbox" checked disabled>
-        </label>
+            <label class="cookie-option">
+                <span>
+                    <b>Analytics Cookies</b>
+                    <small>
+                        These cookies help us understand how visitors use the website and improve performance.
+                    </small>
+                </span>
+                <input type="checkbox" id="cookieAnalytics">
+            </label>
 
-        <label class="cookie-option">
-            <span>
-                <b>Analytics Cookies</b>
-                <small>
-                    These cookies help us understand how visitors use the website and improve performance.
-                </small>
-            </span>
-            <input type="checkbox" id="cookieAnalytics">
-        </label>
+            <label class="cookie-option">
+                <span>
+                    <b>Marketing Cookies</b>
+                    <small>
+                        These cookies are used for ads, personalization, and relevant content.
+                    </small>
+                </span>
+                <input type="checkbox" id="cookieMarketing">
+            </label>
 
-        <label class="cookie-option">
-            <span>
-                <b>Marketing Cookies</b>
-                <small>
-                    These cookies are used for ads, personalization, and relevant content.
-                </small>
-            </span>
-            <input type="checkbox" id="cookieMarketing">
-        </label>
-
-        <div class="cookie-modal-actions">
-            <button id="cookieAcceptAll">Accept All</button>
-            <button id="cookieSave">Save Preferences</button>
-            <button id="cookieRejectModal">Reject All</button>
+            <div class="cookie-modal-actions">
+                <button id="cookieAcceptAll">Accept All</button>
+                <button id="cookieSave">Save Preferences</button>
+                <button id="cookieRejectModal">Reject All</button>
+            </div>
         </div>
     </div>
-</div>
     <button class="floating-cta" onclick="window.location.href='index.html#home'">
         🚚 Get a Free Quote
     </button>
