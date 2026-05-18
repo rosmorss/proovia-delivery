@@ -656,6 +656,55 @@ body.menu-open {
         margin-left: 4px;
     }
 }
+/* ═══════════════════════════════════════
+   TABLET / SMALL LAPTOP NAVBAR
+═══════════════════════════════════════ */
+
+@media (max-width: 1050px) and (min-width: 901px) {
+
+    nav {
+        padding: 0 24px;
+        height: 68px;
+    }
+
+    .nav-logo-img {
+        height: 31px;
+    }
+
+    .nav-links {
+        gap: 22px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+        letter-spacing: 0.2px;
+    }
+
+    .nav-right {
+        gap: 10px;
+    }
+
+    .btn-nav {
+        padding: 9px 16px;
+        font-size: 13px;
+        border-radius: 9px;
+    }
+
+    .theme-toggle {
+        width: 48px;
+        height: 26px;
+    }
+
+    .theme-toggle-thumb {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+    }
+
+    [data-theme="light"] .theme-toggle-thumb {
+        transform: translateX(22px);
+    }
+}
 /* ════════════════════════════════════════
    MOBILE MENU
 ════════════════════════════════════════ */
