@@ -437,3 +437,30 @@ document.querySelectorAll(".choice-btn").forEach(btn => {
 document.querySelectorAll("select").forEach(select => {
     select.addEventListener("change", saveProgramDetails);
 });
+const summaryToggle = document.querySelector(".summary-toggle");
+const summaryList = document.querySelector(".summary-list");
+
+if (summaryToggle && summaryList) {
+    summaryToggle.addEventListener("click", () => {
+        summaryList.classList.toggle("summary-hidden");
+        summaryList.classList.toggle("summary-open");
+
+        const isOpen = summaryList.classList.contains("summary-open");
+
+        summaryToggle.firstChild.textContent = isOpen
+            ? "Hide details "
+            : "See all details ";
+
+        summaryToggle.querySelector("span").textContent = isOpen ? "−" : "+";
+    });
+}
+document.querySelectorAll(".floor-options").forEach(group => {
+    const buttons = group.querySelectorAll(".floor-btn");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            buttons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+        });
+    });
+});
