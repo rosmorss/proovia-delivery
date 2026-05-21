@@ -9,10 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
-    <script>
-        const savedTheme = localStorage.getItem("theme") || "dark";
-        document.documentElement.setAttribute("data-theme", savedTheme);
-    </script>
+
     <script>
         if (window.location.hash) {
             document.documentElement.classList.add("no-smooth-scroll");
@@ -224,6 +221,7 @@
             </div>
         </div>
     </section>
+
     <div class="section-connector-glow"></div>
     <!-- COVERAGE -->
     <section class="coverage reveal" id="coverage">
@@ -310,7 +308,6 @@
                 <div class="number-label">Team Members</div>
             </div>
         </div>
-    </section>
     </section>
 
     <!-- HOW IT WORKS -->
@@ -706,7 +703,7 @@
     <button class="floating-cta" onclick="window.location.href='index.html#home'">
         🚚 Get a Free Quote
     </button>
-
+    <script src="js/theme.js"></script>
     <script src="js/script.js"></script>
 </body>
 
