@@ -116,7 +116,7 @@ if (hamburger && mobileMenu && overlay) {
 
     hamburger.addEventListener("click", () => {
 
-        hamburger.classList.toggle("open");
+        hamburger.classList.toggle("active");
 
         mobileMenu.classList.toggle("open");
 
@@ -127,7 +127,7 @@ if (hamburger && mobileMenu && overlay) {
 
     overlay.addEventListener("click", () => {
 
-        hamburger.classList.remove("open");
+        hamburger.classList.remove("active");
 
         mobileMenu.classList.remove("open");
 
@@ -136,4 +136,5 @@ if (hamburger && mobileMenu && overlay) {
         document.body.classList.remove("menu-open");
     });
 }
+
 });
