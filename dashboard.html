@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proovia — Dashboard</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style/dashboard.css">
 
     <!-- Apply saved theme before first paint (no flash) -->
@@ -16,210 +19,641 @@
         })();
     </script>
 </head>
+
 <body>
 
-<div class="layout">
+    <div class="layout">
 
-    <!-- ════════════════════════════════
+        <!-- ════════════════════════════════
          SIDEBAR
          ════════════════════════════════ -->
-    <aside class="sidebar">
+        <aside class="sidebar">
 
-        <!-- Logo -->
-        <div class="sidebar-logo">
-            <img src="photo/logo.png" alt="Proovia" class="logo-img">
-            <span class="logo-sub">Business Portal</span>
-        </div>
-
-        <!-- User -->
-        <div class="sidebar-user">
-            <div class="user-avatar">TS</div>
-            <div>
-                <div class="user-name">Test Snow</div>
-                <div class="user-role">Business Account</div>
+            <!-- Logo -->
+            <div class="sidebar-logo">
+                <a href="index.html">
+                    <img src="photo/logo.png" alt="Proovia" class="logo-img">
+                </a>
+                <span class="logo-sub">Business Portal</span>
             </div>
-        </div>
 
-        <!-- Navigation -->
-        <nav class="sidebar-nav">
-            <div class="nav-section-label">Main</div>
+            <!-- User -->
+            <div class="sidebar-user">
+                <div class="user-avatar">TS</div>
+                <div>
+                    <div class="user-name">Test Snow</div>
+                    <div class="user-role">Business Account</div>
+                </div>
+            </div>
 
-            <button class="nav-item active" onclick="showPage('home', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                </svg>
-                Home
-            </button>
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Main</div>
 
-            <button class="nav-item" onclick="showPage('create', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                </svg>
-                Create Order
-            </button>
+                <button class="nav-item active" onclick="showPage('home', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Home
+                </button>
 
-            <button class="nav-item" onclick="showPage('active', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-                Active Orders
-                <span class="nav-badge">3</span>
-            </button>
+                <button class="nav-item" onclick="showPage('create', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Create Order
+                </button>
 
-            <button class="nav-item" onclick="showPage('history', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-                Orders History
-            </button>
+                <button class="nav-item" onclick="showPage('active', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Active Orders
+                    <span class="nav-badge">3</span>
+                </button>
 
-            <button class="nav-item" onclick="showPage('addresses', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                My Addresses
-            </button>
+                <button class="nav-item" onclick="showPage('history', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Orders History
+                </button>
 
-            <button class="nav-item" onclick="showPage('discount', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
-                </svg>
-                My Discount
-            </button>
+                <button class="nav-item" onclick="showPage('addresses', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    My Addresses
+                </button>
 
-            <div class="nav-section-label" style="margin-top:8px;">Support</div>
+                <button class="nav-item" onclick="showPage('discount', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                    </svg>
+                    My Discount
+                </button>
 
-            <button class="nav-item" onclick="showPage('claim', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                </svg>
-                Report a Claim
-            </button>
+                <div class="nav-section-label support-label">Support</div>
 
-            <button class="nav-item" onclick="showPage('support', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
-                </svg>
-                Support
-            </button>
+                <button class="nav-item" onclick="showPage('claim', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Report a Claim
+                </button>
 
-            <button class="nav-item" onclick="showPage('settings', this)">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                Settings
-            </button>
-        </nav>
+                <button class="nav-item" onclick="showPage('support', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    Support
+                </button>
 
-        <!-- CTA -->
-        <div class="sidebar-bottom">
-            <button class="btn-new-order" onclick="showPage('create', document.querySelector('[onclick*=create]'))">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
-                </svg>
-                Create New Order
-            </button>
-        </div>
+                <button class="nav-item" onclick="showPage('settings', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Settings
+                </button>
+            </nav>
 
-    </aside><!-- /sidebar -->
+            <!-- CTA -->
+            <div class="sidebar-bottom">
+                <button class="btn-new-order" onclick="showPage('create', document.querySelector('[onclick*=create]'))">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Create New Order
+                </button>
+            </div>
+
+        </aside><!-- /sidebar -->
 
 
-    <!-- ════════════════════════════════
+        <!-- ════════════════════════════════
          MAIN
          ════════════════════════════════ -->
-    <main class="main">
+        <main class="main">
 
-        <!-- Topbar -->
-        <div class="topbar">
-            <div class="topbar-greeting">
-                <h2 id="topbar-title">Welcome back, Test Snow 👋</h2>
-                <p  id="topbar-sub">Track, Manage, and Forecast Deliveries with Ease.</p>
-            </div>
-
-            <div class="topbar-right">
-
-                <!-- Theme toggle -->
-                <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-                    <div class="theme-toggle-thumb" id="themeThumb">🌙</div>
+            <!-- Topbar -->
+            <div class="topbar">
+                <div class="topbar-greeting">
+                    <h2 id="topbar-title">Welcome back, Test Snow 👋</h2>
+                    <p id="topbar-sub">Track, Manage, and Forecast Deliveries with Ease.</p>
                 </div>
 
-                <!-- Search -->
-                <div class="topbar-search">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2"/>
-                    </svg>
-                    Search orders…
+                <div class="topbar-right">
+
+                    <!-- Theme toggle -->
+                    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                        <div class="theme-toggle-thumb" id="themeThumb">🌙</div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="topbar-search">
+
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                            <circle cx="11" cy="11" r="8" />
+
+                            <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
+                        </svg>
+
+                        <input type="text" id="ordersSearch" placeholder="Search orders…">
+
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="icon-btn" title="Notifications" onclick="showToast('No new notifications')">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        <div class="notif-dot"></div>
+                    </div>
+
                 </div>
-
-                <!-- Notifications -->
-                <div class="icon-btn" title="Notifications" onclick="showToast('No new notifications')">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                    </svg>
-                    <div class="notif-dot"></div>
-                </div>
-
-            </div>
-        </div><!-- /topbar -->
+            </div><!-- /topbar -->
 
 
-        <div class="content">
+            <div class="content">
 
-            <!-- ════════════════════════
+                <!-- ════════════════════════
                  HOME PAGE
                  ════════════════════════ -->
-            <section class="page active" id="page-home">
+                <section class="page active" id="page-home">
 
-                <!-- Stat cards -->
-                <div class="stats-grid">
-                    <div class="stat-card red">
-                        <div class="stat-label">Total Orders</div>
-                        <div class="stat-value">847</div>
-                        <div class="stat-delta up">↑ 12% this month</div>
-                        <div class="stat-icon">📦</div>
-                        <div class="mini-chart" id="chart1"></div>
+                    <!-- Stat cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card red">
+                            <div class="stat-label">Total Orders</div>
+                            <div class="stat-value">847</div>
+                            <div class="stat-delta up">↑ 12% this month</div>
+                            <div class="stat-icon">📦</div>
+                            <div class="mini-chart" id="chart1"></div>
+                        </div>
+                        <div class="stat-card green">
+                            <div class="stat-label">Active Orders</div>
+                            <div class="stat-value">3</div>
+                            <div class="stat-delta up">↑ In transit</div>
+                            <div class="stat-icon">🚚</div>
+                        </div>
+                        <div class="stat-card orange">
+                            <div class="stat-label">Pending Payment</div>
+                            <div class="stat-value">£271</div>
+                            <div class="stat-delta down">3 unpaid</div>
+                            <div class="stat-icon">💷</div>
+                        </div>
+                        <div class="stat-card gold">
+                            <div class="stat-label">My Discount</div>
+                            <div class="stat-value">0%</div>
+                            <div class="stat-delta gold-clr">Order 5×/wk to unlock</div>
+                            <div class="stat-icon">⭐</div>
+                        </div>
                     </div>
-                    <div class="stat-card green">
-                        <div class="stat-label">Active Orders</div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-delta up">↑ In transit</div>
-                        <div class="stat-icon">🚚</div>
-                    </div>
-                    <div class="stat-card orange">
-                        <div class="stat-label">Pending Payment</div>
-                        <div class="stat-value">£271</div>
-                        <div class="stat-delta down">3 unpaid</div>
-                        <div class="stat-icon">💷</div>
-                    </div>
-                    <div class="stat-card gold">
-                        <div class="stat-label">My Discount</div>
-                        <div class="stat-value">0%</div>
-                        <div class="stat-delta gold-clr">Order 5×/wk to unlock</div>
-                        <div class="stat-icon">⭐</div>
-                    </div>
-                </div>
 
-                <!-- Main two-col grid -->
-                <div class="main-grid">
+                    <!-- Main two-col grid -->
+                    <div class="main-grid">
 
-                    <!-- Recent Orders panel -->
-                    <div class="panel">
+                        <!-- Recent Orders panel -->
+                        <div class="panel">
+                            <div class="panel-header">
+                                <span class="panel-title">Recent Orders</span>
+                                <a class="panel-link" onclick="showPage('history', null)">View all →</a>
+                            </div>
+
+                            <div class="order-row">
+                                <div class="order-num">#839085</div>
+                                <div class="order-info">
+                                    <div class="order-item">Sofa Chair × 1</div>
+                                    <div class="order-date">28 Nov 2025</div>
+                                    <div class="order-track">24631000230480105</div>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status-badge status-cancelled">Cancelled</span>
+                                    <div class="not-paid">£84.82 · Not Paid</div>
+                                </div>
+                            </div>
+
+                            <div class="order-row">
+                                <div class="order-num">#837029</div>
+                                <div class="order-info">
+                                    <div class="order-item">Sofa Chair × 1</div>
+                                    <div class="order-date">25 Nov 2025</div>
+                                    <div class="order-track">24631000229898365</div>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status-badge status-cancelled">Cancelled</span>
+                                    <div class="not-paid">£84.82 · Not Paid</div>
+                                </div>
+                            </div>
+
+                            <div class="order-row">
+                                <div class="order-num">#836996</div>
+                                <div class="order-info">
+                                    <div class="order-item">Sofa Chair × 1</div>
+                                    <div class="order-date">25 Nov 2025</div>
+                                    <div class="order-track">24631000229886954</div>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status-badge status-cancelled">Cancelled</span>
+                                    <div class="not-paid">£84.82 · Not Paid</div>
+                                </div>
+                            </div>
+
+                            <div class="order-row">
+                                <div class="order-num">#221304</div>
+                                <div class="order-info">
+                                    <div class="order-item">Two Seater Sofa Bed × 1</div>
+                                    <div class="order-date">14 Mar 2022</div>
+                                    <div class="order-track">24631000066468863</div>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status-badge status-processing">Processing</span>
+                                    <div class="not-paid">£122.62 · Not Paid</div>
+                                </div>
+                            </div>
+                        </div><!-- /recent orders -->
+
+                        <!-- Right column: Quick Actions + Addresses -->
+                        <div class="panel-stack">
+
+                            <div class="panel">
+                                <div class="panel-header">
+                                    <span class="panel-title">Quick Actions</span>
+                                </div>
+                                <div class="actions-grid">
+                                    <a class="action-card" onclick="showPage('create', null)">
+                                        <div class="action-icon">➕</div>
+                                        <span class="action-label">New Order</span>
+                                        <span class="action-sub">Create delivery</span>
+                                    </a>
+                                    <a class="action-card" onclick="showPage('active', null)">
+                                        <div class="action-icon">🚚</div>
+                                        <span class="action-label">Track Orders</span>
+                                        <span class="action-sub">3 active</span>
+                                    </a>
+                                    <a class="action-card" onclick="showPage('claim', null)">
+                                        <div class="action-icon">⚠️</div>
+                                        <span class="action-label">File Claim</span>
+                                        <span class="action-sub">Report issue</span>
+                                    </a>
+                                    <a class="action-card" onclick="showPage('support', null)">
+                                        <div class="action-icon">💬</div>
+                                        <span class="action-label">Support</span>
+                                        <span class="action-sub">Get help</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="panel">
+                                <div class="panel-header">
+                                    <span class="panel-title">Saved Addresses</span>
+                                    <a class="panel-link" onclick="showPage('addresses', null)">Manage →</a>
+                                </div>
+                                <div class="addr-list">
+                                    <div class="addr-item">
+                                        <div class="addr-icon">🏭</div>
+                                        <div class="addr-text">1b, Springdale Close, Liverpool, L12 8RX</div>
+                                        <div class="addr-flag">🚩</div>
+                                    </div>
+                                    <div class="addr-item">
+                                        <div class="addr-icon">🏠</div>
+                                        <div class="addr-text">9 St. Johns Road, Staveley, Chesterfield, S43 3QN</div>
+                                        <div class="addr-flag">🚩</div>
+                                    </div>
+                                    <div class="addr-item">
+                                        <div class="addr-icon">📍</div>
+                                        <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /panel-stack -->
+                    </div><!-- /main-grid -->
+
+                    <!-- Bottom two-col grid -->
+                    <div class="bottom-grid">
+
+                        <!-- Discount -->
+                        <div class="panel">
+                            <div class="panel-header">
+                                <span class="panel-title">My Discount &amp; Pricing</span>
+                                <a class="panel-link" onclick="showPage('discount', null)">Details →</a>
+                            </div>
+                            <div class="discount-inner">
+                                <div class="discount-current">
+                                    <div>
+                                        <div class="discount-pct">0%</div>
+                                        <div class="discount-label">Current discount</div>
+                                    </div>
+                                    <div class="discount-meta">
+                                        <div class="discount-meta-hint">Order 5+/week</div>
+                                        <div class="discount-meta-hint">to unlock exclusive rates</div>
+                                    </div>
+                                </div>
+                                <div class="price-list">
+                                    <div class="price-row"><span class="price-name">Bird Cage</span><span
+                                            class="price-val">£45.00</span></div>
+                                    <div class="price-row"><span class="price-name">Picture Frame</span><span
+                                            class="price-val">£50.00</span></div>
+                                    <div class="price-row"><span class="price-name">Wood Panel</span><span
+                                            class="price-val">£70.00</span></div>
+                                    <div class="price-row"><span class="price-name">No More Props – Large</span><span
+                                            class="price-val">£70.00</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Support -->
+                        <div class="panel">
+                            <div class="panel-header">
+                                <span class="panel-title">Contact Support</span>
+                                <a class="panel-link" onclick="showPage('support', null)">Full page →</a>
+                            </div>
+                            <div class="support-inner">
+                                <div class="support-item">
+                                    <div class="support-ico">📞</div>
+                                    <div>
+                                        <div class="support-label">Phone</div>
+                                        <div class="support-val">+44 121 314 2780</div>
+                                    </div>
+                                </div>
+                                <div class="support-item">
+                                    <div class="support-ico">✉️</div>
+                                    <div>
+                                        <div class="support-label">Email</div>
+                                        <div class="support-val">businesscustomers@proovia.co.uk</div>
+                                    </div>
+                                </div>
+                                <div class="hours-grid">
+                                    <div class="hours-item">
+                                        <div class="hours-day">Mon–Sun</div>
+                                        <div class="hours-time">9 AM – 8 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /bottom-grid -->
+                </section><!-- /page-home -->
+
+
+                <!-- ════════════════════════
+                 CREATE ORDER PAGE
+                 ════════════════════════ -->
+                <section class="page" id="page-create">
+                    <div class="panel panel-narrow panel-animated">
                         <div class="panel-header">
-                            <span class="panel-title">Recent Orders</span>
-                            <a class="panel-link" onclick="showPage('history', null)">View all →</a>
+                            <span class="panel-title">Create New Order</span>
+                        </div>
+                        <div class="form-section">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Collection Address *</label>
+                                    <input class="form-input" value="1b, Springdale Close, Liverpool, L12 8RX"
+                                        placeholder="Collection address">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Delivery Address *</label>
+                                    <input class="form-input" value="9 St. Johns Road, Staveley, Chesterfield, S43 3QN"
+                                        placeholder="Delivery address">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-mb">
+                                <label class="form-label">Item *</label>
+                                <input class="form-input" placeholder="Search items… (e.g. Sofa Chair)">
+                            </div>
+
+                            <!-- Calendars -->
+                            <div class="create-order-grid">
+                                <div>
+                                    <label class="form-label">Collection Date</label>
+                                    <div class="calendar-mini">
+                                        <div class="cal-header">
+                                            <span class="cal-month">May 2026</span>
+                                            <button class="cal-nav" type="button">›</button>
+                                        </div>
+                                        <div class="cal-grid">
+                                            <div class="cal-day-label">Mo</div>
+                                            <div class="cal-day-label">Tu</div>
+                                            <div class="cal-day-label">We</div>
+                                            <div class="cal-day-label">Th</div>
+                                            <div class="cal-day-label">Fr</div>
+                                            <div class="cal-day-label">Sa</div>
+                                            <div class="cal-day-label">Su</div>
+                                            <div class="cal-day grey">27</div>
+                                            <div class="cal-day grey">28</div>
+                                            <div class="cal-day grey">29</div>
+                                            <div class="cal-day grey">30</div>
+                                            <div class="cal-day">1</div>
+                                            <div class="cal-day">2</div>
+                                            <div class="cal-day">3</div>
+                                            <div class="cal-day">4</div>
+                                            <div class="cal-day">5</div>
+                                            <div class="cal-day today">7</div>
+                                            <div class="cal-day">8</div>
+                                            <div class="cal-day">9</div>
+                                            <div class="cal-day">10</div>
+                                            <div class="cal-day">11</div>
+                                            <div class="cal-day">12</div>
+                                            <div class="cal-day">13</div>
+                                            <div class="cal-day">14</div>
+                                            <div class="cal-day">15</div>
+                                            <div class="cal-day">16</div>
+                                            <div class="cal-day">17</div>
+                                            <div class="cal-day">18</div>
+                                            <div class="cal-day">19</div>
+                                            <div class="cal-day">20</div>
+                                            <div class="cal-day">21</div>
+                                            <div class="cal-day">22</div>
+                                            <div class="cal-day">23</div>
+                                            <div class="cal-day">24</div>
+                                            <div class="cal-day">25</div>
+                                            <div class="cal-day">26</div>
+                                            <div class="cal-day">27</div>
+                                            <div class="cal-day">28</div>
+                                            <div class="cal-day">29</div>
+                                            <div class="cal-day">30</div>
+                                            <div class="cal-day">31</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">Delivery Date</label>
+                                    <div class="calendar-mini">
+                                        <div class="cal-header">
+                                            <span class="cal-month">May 2026</span>
+                                            <button class="cal-nav" type="button">›</button>
+                                        </div>
+                                        <div class="cal-grid">
+                                            <div class="cal-day-label">Mo</div>
+                                            <div class="cal-day-label">Tu</div>
+                                            <div class="cal-day-label">We</div>
+                                            <div class="cal-day-label">Th</div>
+                                            <div class="cal-day-label">Fr</div>
+                                            <div class="cal-day-label">Sa</div>
+                                            <div class="cal-day-label">Su</div>
+                                            <div class="cal-day grey">27</div>
+                                            <div class="cal-day grey">28</div>
+                                            <div class="cal-day grey">29</div>
+                                            <div class="cal-day grey">30</div>
+                                            <div class="cal-day">1</div>
+                                            <div class="cal-day">2</div>
+                                            <div class="cal-day">3</div>
+                                            <div class="cal-day">4</div>
+                                            <div class="cal-day">5</div>
+                                            <div class="cal-day">7</div>
+                                            <div class="cal-day next-day">8</div>
+                                            <div class="cal-day">9</div>
+                                            <div class="cal-day">10</div>
+                                            <div class="cal-day">11</div>
+                                            <div class="cal-day">12</div>
+                                            <div class="cal-day">13</div>
+                                            <div class="cal-day">14</div>
+                                            <div class="cal-day">15</div>
+                                            <div class="cal-day">16</div>
+                                            <div class="cal-day">17</div>
+                                            <div class="cal-day">18</div>
+                                            <div class="cal-day">19</div>
+                                            <div class="cal-day">20</div>
+                                            <div class="cal-day">21</div>
+                                            <div class="cal-day">22</div>
+                                            <div class="cal-day">23</div>
+                                            <div class="cal-day">24</div>
+                                            <div class="cal-day">25</div>
+                                            <div class="cal-day">26</div>
+                                            <div class="cal-day">27</div>
+                                            <div class="cal-day">28</div>
+                                            <div class="cal-day">29</div>
+                                            <div class="cal-day">30</div>
+                                            <div class="cal-day">31</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row form-row-mt">
+                                <div class="form-group">
+                                    <label class="form-label">Collection Contact</label>
+                                    <input class="form-input" placeholder="Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Delivery Contact</label>
+                                    <input class="form-input" placeholder="Full Name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Reference Label</label>
+                                    <input class="form-input" placeholder="Optional reference">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Number of Pieces</label>
+                                    <input class="form-input" type="number" placeholder="1" min="1">
+                                </div>
+                            </div>
+
+                            <div class="order-total-bar">
+                                <span class="order-total-label">TOTAL</span>
+                                <span class="order-total-value">£0.00</span>
+                            </div>
+
+                            <div class="btn-row">
+                                <button class="btn-submit" type="button"
+                                    onclick="showToast('✅ Order added to cart!')">Add to Cart</button>
+                                <button class="btn-submit dark" type="button"
+                                    onclick="showToast('✅ Order submitted for checkout!')">Checkout</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </section><!-- /page-create -->
+
+
+                <!-- ════════════════════════
+                 ACTIVE ORDERS PAGE
+                 ════════════════════════ -->
+                <section class="page" id="page-active">
+                    <div class="panel panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Active Orders</span>
+                            <span class="panel-sub-note">3 in progress</span>
+                        </div>
+
+                        <div class="order-row">
+                            <div class="order-num">#221304</div>
+                            <div class="order-info">
+                                <div class="order-item">Two Seater Sofa Bed × 1</div>
+                                <div class="order-date">14 Mar 2022</div>
+                                <div class="order-track">24631000066468863</div>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge status-processing">Processing</span>
+                                <div class="not-paid">£122.62 · Not Paid</div>
+                            </div>
+                        </div>
+
+                        <div class="order-row">
+                            <div class="order-num">#220545</div>
+                            <div class="order-info">
+                                <div class="order-item">One Seater Sofa × 1</div>
+                                <div class="order-date">11 Mar 2022</div>
+                                <div class="order-track">Test</div>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge status-processing">Processing</span>
+                                <div class="not-paid">£94.26 · Not Paid</div>
+                            </div>
+                        </div>
+
+                        <div class="order-row">
+                            <div class="order-num">#214541</div>
+                            <div class="order-info">
+                                <div class="order-item">One Seater Sofa × 1</div>
+                                <div class="order-date">17 Feb 2022</div>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge status-processing">Processing</span>
+                                <div class="not-paid">£54.40 · Not Paid</div>
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /page-active -->
+
+
+                <!-- ════════════════════════
+                 HISTORY PAGE
+                 ════════════════════════ -->
+                <section class="page" id="page-history">
+                    <div class="panel panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Orders History</span>
+                        </div>
+
+                        <div class="inline-search-wrap">
+                            <div class="inline-search">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
+                                </svg>
+                                <input placeholder="Search orders…">
+                            </div>
                         </div>
 
                         <div class="order-row">
@@ -266,106 +700,211 @@
                             <div class="order-info">
                                 <div class="order-item">Two Seater Sofa Bed × 1</div>
                                 <div class="order-date">14 Mar 2022</div>
-                                <div class="order-track">24631000066468863</div>
                             </div>
                             <div class="order-status">
                                 <span class="status-badge status-processing">Processing</span>
                                 <div class="not-paid">£122.62 · Not Paid</div>
                             </div>
                         </div>
-                    </div><!-- /recent orders -->
 
-                    <!-- Right column: Quick Actions + Addresses -->
-                    <div class="panel-stack">
-
-                        <div class="panel">
-                            <div class="panel-header">
-                                <span class="panel-title">Quick Actions</span>
+                        <div class="order-row">
+                            <div class="order-num">#220545</div>
+                            <div class="order-info">
+                                <div class="order-item">One Seater Sofa × 1</div>
+                                <div class="order-date">11 Mar 2022</div>
                             </div>
-                            <div class="actions-grid">
-                                <a class="action-card" onclick="showPage('create', null)">
-                                    <div class="action-icon">➕</div>
-                                    <span class="action-label">New Order</span>
-                                    <span class="action-sub">Create delivery</span>
-                                </a>
-                                <a class="action-card" onclick="showPage('active', null)">
-                                    <div class="action-icon">🚚</div>
-                                    <span class="action-label">Track Orders</span>
-                                    <span class="action-sub">3 active</span>
-                                </a>
-                                <a class="action-card" onclick="showPage('claim', null)">
-                                    <div class="action-icon">⚠️</div>
-                                    <span class="action-label">File Claim</span>
-                                    <span class="action-sub">Report issue</span>
-                                </a>
-                                <a class="action-card" onclick="showPage('support', null)">
-                                    <div class="action-icon">💬</div>
-                                    <span class="action-label">Support</span>
-                                    <span class="action-sub">Get help</span>
-                                </a>
+                            <div class="order-status">
+                                <span class="status-badge status-processing">Processing</span>
+                                <div class="not-paid">£94.26 · Not Paid</div>
                             </div>
                         </div>
+                    </div>
+                </section><!-- /page-history -->
 
+
+                <!-- ════════════════════════
+                 ADDRESSES PAGE
+                 ════════════════════════ -->
+                <section class="page" id="page-addresses">
+                    <div class="addresses-grid">
+
+                        <!-- Collection -->
                         <div class="panel">
                             <div class="panel-header">
-                                <span class="panel-title">Saved Addresses</span>
-                                <a class="panel-link" onclick="showPage('addresses', null)">Manage →</a>
+                                <span class="panel-title">Collection Addresses</span>
+                            </div>
+                            <div class="inline-search-wrap">
+                                <div class="inline-search sm">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
+                                    </svg>
+                                    <input placeholder="Search…">
+                                </div>
                             </div>
                             <div class="addr-list">
                                 <div class="addr-item">
                                     <div class="addr-icon">🏭</div>
-                                    <div class="addr-text">1b, Springdale Close, Liverpool, L12 8RX</div>
+                                    <div class="addr-text">Shropshire Design Ltd, 14 Station Road, Albrighton, WV7 3QG
+                                    </div>
+                                </div>
+                                <div class="addr-item">
+                                    <div class="addr-icon">📍</div>
+                                    <div class="addr-text">1 Test Road, Sompting, Lancing, BN15 0EG</div>
                                     <div class="addr-flag">🚩</div>
                                 </div>
                                 <div class="addr-item">
                                     <div class="addr-icon">🏠</div>
-                                    <div class="addr-text">9 St. Johns Road, Staveley, Chesterfield, S43 3QN</div>
+                                    <div class="addr-text">1b, Springdale Close, Liverpool, L12 8RX</div>
                                     <div class="addr-flag">🚩</div>
                                 </div>
                                 <div class="addr-item">
                                     <div class="addr-icon">📍</div>
                                     <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
                                 </div>
+                                <div class="addr-item">
+                                    <div class="addr-icon">📍</div>
+                                    <div class="addr-text">35 Lynn Road, Wiggenhall St. Germans, King's Lynn, PE34 3EY
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                    </div><!-- /panel-stack -->
-                </div><!-- /main-grid -->
+                        <!-- Delivery -->
+                        <div class="panel">
+                            <div class="panel-header">
+                                <span class="panel-title">Delivery Addresses</span>
+                            </div>
+                            <div class="inline-search-wrap">
+                                <div class="inline-search sm">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
+                                    </svg>
+                                    <input placeholder="Search…">
+                                </div>
+                            </div>
+                            <div class="addr-list">
+                                <div class="addr-item">
+                                    <div class="addr-icon">📍</div>
+                                    <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
+                                </div>
+                                <div class="addr-item">
+                                    <div class="addr-icon">🏠</div>
+                                    <div class="addr-text">9 St. Johns Road, Staveley, Chesterfield, S43 3QN</div>
+                                    <div class="addr-flag">🚩</div>
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- Bottom two-col grid -->
-                <div class="bottom-grid">
+                    </div>
+                </section><!-- /page-addresses -->
 
-                    <!-- Discount -->
-                    <div class="panel">
+
+                <!-- ════════════════════════
+                 DISCOUNT PAGE
+                 ════════════════════════ -->
+                <section class="page" id="page-discount">
+                    <div class="panel panel-sm panel-animated">
                         <div class="panel-header">
-                            <span class="panel-title">My Discount &amp; Pricing</span>
-                            <a class="panel-link" onclick="showPage('discount', null)">Details →</a>
+                            <span class="panel-title">My Discount</span>
                         </div>
                         <div class="discount-inner">
                             <div class="discount-current">
                                 <div>
                                     <div class="discount-pct">0%</div>
-                                    <div class="discount-label">Current discount</div>
+                                    <div class="discount-label">Current discount level</div>
                                 </div>
-                                <div style="text-align:right;">
-                                    <div style="font-size:12px;color:var(--text3);">Order 5+/week</div>
-                                    <div style="font-size:12px;color:var(--text3);">to unlock exclusive rates</div>
-                                </div>
+                                <!-- Progress ring -->
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--bg3)" stroke-width="8" />
+                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--red)" stroke-width="8"
+                                        stroke-dasharray="0 201" stroke-linecap="round" class="ring-progress" />
+                                </svg>
                             </div>
+
+                            <div class="price-list-title">Fixed Price Items:</div>
                             <div class="price-list">
-                                <div class="price-row"><span class="price-name">Bird Cage</span><span class="price-val">£45.00</span></div>
-                                <div class="price-row"><span class="price-name">Picture Frame</span><span class="price-val">£50.00</span></div>
-                                <div class="price-row"><span class="price-name">Wood Panel</span><span class="price-val">£70.00</span></div>
-                                <div class="price-row"><span class="price-name">No More Props – Large</span><span class="price-val">£70.00</span></div>
+                                <div class="price-row"><span class="price-name">Bird Cage</span><span
+                                        class="price-val">£45.00</span></div>
+                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
+                                        Large</span><span class="price-val">£70.00</span></div>
+                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
+                                        Medium</span><span class="price-val">£65.00</span></div>
+                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
+                                        Small</span><span class="price-val">£60.00</span></div>
+                                <div class="price-row"><span class="price-name">Picture Frame</span><span
+                                        class="price-val">£50.00</span></div>
+                                <div class="price-row"><span class="price-name">Wood Panel</span><span
+                                        class="price-val">£70.00</span></div>
+                            </div>
+                            <div class="discount-tip">
+                                * Place orders <strong>5 times a week or more</strong>? Contact us for exclusive pricing
+                                and personalised support. Start saving now!
                             </div>
                         </div>
                     </div>
+                </section><!-- /page-discount -->
 
-                    <!-- Support -->
-                    <div class="panel">
+
+                <!-- ════════════════════════
+                 CLAIM PAGE
+                 ════════════════════════ -->
+                <section class="page" id="page-claim">
+                    <div class="panel panel-md panel-animated">
                         <div class="panel-header">
-                            <span class="panel-title">Contact Support</span>
-                            <a class="panel-link" onclick="showPage('support', null)">Full page →</a>
+                            <span class="panel-title">Report a Claim</span>
+                        </div>
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Order Number *</label>
+                                    <input class="form-input" placeholder="Search an order…">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Issue Type *</label>
+                                    <select class="form-input">
+                                        <option value="">Select a type</option>
+                                        <option>Damaged item</option>
+                                        <option>Missing item</option>
+                                        <option>Late delivery</option>
+                                        <option>Wrong address</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-mb">
+                                <label class="form-label">Description *</label>
+                                <textarea class="form-textarea"
+                                    placeholder="Please describe the issue with as much detail as possible…"></textarea>
+                            </div>
+
+                            <div class="upload-area">
+                                <div class="upload-icon">📎</div>
+                                <div class="upload-text">Click to upload supporting photos or documents</div>
+                            </div>
+
+                            <div class="checkbox-row">
+                                <input type="checkbox" id="confirm-check">
+                                <label for="confirm-check">I confirm that the information provided is accurate to the
+                                    best of my knowledge.</label>
+                            </div>
+
+                            <button class="btn-submit" type="button"
+                                onclick="showToast('✅ Claim submitted successfully!')">Submit Claim</button>
+                        </div>
+                    </div>
+                </section><!-- /page-claim -->
+
+
+                <!-- ════════════════════════
+                 SUPPORT PAGE
+                 ════════════════════════ -->
+                <section class="page" id="page-support">
+                    <div class="panel panel-xs panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Support</span>
                         </div>
                         <div class="support-inner">
                             <div class="support-item">
@@ -382,546 +921,92 @@
                                     <div class="support-val">businesscustomers@proovia.co.uk</div>
                                 </div>
                             </div>
-                            <div class="hours-grid" style="margin-top:8px;">
-                                <div class="hours-item">
-                                    <div class="hours-day">Mon–Sun</div>
-                                    <div class="hours-time">9 AM – 8 PM</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div><!-- /bottom-grid -->
-            </section><!-- /page-home -->
-
-
-            <!-- ════════════════════════
-                 CREATE ORDER PAGE
-                 ════════════════════════ -->
-            <section class="page" id="page-create">
-                <div class="panel" style="max-width:800px;animation:slideUp 0.4s ease;">
-                    <div class="panel-header">
-                        <span class="panel-title">Create New Order</span>
-                    </div>
-                    <div class="form-section">
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Collection Address *</label>
-                                <input class="form-input" value="1b, Springdale Close, Liverpool, L12 8RX" placeholder="Collection address">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Delivery Address *</label>
-                                <input class="form-input" value="9 St. Johns Road, Staveley, Chesterfield, S43 3QN" placeholder="Delivery address">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom:16px;">
-                            <label class="form-label">Item *</label>
-                            <input class="form-input" placeholder="Search items… (e.g. Sofa Chair)">
-                        </div>
-
-                        <!-- Calendars -->
-                        <div class="create-order-grid">
-                            <div>
-                                <label class="form-label" style="margin-bottom:8px;display:block;">Collection Date</label>
-                                <div class="calendar-mini">
-                                    <div class="cal-header">
-                                        <span class="cal-month">May 2026</span>
-                                        <button class="cal-nav" type="button">›</button>
-                                    </div>
-                                    <div class="cal-grid">
-                                        <div class="cal-day-label">Mo</div><div class="cal-day-label">Tu</div><div class="cal-day-label">We</div>
-                                        <div class="cal-day-label">Th</div><div class="cal-day-label">Fr</div><div class="cal-day-label">Sa</div><div class="cal-day-label">Su</div>
-                                        <div class="cal-day grey">27</div><div class="cal-day grey">28</div><div class="cal-day grey">29</div><div class="cal-day grey">30</div>
-                                        <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div>
-                                        <div class="cal-day">4</div><div class="cal-day">5</div>
-                                        <div class="cal-day today">7</div>
-                                        <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div>
-                                        <div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div>
-                                        <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div>
-                                        <div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
-                                        <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div>
-                                        <div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
-                                        <div class="cal-day">30</div><div class="cal-day">31</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="form-label" style="margin-bottom:8px;display:block;">Delivery Date</label>
-                                <div class="calendar-mini">
-                                    <div class="cal-header">
-                                        <span class="cal-month">May 2026</span>
-                                        <button class="cal-nav" type="button">›</button>
-                                    </div>
-                                    <div class="cal-grid">
-                                        <div class="cal-day-label">Mo</div><div class="cal-day-label">Tu</div><div class="cal-day-label">We</div>
-                                        <div class="cal-day-label">Th</div><div class="cal-day-label">Fr</div><div class="cal-day-label">Sa</div><div class="cal-day-label">Su</div>
-                                        <div class="cal-day grey">27</div><div class="cal-day grey">28</div><div class="cal-day grey">29</div><div class="cal-day grey">30</div>
-                                        <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div>
-                                        <div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">7</div>
-                                        <div class="cal-day next-day">8</div>
-                                        <div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div>
-                                        <div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div>
-                                        <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div>
-                                        <div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
-                                        <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div>
-                                        <div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
-                                        <div class="cal-day">30</div><div class="cal-day">31</div>
+                            <div class="support-hours-title">
+                                <div class="support-label">Working Hours</div>
+                                <div class="hours-grid">
+                                    <div class="hours-item">
+                                        <div class="hours-day">Monday – Sunday</div>
+                                        <div class="hours-time">9:00 AM – 8:00 PM</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-row" style="margin-top:16px;">
-                            <div class="form-group">
-                                <label class="form-label">Collection Contact</label>
-                                <input class="form-input" placeholder="Full Name">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Delivery Contact</label>
-                                <input class="form-input" placeholder="Full Name">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Reference Label</label>
-                                <input class="form-input" placeholder="Optional reference">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Number of Pieces</label>
-                                <input class="form-input" type="number" placeholder="1" min="1">
-                            </div>
-                        </div>
-
-                        <div class="order-total-bar">
-                            <span class="order-total-label">TOTAL</span>
-                            <span class="order-total-value">£0.00</span>
-                        </div>
-
-                        <div style="display:flex;gap:12px;">
-                            <button class="btn-submit" type="button" onclick="showToast('✅ Order added to cart!')">Add to Cart</button>
-                            <button class="btn-submit dark" type="button" onclick="showToast('✅ Order submitted for checkout!')">Checkout</button>
-                        </div>
-
                     </div>
-                </div>
-            </section><!-- /page-create -->
+                </section><!-- /page-support -->
 
 
-            <!-- ════════════════════════
-                 ACTIVE ORDERS PAGE
-                 ════════════════════════ -->
-            <section class="page" id="page-active">
-                <div class="panel" style="animation:slideUp 0.4s ease;">
-                    <div class="panel-header">
-                        <span class="panel-title">Active Orders</span>
-                        <span style="font-size:13px;color:var(--text3);">3 in progress</span>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#221304</div>
-                        <div class="order-info">
-                            <div class="order-item">Two Seater Sofa Bed × 1</div>
-                            <div class="order-date">14 Mar 2022</div>
-                            <div class="order-track">24631000066468863</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-processing">Processing</span>
-                            <div class="not-paid">£122.62 · Not Paid</div>
-                        </div>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#220545</div>
-                        <div class="order-info">
-                            <div class="order-item">One Seater Sofa × 1</div>
-                            <div class="order-date">11 Mar 2022</div>
-                            <div class="order-track">Test</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-processing">Processing</span>
-                            <div class="not-paid">£94.26 · Not Paid</div>
-                        </div>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#214541</div>
-                        <div class="order-info">
-                            <div class="order-item">One Seater Sofa × 1</div>
-                            <div class="order-date">17 Feb 2022</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-processing">Processing</span>
-                            <div class="not-paid">£54.40 · Not Paid</div>
-                        </div>
-                    </div>
-                </div>
-            </section><!-- /page-active -->
-
-
-            <!-- ════════════════════════
-                 HISTORY PAGE
-                 ════════════════════════ -->
-            <section class="page" id="page-history">
-                <div class="panel" style="animation:slideUp 0.4s ease;">
-                    <div class="panel-header">
-                        <span class="panel-title">Orders History</span>
-                    </div>
-
-                    <div class="inline-search-wrap">
-                        <div class="inline-search">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2"/>
-                            </svg>
-                            <input placeholder="Search orders…">
-                        </div>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#839085</div>
-                        <div class="order-info">
-                            <div class="order-item">Sofa Chair × 1</div>
-                            <div class="order-date">28 Nov 2025</div>
-                            <div class="order-track">24631000230480105</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-cancelled">Cancelled</span>
-                            <div class="not-paid">£84.82 · Not Paid</div>
-                        </div>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#837029</div>
-                        <div class="order-info">
-                            <div class="order-item">Sofa Chair × 1</div>
-                            <div class="order-date">25 Nov 2025</div>
-                            <div class="order-track">24631000229898365</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-cancelled">Cancelled</span>
-                            <div class="not-paid">£84.82 · Not Paid</div>
-                        </div>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#836996</div>
-                        <div class="order-info">
-                            <div class="order-item">Sofa Chair × 1</div>
-                            <div class="order-date">25 Nov 2025</div>
-                            <div class="order-track">24631000229886954</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-cancelled">Cancelled</span>
-                            <div class="not-paid">£84.82 · Not Paid</div>
-                        </div>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#221304</div>
-                        <div class="order-info">
-                            <div class="order-item">Two Seater Sofa Bed × 1</div>
-                            <div class="order-date">14 Mar 2022</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-processing">Processing</span>
-                            <div class="not-paid">£122.62 · Not Paid</div>
-                        </div>
-                    </div>
-
-                    <div class="order-row">
-                        <div class="order-num">#220545</div>
-                        <div class="order-info">
-                            <div class="order-item">One Seater Sofa × 1</div>
-                            <div class="order-date">11 Mar 2022</div>
-                        </div>
-                        <div class="order-status">
-                            <span class="status-badge status-processing">Processing</span>
-                            <div class="not-paid">£94.26 · Not Paid</div>
-                        </div>
-                    </div>
-                </div>
-            </section><!-- /page-history -->
-
-
-            <!-- ════════════════════════
-                 ADDRESSES PAGE
-                 ════════════════════════ -->
-            <section class="page" id="page-addresses">
-                <div class="addresses-grid">
-
-                    <!-- Collection -->
-                    <div class="panel">
-                        <div class="panel-header">
-                            <span class="panel-title">Collection Addresses</span>
-                        </div>
-                        <div class="inline-search-wrap">
-                            <div class="inline-search sm">
-                                <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2"/>
-                                </svg>
-                                <input placeholder="Search…">
-                            </div>
-                        </div>
-                        <div class="addr-list">
-                            <div class="addr-item">
-                                <div class="addr-icon">🏭</div>
-                                <div class="addr-text">Shropshire Design Ltd, 14 Station Road, Albrighton, WV7 3QG</div>
-                            </div>
-                            <div class="addr-item">
-                                <div class="addr-icon">📍</div>
-                                <div class="addr-text">1 Test Road, Sompting, Lancing, BN15 0EG</div>
-                                <div class="addr-flag">🚩</div>
-                            </div>
-                            <div class="addr-item">
-                                <div class="addr-icon">🏠</div>
-                                <div class="addr-text">1b, Springdale Close, Liverpool, L12 8RX</div>
-                                <div class="addr-flag">🚩</div>
-                            </div>
-                            <div class="addr-item">
-                                <div class="addr-icon">📍</div>
-                                <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
-                            </div>
-                            <div class="addr-item">
-                                <div class="addr-icon">📍</div>
-                                <div class="addr-text">35 Lynn Road, Wiggenhall St. Germans, King's Lynn, PE34 3EY</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Delivery -->
-                    <div class="panel">
-                        <div class="panel-header">
-                            <span class="panel-title">Delivery Addresses</span>
-                        </div>
-                        <div class="inline-search-wrap">
-                            <div class="inline-search sm">
-                                <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2"/>
-                                </svg>
-                                <input placeholder="Search…">
-                            </div>
-                        </div>
-                        <div class="addr-list">
-                            <div class="addr-item">
-                                <div class="addr-icon">📍</div>
-                                <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
-                            </div>
-                            <div class="addr-item">
-                                <div class="addr-icon">🏠</div>
-                                <div class="addr-text">9 St. Johns Road, Staveley, Chesterfield, S43 3QN</div>
-                                <div class="addr-flag">🚩</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section><!-- /page-addresses -->
-
-
-            <!-- ════════════════════════
-                 DISCOUNT PAGE
-                 ════════════════════════ -->
-            <section class="page" id="page-discount">
-                <div class="panel" style="max-width:600px;animation:slideUp 0.4s ease;">
-                    <div class="panel-header">
-                        <span class="panel-title">My Discount</span>
-                    </div>
-                    <div class="discount-inner">
-                        <div class="discount-current">
-                            <div>
-                                <div class="discount-pct">0%</div>
-                                <div class="discount-label">Current discount level</div>
-                            </div>
-                            <!-- Progress ring -->
-                            <svg width="80" height="80" viewBox="0 0 80 80">
-                                <circle cx="40" cy="40" r="32" fill="none" stroke="var(--bg3)" stroke-width="8"/>
-                                <circle cx="40" cy="40" r="32" fill="none" stroke="var(--red)" stroke-width="8"
-                                    stroke-dasharray="0 201" stroke-linecap="round"
-                                    style="transform:rotate(-90deg);transform-origin:50% 50%;"/>
-                            </svg>
-                        </div>
-
-                        <div style="font-weight:700;font-size:13px;margin-bottom:12px;color:var(--text);">Fixed Price Items:</div>
-                        <div class="price-list">
-                            <div class="price-row"><span class="price-name">Bird Cage</span><span class="price-val">£45.00</span></div>
-                            <div class="price-row"><span class="price-name">No More Props / Tight Space Unit – Large</span><span class="price-val">£70.00</span></div>
-                            <div class="price-row"><span class="price-name">No More Props / Tight Space Unit – Medium</span><span class="price-val">£65.00</span></div>
-                            <div class="price-row"><span class="price-name">No More Props / Tight Space Unit – Small</span><span class="price-val">£60.00</span></div>
-                            <div class="price-row"><span class="price-name">Picture Frame</span><span class="price-val">£50.00</span></div>
-                            <div class="price-row"><span class="price-name">Wood Panel</span><span class="price-val">£70.00</span></div>
-                        </div>
-                        <div class="discount-tip">
-                            * Place orders <strong>5 times a week or more</strong>? Contact us for exclusive pricing and personalised support. Start saving now!
-                        </div>
-                    </div>
-                </div>
-            </section><!-- /page-discount -->
-
-
-            <!-- ════════════════════════
-                 CLAIM PAGE
-                 ════════════════════════ -->
-            <section class="page" id="page-claim">
-                <div class="panel" style="max-width:700px;animation:slideUp 0.4s ease;">
-                    <div class="panel-header">
-                        <span class="panel-title">Report a Claim</span>
-                    </div>
-                    <div class="form-section">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Order Number *</label>
-                                <input class="form-input" placeholder="Search an order…">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Issue Type *</label>
-                                <select class="form-input">
-                                    <option value="">Select a type</option>
-                                    <option>Damaged item</option>
-                                    <option>Missing item</option>
-                                    <option>Late delivery</option>
-                                    <option>Wrong address</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom:16px;">
-                            <label class="form-label">Description *</label>
-                            <textarea class="form-textarea" placeholder="Please describe the issue with as much detail as possible…"></textarea>
-                        </div>
-
-                        <div class="upload-area">
-                            <div class="upload-icon">📎</div>
-                            <div class="upload-text">Click to upload supporting photos or documents</div>
-                        </div>
-
-                        <div class="checkbox-row">
-                            <input type="checkbox" id="confirm-check">
-                            <label for="confirm-check">I confirm that the information provided is accurate to the best of my knowledge.</label>
-                        </div>
-
-                        <button class="btn-submit" type="button" onclick="showToast('✅ Claim submitted successfully!')">Submit Claim</button>
-                    </div>
-                </div>
-            </section><!-- /page-claim -->
-
-
-            <!-- ════════════════════════
-                 SUPPORT PAGE
-                 ════════════════════════ -->
-            <section class="page" id="page-support">
-                <div class="panel" style="max-width:500px;animation:slideUp 0.4s ease;">
-                    <div class="panel-header">
-                        <span class="panel-title">Support</span>
-                    </div>
-                    <div class="support-inner">
-                        <div class="support-item">
-                            <div class="support-ico">📞</div>
-                            <div>
-                                <div class="support-label">Phone</div>
-                                <div class="support-val">+44 121 314 2780</div>
-                            </div>
-                        </div>
-                        <div class="support-item">
-                            <div class="support-ico">✉️</div>
-                            <div>
-                                <div class="support-label">Email</div>
-                                <div class="support-val">businesscustomers@proovia.co.uk</div>
-                            </div>
-                        </div>
-                        <div style="margin-top:16px;">
-                            <div class="support-label" style="margin-bottom:10px;">Working Hours</div>
-                            <div class="hours-grid">
-                                <div class="hours-item">
-                                    <div class="hours-day">Monday – Sunday</div>
-                                    <div class="hours-time">9:00 AM – 8:00 PM</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section><!-- /page-support -->
-
-
-            <!-- ════════════════════════
+                <!-- ════════════════════════
                  SETTINGS PAGE
                  ════════════════════════ -->
-            <section class="page" id="page-settings">
-                <div class="panel" style="max-width:700px;animation:slideUp 0.4s ease;">
-                    <div class="panel-header">
-                        <span class="panel-title">Settings</span>
-                    </div>
-
-                    <!-- Profile -->
-                    <div class="settings-section">
-                        <div class="settings-title">Edit Profile</div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Email</label>
-                                <input class="form-input" value="test@test.test" disabled style="opacity:0.6;cursor:not-allowed;">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Phone Number</label>
-                                <input class="form-input" value="44 1234 567890">
-                            </div>
+                <section class="page" id="page-settings">
+                    <div class="panel panel-md panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Settings</span>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">First Name</label>
-                                <input class="form-input" value="Test">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Last Name</label>
-                                <input class="form-input" value="Snow">
-                            </div>
-                        </div>
-                        <button class="btn-update" type="button" onclick="showToast('✅ Profile updated!')">Update Profile</button>
-                    </div>
 
-                    <!-- Security -->
-                    <div class="settings-section">
-                        <div class="settings-title">Security</div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Current Password</label>
+                        <!-- Profile -->
+                        <div class="settings-section">
+                            <div class="settings-title">Edit Profile</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input class="form-input" value="test@test.test" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input class="form-input" value="44 1234 567890">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input class="form-input" value="Test">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input class="form-input" value="Snow">
+                                </div>
+                            </div>
+                            <button class="btn-update" type="button" onclick="showToast('✅ Profile updated!')">Update
+                                Profile</button>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="settings-section">
+                            <div class="settings-title">Security</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Current Password</label>
+                                    <input class="form-input" type="password" placeholder="••••••••">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New Password</label>
+                                    <input class="form-input" type="password" placeholder="••••••••">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-narrow">
+                                <label class="form-label">Confirm New Password</label>
                                 <input class="form-input" type="password" placeholder="••••••••">
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">New Password</label>
-                                <input class="form-input" type="password" placeholder="••••••••">
-                            </div>
+                            <button class="btn-update" type="button" onclick="showToast('✅ Password updated!')">Update
+                                Password</button>
                         </div>
-                        <div class="form-group" style="max-width:340px;">
-                            <label class="form-label">Confirm New Password</label>
-                            <input class="form-input" type="password" placeholder="••••••••">
-                        </div>
-                        <button class="btn-update" type="button" onclick="showToast('✅ Password updated!')">Update Password</button>
+
                     </div>
+                </section><!-- /page-settings -->
 
-                </div>
-            </section><!-- /page-settings -->
+            </div><!-- /content -->
+        </main><!-- /main -->
 
-        </div><!-- /content -->
-    </main><!-- /main -->
+    </div><!-- /layout -->
 
-</div><!-- /layout -->
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<!-- Scripts (order matters: dashboard first, theme second) -->
-<script src="js/dashboard.js"></script>
-<script src="js/theme.js"></script>
-
-<!-- Extra: keep panel-stack stacked -->
-<style>
-    .panel-stack { display: flex; flex-direction: column; gap: 16px; }
-</style>
+    <!-- Scripts -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/theme.js"></script>
 
 </body>
+
 </html>
