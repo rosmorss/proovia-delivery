@@ -61,3 +61,21 @@ document.querySelectorAll('.order-row').forEach(row => {
         showToast('📋 Order details opened');
     });
 });
+// ── SEARCH ORDERS ──
+const ordersSearch = document.getElementById('ordersSearch');
+
+if (ordersSearch) {
+    ordersSearch.addEventListener('input', function () {
+        const value = this.value.toLowerCase().trim();
+
+        document.querySelectorAll('.order-row').forEach(row => {
+            const text = row.textContent.toLowerCase();
+
+            if (text.includes(value)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+}   
