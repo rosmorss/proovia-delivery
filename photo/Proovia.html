@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://127.0.0.1:5500/booking.html -->
+<html lang="en" katalonextensionid="ljdobmomdgdljniojadhoplhkpialdid" data-theme="dark" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="http://127.0.0.1:5500/photo/logotitle.png">
+    <link href="./Proovia_files/css2" rel="stylesheet">
+    <script>
+        const _savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", _savedTheme);
+    </script>
+    <link rel="stylesheet" href="./Proovia_files/theme.css">
+    <link rel="stylesheet" href="./Proovia_files/booking.css">
+<script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script><script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script></head>
+
+<body>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-overlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="http://127.0.0.1:5500/index.html#">Home</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#services">Services</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#coverage">Coverage</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#how">How It Works</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#contact">Contact</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#reviews">Reviews</a></li>
+            <li><a href="http://127.0.0.1:5500/infod.html">Drive with us</a></li>
+        </ul>
+        <a href="http://127.0.0.1:5500/log.html" class="mobile-menu-account">
+            👤 My Account
+        </a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="http://127.0.0.1:5500/index.html" class="nav-logo">
+            <img src="./Proovia_files/logo.png" alt="Proovia Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="http://127.0.0.1:5500/index.html#">Home</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#services">Services</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#coverage">Coverage</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#how">How It Works</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#contact">Contact</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#reviews">Reviews</a></li>
+            <li><a href="http://127.0.0.1:5500/infod.html">Drive with us</a></li>
+        </ul>
+        <!-- Hamburger -->
+        <button id="hamburger" class="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                <div class="theme-toggle-thumb" id="themeThumb">☀️</div>
+            </div>
+            <button class="btn-nav" onclick="window.location.href=&#39;log.html&#39;">My Account</button>
+        </div>
+    </nav>
+<section class="booking-section">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="booking-categories" id="categories">
+
+    <div class="booking-sidebar-header">
+        <span>Categories</span>
+        <h2>Select Room</h2>
+    </div>
+
+    <div id="categoriesList"></div>
+
+</div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="booking-content">
+
+        <div class="booking-top">
+
+            <div>
+                <div class="booking-badge">Smart Booking</div>
+
+                <h1>Select items for delivery</h1>
+
+                <p>
+                    Choose a category and quickly add items to your booking.
+                    Everything updates instantly for a smooth experience.
+                </p>
+            </div>
+
+            <div class="booking-search">
+                <input type="text" placeholder="Search items..." id="searchItems">
+            </div>
+
+        </div>
+
+        <!-- ITEMS -->
+       <!-- ITEMS -->
+<div class="booking-items" id="bookingItems"></div>
+
+<!-- ACTIONS -->
+<div class="booking-actions">
+
+    <button class="booking-back-btn" onclick="window.location.href=&#39;index.html&#39;">
+
+        ← Back
+
+    </button>
+
+    <button class="booking-continue-btn" onclick="window.location.href=&#39;plans.html&#39;">
+
+        Continue →
+
+    </button>
+
+</div>
+
+    </div>
+
+</section>
+
+   
+    <footer>
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <a href="http://127.0.0.1:5500/index.html">
+                    <img src="./Proovia_files/logo.png" alt="Proovia Logo" class="hero-logo">
+                </a>
+
+                <p>
+                    Reliable nationwide delivery and moving services across England.
+                    Founded in Birmingham in 2014.
+                </p>
+
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank" class="social-btn">in</a>
+
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank" class="social-btn">f</a>
+
+                    <a href="https://www.instagram.com/proovia.couriers/" target="_blank" class="social-btn">ig</a>
+
+                    <a href="https://maps.app.goo.gl/aRXeHiQcLu9KFJcKA" target="_blank" class="social-btn">G</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+
+                <ul>
+                    <li><a href="http://127.0.0.1:5500/index.html#services">Services</a></li>
+                    <li><a href="http://127.0.0.1:5500/index.html#coverage">Coverage</a></li>
+                    <li><a href="http://127.0.0.1:5500/index.html#how">How It Works</a></li>
+                    <li><a href="http://127.0.0.1:5500/index.html#reviews">Reviews</a></li>
+                    <li><a href="http://127.0.0.1:5500/infod.html">Drivers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Support</h5>
+
+                <ul>
+                    <li><a href="http://127.0.0.1:5500/log.html" target="_blank">My Account</a></li>
+                    <li><a href="http://127.0.0.1:5500/faq.html">FAQ</a></li>
+                    <li><a href="http://127.0.0.1:5500/terms.html" target="_blank">Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact</h5>
+
+                <ul>
+                    <a href="tel:+441213149848">(+44) 121 314 9848</a>
+
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+
+                    <li>
+                        <a href="https://maps.app.goo.gl/6gp5m9FH1mfmsye67" target="_blank">
+                            Office, Fort Dunlop, 110 Fort Pkwy, Birmingham B24 9FE, United Kingdom
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Proovia Couriers LTD. All rights reserved.</p>
+
+            <p>
+                Built for fast, secure and reliable delivery across England.
+            </p>
+        </div>
+    </footer>
+
+    
+    <script src="./Proovia_files/theme.js.Без названия"></script>
+    <script type="module" src="./Proovia_files/booking.js.Без названия"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+
+</body></html>
