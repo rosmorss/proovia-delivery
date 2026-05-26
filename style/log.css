@@ -61,6 +61,9 @@
   outline: none;
   transition: 0.3s;
 }
+.form-group input:not(:last-child) {
+  margin-bottom: 10px;
+}
 
 .form-group input:focus {
   border-color: var(--red);
