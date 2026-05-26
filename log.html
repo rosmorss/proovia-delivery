@@ -76,12 +76,10 @@
             <form id="loginForm">
 
                 <div class="form-group">
-                    <input type="email" placeholder="Email Address" required>
+                    <input type="username" placeholder="Username" name="username" required>
+                    <input type="password" placeholder="Password" name="password" required>
                 </div>
-
-                <button class="btn" type="button" onclick="window.location.href='dashboard.html'">
-                    Log in
-                </button>
+                
 
                 <button class="btn" type="submit">Login</button>
 
@@ -174,7 +172,7 @@
     </button>
     <script src="js/theme.js"></script>
 
-    <script src="js/log.js"></script>
+    <script type="module" src="./js/log.js"></script>
 </body>
 
 </html>
