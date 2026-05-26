@@ -1,286 +1,142 @@
+import { bring } from "./fetch.js";
+
 const bookingItems = document.getElementById("bookingItems");
 const categoriesContainer = document.getElementById("categoriesList");
 const searchInput = document.getElementById("searchItems");
-const categoriesList = document.getElementById("categoriesList");
-let allProducts = [];
-let currentCategory = "all";
 
-/* ------------------------ */
-/* STORAGE */
-/* ------------------------ */
+let allItems = [];
+let currentCategory = "all";
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-/* ------------------------ */
-/* LOAD DATA */
-/* ------------------------ */
-
 window.addEventListener("DOMContentLoaded", async () => {
-
     await loadCategories();
-    await loadProducts();
-
+    await loadItems();
 });
 
-/* ------------------------ */
-/* LOAD CATEGORIES */
-/* ------------------------ */
-
 async function loadCategories() {
+    const categories = await bring("/category");
 
-    const res = await fetch(
-        "https://dummyjson.com/products/categories"
-    );
-
-    const categories = await res.json();
-
-    categoriesContainer.innerHTML = "";
-
-    // ALL BUTTON
-
-    categoriesContainer.innerHTML += `
-    
-    <button class="category-card active"
-            data-category="all">
-
-        All Items
-
-    </button>
-    
+    categoriesContainer.innerHTML = `
+        <button class="category-card active" data-category="all">
+            All Items
+        </button>
     `;
 
-    // API CATEGORIES
-
-    categories.slice(0, 10).forEach(category => {
-
+    categories.forEach(category => {
         categoriesContainer.innerHTML += `
-
-        <button class="category-card"
-                data-category="${category.slug}">
-
-            ${category.name}
-
-        </button>
-
+            <button class="category-card" data-category="${category.id}">
+                ${category.name}
+            </button>
         `;
-
     });
 
     setupCategoryListeners();
-
 }
 
-/* ------------------------ */
-/* LOAD PRODUCTS */
-/* ------------------------ */
-
-async function loadProducts() {
-
-    const res = await fetch(
-        "https://dummyjson.com/products?limit=100"
-    );
-
-    const data = await res.json();
-
-    allProducts = data.products;
-
-    renderProducts(allProducts);
-
+async function loadItems() {
+    allItems = await bring("/item");
+    renderItems(allItems);
 }
 
-/* ------------------------ */
-/* RENDER PRODUCTS */
-/* ------------------------ */
-
-function renderProducts(products) {
-
+function renderItems(items) {
     bookingItems.innerHTML = "";
 
-products.slice(0, 10).forEach(product => {
-
+    items.forEach(item => {
         bookingItems.innerHTML += `
+            <div class="booking-item">
+                <div class="booking-item-left">
+                    <img src="${item.image || "photo/no-image.png"}" alt="${item.name}">
 
-        <div class="booking-item">
-
-            <div class="booking-item-left">
-
-                <img src="${product.thumbnail}" alt="">
-
-                <div>
-                    <h4>${product.title}</h4>
-
-                    <span>
-                        ${product.category}
-                    </span>
+                    <div>
+                        <h4>${item.name}</h4>
+                        <span>${item.category?.name || "No category"}</span>
+                        <p>£${item.basePrice}</p>
+                    </div>
                 </div>
 
+                <button onclick="addToCart(${item.id})">
+                    Add
+                </button>
             </div>
-
-            <button onclick="addToCart(${product.id})">
-
-                Add
-
-            </button>
-
-        </div>
-
         `;
-        setTimeout(() => {
-
-    document.querySelectorAll(".booking-item").forEach((item, index) => {
-
-        setTimeout(() => {
-            item.classList.add("show");
-        }, index * 70);
-
     });
 
-}, 50);
-
-    });
-
+    setTimeout(() => {
+        document.querySelectorAll(".booking-item").forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add("show");
+            }, index * 70);
+        });
+    }, 50);
 }
-
-/* ------------------------ */
-/* CATEGORY FILTER */
-/* ------------------------ */
 
 function setupCategoryListeners() {
-
-    const categoryButtons =
-        document.querySelectorAll(".category-card");
+    const categoryButtons = document.querySelectorAll(".category-card");
 
     categoryButtons.forEach(button => {
-
-        button.addEventListener("click", async () => {
-
-            categoryButtons.forEach(btn => {
-                btn.classList.remove("active");
-            });
-
+        button.addEventListener("click", () => {
+            categoryButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
 
-            const category = button.dataset.category;
+            currentCategory = button.dataset.category;
 
-            currentCategory = category;
-
-            if (category === "all") {
-
-                renderProducts(allProducts);
-
-            } else {
-
-                const res = await fetch(
-                    `https://dummyjson.com/products/category/${category}`
-                );
-
-                const data = await res.json();
-
-                renderProducts(data.products.slice(0, 10));
-
+            if (currentCategory === "all") {
+                renderItems(allItems);
+                return;
             }
 
-        });
-
-    });
-
-}
-
-/* ------------------------ */
-/* SEARCH */
-/* ------------------------ */
-
-searchInput.addEventListener("input", async (e) => {
-
-    const value = e.target.value.toLowerCase();
-
-    // EMPTY SEARCH
-
-    if (value.trim() === "") {
-
-        if (currentCategory === "all") {
-
-            renderProducts(allProducts);
-
-        } else {
-
-            const filtered = allProducts.filter(product =>
-                product.category === currentCategory
+            const filteredItems = allItems.filter(item =>
+                item.categoryId == currentCategory
             );
 
-            renderProducts(filtered);
+            renderItems(filteredItems);
+        });
+    });
+}
 
-        }
+searchInput.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase().trim();
 
-        return;
-    }
-
-    // SEARCH API
-
-    const res = await fetch(
-        `https://dummyjson.com/products/search?q=${value}`
-    );
-
-    const data = await res.json();
-
-    // FILTER CATEGORY + SEARCH
-
-    let filteredProducts = data.products.slice(0, 10);
+    let filteredItems = allItems;
 
     if (currentCategory !== "all") {
-
-        filteredProducts = filteredProducts.filter(product =>
-            product.category === currentCategory
+        filteredItems = filteredItems.filter(item =>
+            item.categoryId == currentCategory
         );
-
     }
 
-    renderProducts(filteredProducts);
+    if (value !== "") {
+        filteredItems = filteredItems.filter(item =>
+            item.name.toLowerCase().includes(value)
+        );
+    }
 
+    renderItems(filteredItems);
 });
 
-/* ------------------------ */
-/* ADD TO CART */
-/* ------------------------ */
+window.addToCart = function(id) {
+    const item = allItems.find(item => item.id === id);
 
-function addToCart(id) {
+    const existingItem = cart.find(cartItem => cartItem.id === id);
 
-    const product = allProducts.find(p => p.id === id);
-
-    cart.push(product);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: item.id,
+            name: item.name,
+            image: item.image,
+            basePrice: item.basePrice,
+            categoryId: item.categoryId,
+            quantity: 1
+        });
+    }
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
     console.log("Cart:", cart);
-
-}
-/* ------------------------ */
-/* REVEAL */
-/* ------------------------ */
-
-const revealElements = document.querySelectorAll(
-    ".booking-categories, .booking-top, .booking-actions"
-);
-
-const revealObserver = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add("show");
-
-        }
-
-    });
-
-}, {
-    threshold: 0.12
-});
-
-revealElements.forEach(el => {
-    revealObserver.observe(el);
-}); 
+};
 
 const pickupAddress = localStorage.getItem("pickupAddress");
 const dropoffAddress = localStorage.getItem("dropoffAddress");
