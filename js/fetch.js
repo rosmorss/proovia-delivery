@@ -1,18 +1,33 @@
 import { BACKEND_URL } from "./constants.js";
 
-const defaultOptions = {
-    method: "GET",
-    headers: {
-        "Content-Type": "application/json"
+export const bring = async (url, options = {}) => {
+    const response = await fetch(BACKEND_URL + url, options);
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.error || "Request failed");
     }
+
+    return data;
 };
 
-export const bring = async (url, options) => {
-    try {
-        const response = await fetch(BACKEND_URL + url, { ...defaultOptions, ...options });
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
+export const bringAuth = async (url, options = {}) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(BACKEND_URL + url, {
+        ...options,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            ...(options.headers || {})
+        }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.error || "Request failed");
     }
+
+    return data;
 };

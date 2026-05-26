@@ -39,10 +39,10 @@
 
             <!-- User -->
             <div class="sidebar-user">
-                <div class="user-avatar">TS</div>
+                <div class="user-avatar" id="sidebarAvatar">U</div>
                 <div>
-                    <div class="user-name">Test Snow</div>
-                    <div class="user-role">Business Account</div>
+                    <div class="user-name" id="sidebarUsername">Loading...</div>
+                    <div class="user-role" id="sidebarUserRole">Business Account</div>
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                             d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Active Orders
-                    <span class="nav-badge">3</span>
+                    <span class="nav-badge" id="activeOrdersBadge">0</span>
                 </button>
 
                 <button class="nav-item" onclick="showPage('history', this)">
@@ -150,7 +150,7 @@
             <!-- Topbar -->
             <div class="topbar">
                 <div class="topbar-greeting">
-                    <h2 id="topbar-title">Welcome back, Test Snow 👋</h2>
+                    <h2 id="topbar-title">Welcome back 👋</h2>
                     <p id="topbar-sub">Track, Manage, and Forecast Deliveries with Ease.</p>
                 </div>
 
@@ -199,26 +199,26 @@
                     <div class="stats-grid">
                         <div class="stat-card red">
                             <div class="stat-label">Total Orders</div>
-                            <div class="stat-value">847</div>
+                            <div class="stat-value" id="totalOrdersCount">0</div>
                             <div class="stat-delta up">↑ 12% this month</div>
                             <div class="stat-icon">📦</div>
                             <div class="mini-chart" id="chart1"></div>
                         </div>
                         <div class="stat-card green">
                             <div class="stat-label">Active Orders</div>
-                            <div class="stat-value">3</div>
+                            <div class="stat-value" id="activeOrdersCount">0</div>
                             <div class="stat-delta up">↑ In transit</div>
                             <div class="stat-icon">🚚</div>
                         </div>
                         <div class="stat-card orange">
                             <div class="stat-label">Pending Payment</div>
-                            <div class="stat-value">£271</div>
-                            <div class="stat-delta down">3 unpaid</div>
+                            <div class="stat-value" id="pendingPaymentAmount">£0</div>
+                            <div class="stat-delta down" id="pendingPaymentCount">0 unpaid</div>
                             <div class="stat-icon">💷</div>
                         </div>
                         <div class="stat-card gold">
                             <div class="stat-label">My Discount</div>
-                            <div class="stat-value">0%</div>
+                            <div class="stat-value" id="discountPercent">0%</div>
                             <div class="stat-delta gold-clr">Order 5×/wk to unlock</div>
                             <div class="stat-icon">⭐</div>
                         </div>
@@ -233,58 +233,7 @@
                                 <span class="panel-title">Recent Orders</span>
                                 <a class="panel-link" onclick="showPage('history', null)">View all →</a>
                             </div>
-
-                            <div class="order-row">
-                                <div class="order-num">#839085</div>
-                                <div class="order-info">
-                                    <div class="order-item">Sofa Chair × 1</div>
-                                    <div class="order-date">28 Nov 2025</div>
-                                    <div class="order-track">24631000230480105</div>
-                                </div>
-                                <div class="order-status">
-                                    <span class="status-badge status-cancelled">Cancelled</span>
-                                    <div class="not-paid">£84.82 · Not Paid</div>
-                                </div>
-                            </div>
-
-                            <div class="order-row">
-                                <div class="order-num">#837029</div>
-                                <div class="order-info">
-                                    <div class="order-item">Sofa Chair × 1</div>
-                                    <div class="order-date">25 Nov 2025</div>
-                                    <div class="order-track">24631000229898365</div>
-                                </div>
-                                <div class="order-status">
-                                    <span class="status-badge status-cancelled">Cancelled</span>
-                                    <div class="not-paid">£84.82 · Not Paid</div>
-                                </div>
-                            </div>
-
-                            <div class="order-row">
-                                <div class="order-num">#836996</div>
-                                <div class="order-info">
-                                    <div class="order-item">Sofa Chair × 1</div>
-                                    <div class="order-date">25 Nov 2025</div>
-                                    <div class="order-track">24631000229886954</div>
-                                </div>
-                                <div class="order-status">
-                                    <span class="status-badge status-cancelled">Cancelled</span>
-                                    <div class="not-paid">£84.82 · Not Paid</div>
-                                </div>
-                            </div>
-
-                            <div class="order-row">
-                                <div class="order-num">#221304</div>
-                                <div class="order-info">
-                                    <div class="order-item">Two Seater Sofa Bed × 1</div>
-                                    <div class="order-date">14 Mar 2022</div>
-                                    <div class="order-track">24631000066468863</div>
-                                </div>
-                                <div class="order-status">
-                                    <span class="status-badge status-processing">Processing</span>
-                                    <div class="not-paid">£122.62 · Not Paid</div>
-                                </div>
-                            </div>
+                            <div id="recentOrdersContainer"></div>
                         </div><!-- /recent orders -->
 
                         <!-- Right column: Quick Actions + Addresses -->
@@ -303,7 +252,7 @@
                                     <a class="action-card" onclick="showPage('active', null)">
                                         <div class="action-icon">🚚</div>
                                         <span class="action-label">Track Orders</span>
-                                        <span class="action-sub">3 active</span>
+                                        <span class="action-sub" id="quickActiveCount">0 active</span>
                                     </a>
                                     <a class="action-card" onclick="showPage('claim', null)">
                                         <div class="action-icon">⚠️</div>
@@ -323,24 +272,7 @@
                                     <span class="panel-title">Saved Addresses</span>
                                     <a class="panel-link" onclick="showPage('addresses', null)">Manage →</a>
                                 </div>
-                                <div class="addr-list">
-                                    <div class="addr-item">
-                                        <div class="addr-icon">🏭</div>
-                                        <div class="addr-text">1b, Springdale Close, Liverpool, L12 8RX</div>
-                                        <div class="addr-flag">🚩</div>
-                                    </div>
-                                    <div class="addr-item">
-                                        <div class="addr-icon">🏠</div>
-                                        <div class="addr-text">9 St. Johns Road, Staveley, Chesterfield, S43 3QN</div>
-                                        <div class="addr-flag">🚩</div>
-                                    </div>
-                                    <div class="addr-item">
-                                        <div class="addr-icon">📍</div>
-                                        <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
-                                    </div>
-                                </div>
-                            </div>
-
+                               <div class="addr-list" id="homeAddressesContainer"></div>
                         </div><!-- /panel-stack -->
                     </div><!-- /main-grid -->
 
@@ -356,7 +288,7 @@
                             <div class="discount-inner">
                                 <div class="discount-current">
                                     <div>
-                                        <div class="discount-pct">0%</div>
+                                       <div class="discount-pct" id="discountPagePercent">0%</div>
                                         <div class="discount-label">Current discount</div>
                                     </div>
                                     <div class="discount-meta">
@@ -424,12 +356,12 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">Collection Address *</label>
-                                    <input class="form-input" value="1b, Springdale Close, Liverpool, L12 8RX"
+                                  <input class="form-input" id="createPickupAddress" placeholder="Collection address">
                                         placeholder="Collection address">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Delivery Address *</label>
-                                    <input class="form-input" value="9 St. Johns Road, Staveley, Chesterfield, S43 3QN"
+                                    <input class="form-input" id="createDropoffAddress" placeholder="Delivery address">
                                         placeholder="Delivery address">
                                 </div>
                             </div>
@@ -593,46 +525,9 @@
                     <div class="panel panel-animated">
                         <div class="panel-header">
                             <span class="panel-title">Active Orders</span>
-                            <span class="panel-sub-note">3 in progress</span>
+                            <span class="panel-sub-note">0 in progress</span>
                         </div>
-
-                        <div class="order-row">
-                            <div class="order-num">#221304</div>
-                            <div class="order-info">
-                                <div class="order-item">Two Seater Sofa Bed × 1</div>
-                                <div class="order-date">14 Mar 2022</div>
-                                <div class="order-track">24631000066468863</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-processing">Processing</span>
-                                <div class="not-paid">£122.62 · Not Paid</div>
-                            </div>
-                        </div>
-
-                        <div class="order-row">
-                            <div class="order-num">#220545</div>
-                            <div class="order-info">
-                                <div class="order-item">One Seater Sofa × 1</div>
-                                <div class="order-date">11 Mar 2022</div>
-                                <div class="order-track">Test</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-processing">Processing</span>
-                                <div class="not-paid">£94.26 · Not Paid</div>
-                            </div>
-                        </div>
-
-                        <div class="order-row">
-                            <div class="order-num">#214541</div>
-                            <div class="order-info">
-                                <div class="order-item">One Seater Sofa × 1</div>
-                                <div class="order-date">17 Feb 2022</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-processing">Processing</span>
-                                <div class="not-paid">£54.40 · Not Paid</div>
-                            </div>
-                        </div>
+                            <div id="activeOrdersContainer"></div>
                     </div>
                 </section><!-- /page-active -->
 
@@ -655,69 +550,8 @@
                                 <input placeholder="Search orders…">
                             </div>
                         </div>
+                        <div id="historyOrdersContainer"></div>
 
-                        <div class="order-row">
-                            <div class="order-num">#839085</div>
-                            <div class="order-info">
-                                <div class="order-item">Sofa Chair × 1</div>
-                                <div class="order-date">28 Nov 2025</div>
-                                <div class="order-track">24631000230480105</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-cancelled">Cancelled</span>
-                                <div class="not-paid">£84.82 · Not Paid</div>
-                            </div>
-                        </div>
-
-                        <div class="order-row">
-                            <div class="order-num">#837029</div>
-                            <div class="order-info">
-                                <div class="order-item">Sofa Chair × 1</div>
-                                <div class="order-date">25 Nov 2025</div>
-                                <div class="order-track">24631000229898365</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-cancelled">Cancelled</span>
-                                <div class="not-paid">£84.82 · Not Paid</div>
-                            </div>
-                        </div>
-
-                        <div class="order-row">
-                            <div class="order-num">#836996</div>
-                            <div class="order-info">
-                                <div class="order-item">Sofa Chair × 1</div>
-                                <div class="order-date">25 Nov 2025</div>
-                                <div class="order-track">24631000229886954</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-cancelled">Cancelled</span>
-                                <div class="not-paid">£84.82 · Not Paid</div>
-                            </div>
-                        </div>
-
-                        <div class="order-row">
-                            <div class="order-num">#221304</div>
-                            <div class="order-info">
-                                <div class="order-item">Two Seater Sofa Bed × 1</div>
-                                <div class="order-date">14 Mar 2022</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-processing">Processing</span>
-                                <div class="not-paid">£122.62 · Not Paid</div>
-                            </div>
-                        </div>
-
-                        <div class="order-row">
-                            <div class="order-num">#220545</div>
-                            <div class="order-info">
-                                <div class="order-item">One Seater Sofa × 1</div>
-                                <div class="order-date">11 Mar 2022</div>
-                            </div>
-                            <div class="order-status">
-                                <span class="status-badge status-processing">Processing</span>
-                                <div class="not-paid">£94.26 · Not Paid</div>
-                            </div>
-                        </div>
                     </div>
                 </section><!-- /page-history -->
 
@@ -733,41 +567,8 @@
                             <div class="panel-header">
                                 <span class="panel-title">Collection Addresses</span>
                             </div>
-                            <div class="inline-search-wrap">
-                                <div class="inline-search sm">
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <circle cx="11" cy="11" r="8" />
-                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
-                                    </svg>
-                                    <input placeholder="Search…">
-                                </div>
-                            </div>
-                            <div class="addr-list">
-                                <div class="addr-item">
-                                    <div class="addr-icon">🏭</div>
-                                    <div class="addr-text">Shropshire Design Ltd, 14 Station Road, Albrighton, WV7 3QG
-                                    </div>
-                                </div>
-                                <div class="addr-item">
-                                    <div class="addr-icon">📍</div>
-                                    <div class="addr-text">1 Test Road, Sompting, Lancing, BN15 0EG</div>
-                                    <div class="addr-flag">🚩</div>
-                                </div>
-                                <div class="addr-item">
-                                    <div class="addr-icon">🏠</div>
-                                    <div class="addr-text">1b, Springdale Close, Liverpool, L12 8RX</div>
-                                    <div class="addr-flag">🚩</div>
-                                </div>
-                                <div class="addr-item">
-                                    <div class="addr-icon">📍</div>
-                                    <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
-                                </div>
-                                <div class="addr-item">
-                                    <div class="addr-icon">📍</div>
-                                    <div class="addr-text">35 Lynn Road, Wiggenhall St. Germans, King's Lynn, PE34 3EY
-                                    </div>
-                                </div>
-                            </div>
+                            
+                            <div class="addr-list" id="collectionAddressesContainer"></div>
                         </div>
 
                         <!-- Delivery -->
@@ -784,17 +585,7 @@
                                     <input placeholder="Search…">
                                 </div>
                             </div>
-                            <div class="addr-list">
-                                <div class="addr-item">
-                                    <div class="addr-icon">📍</div>
-                                    <div class="addr-text">1 Bloomfield Place, Aberdeen, AB10 6AG</div>
-                                </div>
-                                <div class="addr-item">
-                                    <div class="addr-icon">🏠</div>
-                                    <div class="addr-text">9 St. Johns Road, Staveley, Chesterfield, S43 3QN</div>
-                                    <div class="addr-flag">🚩</div>
-                                </div>
-                            </div>
+                            <div class="addr-list" id="deliveryAddressesContainer"></div>
                         </div>
 
                     </div>
@@ -812,7 +603,7 @@
                         <div class="discount-inner">
                             <div class="discount-current">
                                 <div>
-                                    <div class="discount-pct">0%</div>
+                                    <div class="discount-pct" id="discountPagePercent">0%</div>
                                     <div class="discount-label">Current discount level</div>
                                 </div>
                                 <!-- Progress ring -->
@@ -950,21 +741,21 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">Email</label>
-                                    <input class="form-input" value="test@test.test" disabled>
+                                   <input class="form-input" id="settingsEmail" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Phone Number</label>
-                                    <input class="form-input" value="44 1234 567890">
+                                    <input class="form-input" id="settingsPhone">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">First Name</label>
-                                    <input class="form-input" value="Test">
+                                    <input class="form-input" id="settingsUsername">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Last Name</label>
-                                    <input class="form-input" value="Snow">
+                                    <input class="form-input" id="settingsLastName">
                                 </div>
                             </div>
                             <button class="btn-update" type="button" onclick="showToast('✅ Profile updated!')">Update
@@ -1004,8 +795,8 @@
     <div class="toast" id="toast"></div>
 
     <!-- Scripts -->
-    <script src="js/dashboard.js"></script>
-    <script src="js/theme.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
 
 </body>
 

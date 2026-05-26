@@ -46,21 +46,24 @@ loginForm.addEventListener("submit", async (e) => {
         }
     }
     console.log(body);
-    try {
-        const response = await bring("/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        });
+   try {
+    const response = await bring("/auth/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
 
-        console.log("RESPONSE:", response);
+    console.log("RESPONSE:", response);
 
-        window.location.href = "dashboard.html";
-    } catch (error) {
-        console.error('Login failed:', error);
-        alert('Login failed. Please check your credentials and try again.');
-    }
+    localStorage.setItem("token", response.token);
+    localStorage.setItem("username", response.user?.username || body.username);
 
+    window.location.href = "dashboard.html";
+
+} catch (error) {
+    console.error("Login failed:", error);
+    alert("Login failed. Please check your credentials and try again.");
+}
 });

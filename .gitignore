@@ -1,1 +1,4 @@
-js/constants.js
+.env
+/node_modules
+/dist
+/build

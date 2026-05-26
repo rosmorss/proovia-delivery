@@ -1,6 +1,71 @@
-// ── PAGE NAVIGATION ──
+import { bringAuth } from "./fetch.js";
+
+let currentUser = null;
+let userOrders = [];
+let userAddresses = [];
+let userClaims = [];
+
+window.addEventListener("DOMContentLoaded", async () => {
+    await loadDashboardData();
+});
+
+async function loadDashboardData() {
+    try {
+        const username = localStorage.getItem("username");
+        const token = localStorage.getItem("token");
+
+        if (!username || !token) {
+            window.location.href = "log.html";
+            return;
+        }
+
+        currentUser = await bringAuth(`/users/username/${username}`);
+        userOrders = await bringAuth(`/user-orders/user/${currentUser.id}`);
+        userAddresses = await bringAuth(`/user-addresses/user/${currentUser.id}`);
+        userClaims = await bringAuth(`/user-claims/user/${currentUser.id}`);
+
+        console.log("USER:", currentUser);
+        console.log("ORDERS:", userOrders);
+        console.log("ADDRESSES:", userAddresses);
+        console.log("CLAIMS:", userClaims);
+        renderDashboard();
+
+    } catch (error) {
+        console.error("Dashboard error:", error);
+        alert(error.message);
+    }
+}
+function renderDashboard() {
+    const name = currentUser.username || "User";
+
+    document.getElementById("topbar-title").textContent =
+        `Welcome back, ${name} 👋`;
+
+    document.getElementById("sidebarUsername").textContent = name;
+
+    document.getElementById("sidebarAvatar").textContent =
+        name.substring(0, 2).toUpperCase();
+
+    document.getElementById("sidebarUserRole").textContent =
+        currentUser.role || "Business Account";
+
+    document.getElementById("totalOrdersCount").textContent =
+        userOrders.length;
+
+    document.getElementById("activeOrdersCount").textContent =
+        userOrders.filter(order => order.status === "PROCESSING").length;
+
+    document.getElementById("activeOrdersBadge").textContent =
+        userOrders.filter(order => order.status === "PROCESSING").length;
+
+    document.getElementById("discountPercent").textContent =
+        `${Number(currentUser.discountPercent || 0)}%`;
+
+    document.getElementById("discountPagePercent").textContent =
+        `${Number(currentUser.discountPercent || 0)}%`;
+}
 const pageTitles = {
-    home: ['Welcome back, Test Snow 👋', 'Track, Manage, and Forecast Deliveries with Ease.'],
+    home: ['Dashboard', 'Track, Manage, and Forecast Deliveries with Ease.'],
     create: ['Create New Order', 'Fill in the details below to book your delivery.'],
     active: ['Active Orders', '3 shipments currently in progress.'],
     history: ['Orders History', 'Browse and search all your past orders.'],
