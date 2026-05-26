@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -63,108 +63,111 @@
             <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
         </div>
     </nav>
-  <section class="order-page">
+    
+    <section class="order-page">
 
-    <div class="order-glow glow-left"></div>
-    <div class="order-glow glow-right"></div>
+        <div class="order-glow glow-left"></div>
+        <div class="order-glow glow-right"></div>
 
-    <div class="order-container">
+        <div class="order-container">
 
-        <div class="order-header">
-            <span class="order-badge">Checkout</span>
-            <h1>Order Details</h1>
+            <div class="order-header">
+                <span class="order-badge">Checkout</span>
+                <h1>Order Details</h1>
 
-            <div class="order-steps">
-                <div class="step active">1</div>
-                <div class="step-line"></div>
-                <div class="step">2</div>
+                <div class="order-steps">
+                    <div class="step active">1</div>
+                    <div class="step-line"></div>
+                    <div class="step">2</div>
+                </div>
             </div>
+
+            <form class="order-form">
+
+                <div class="order-section">
+                    <div class="section-title">
+                        <h2>Customer Details</h2>
+                        <span>Main contact information</span>
+                    </div>
+
+                    <div class="input-grid">
+                        <input type="text" name="customerFullName" placeholder="Full name" required>
+                        <input type="email" name="customerEmail" placeholder="Email address">
+                        <input type="tel" name="customerPhone" placeholder="Phone number">
+                    </div>
+                </div>
+
+                <div class="order-section">
+                    <div class="section-title with-action">
+                        <div>
+                            <h2>Collection Details</h2>
+                            <span>Who should we contact at collection?</span>
+                        </div>
+
+                        <label class="custom-check">
+                            <input type="checkbox" class="same-customer" data-target="collection">
+                            <span></span>
+                            Same as Customer
+                        </label>
+                    </div>
+
+                    <div class="input-grid collection-fields">
+                        <input type="text" name="collectionFullName" placeholder="Full name" required>
+                        <input type="email" name="collectionEmail" placeholder="Email address">
+                        <input type="tel" name="collectionPhone" placeholder="Phone number">
+                    </div>
+
+                    <label class="notes-toggle">
+                        <input type="checkbox" class="notes-check" data-target="collection-notes">
+                        <span></span>
+                        Collection Notes
+                    </label>
+
+                    <textarea id="collection-notes" class="notes-area"
+                        placeholder="Add collection instructions..."></textarea>
+                </div>
+
+                <div class="order-section">
+                    <div class="section-title with-action">
+                        <div>
+                            <h2>Delivery Details</h2>
+                            <span>Who should we contact at delivery?</span>
+                        </div>
+
+                        <label class="custom-check">
+                            <input type="checkbox" class="same-customer" data-target="delivery">
+                            <span></span>
+                            Same as Customer
+                        </label>
+                    </div>
+
+                    <div class="input-grid delivery-fields">
+                        <input type="text" name="deliveryFullName" placeholder="Full name" required>
+                        <input type="email" name="deliveryEmail" placeholder="Email address">
+                        <input type="tel" name="deliveryPhone" placeholder="Phone number">
+                    </div>
+
+                    <label class="notes-toggle">
+                        <input type="checkbox" class="notes-check" data-target="delivery-notes">
+                        <span></span>
+                        Delivery Notes
+                    </label>
+
+                    <textarea id="delivery-notes" class="notes-area"
+                        placeholder="Add delivery instructions..."></textarea>
+                </div>
+
+                <div class="order-actions">
+                    <button type="button" class="back-btn" onclick="window.location.href='service.html'">Back</button>
+                    <button type="submit" class="next-btn">Continue</button>
+                </div>
+
+            </form>
+
         </div>
 
-        <form class="order-form">
+    </section>
 
-            <div class="order-section">
-                <div class="section-title">
-                    <h2>Customer Details</h2>
-                    <span>Main contact information</span>
-                </div>
-
-                <div class="input-grid">
-                    <input type="text" placeholder="Full name" >
-                    <input type="email" placeholder="Email address" >
-                    <input type="tel" placeholder="Phone number">
-                </div>
-            </div>
-
-            <div class="order-section">
-                <div class="section-title with-action">
-                    <div>
-                        <h2>Collection Details</h2>
-                        <span>Who should we contact at collection?</span>
-                    </div>
-
-                    <label class="custom-check">
-                        <input type="checkbox" class="same-customer" data-target="collection">
-                        <span></span>
-                        Same as Customer
-                    </label>
-                </div>
-
-                <div class="input-grid collection-fields">
-                    <input type="text" placeholder="Full name">
-                    <input type="email" placeholder="Email address">
-                    <input type="tel" placeholder="Phone number">
-                </div>
-
-                <label class="notes-toggle">
-                    <input type="checkbox" class="notes-check" data-target="collection-notes">
-                    <span></span>
-                    Collection Notes
-                </label>
-
-                <textarea id="collection-notes" class="notes-area" placeholder="Add collection instructions..."></textarea>
-            </div>
-
-            <div class="order-section">
-                <div class="section-title with-action">
-                    <div>
-                        <h2>Delivery Details</h2>
-                        <span>Who should we contact at delivery?</span>
-                    </div>
-
-                    <label class="custom-check">
-                        <input type="checkbox" class="same-customer" data-target="delivery">
-                        <span></span>
-                        Same as Customer
-                    </label>
-                </div>
-
-                <div class="input-grid delivery-fields">
-                    <input type="text" placeholder="Full name">
-                    <input type="email" placeholder="Email address">
-                    <input type="tel" placeholder="Phone number">
-                </div>
-
-                <label class="notes-toggle">
-                    <input type="checkbox" class="notes-check" data-target="delivery-notes">
-                    <span></span>
-                    Delivery Notes
-                </label>
-
-                <textarea id="delivery-notes" class="notes-area" placeholder="Add delivery instructions..."></textarea>
-            </div>
-
-            <div class="order-actions">
-                <button type="button" class="back-btn"onclick="window.location.href='service.html'">Back</button>
-                <button type="submit" class="next-btn"onclick="window.location.href='checkout.html'">Continue</button>
-            </div>
-
-        </form>
-
-    </div>
-
-</section>
-  
     <footer>
         <div class="footer-top">
 
@@ -179,9 +182,11 @@
                 </p>
 
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank" class="social-btn">in</a>
+                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank"
+                        class="social-btn">in</a>
 
-                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank" class="social-btn">f</a>
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank"
+                        class="social-btn">f</a>
 
                     <a href="https://www.instagram.com/proovia.couriers/" target="_blank" class="social-btn">ig</a>
 
@@ -243,7 +248,7 @@
     </button>
     <script src="js/theme.js"></script>
 
-    <script src="js/details.js"></script>
+    <script type="module" src="./js/details.js"></script>
 </body>
 
 </html>

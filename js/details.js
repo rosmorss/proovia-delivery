@@ -1,3 +1,5 @@
+import { bring } from "./fetch.js";
+
 // =========================
 // REVEAL ANIMATION
 // =========================
@@ -137,38 +139,64 @@ formInputs.forEach(input => {
 // BUTTON EFFECT
 // =========================
 
-const nextBtn =
-    document.querySelector(".next-btn");
+const orderForm = document.querySelector(".order-form");
+const nextBtn = document.querySelector(".next-btn");
 
-if (nextBtn) {
+orderForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    nextBtn.addEventListener("click", (e) => {
+    const formData = new FormData(orderForm);
 
-        e.preventDefault();
+    const orderDetails = {
+        customerFullName: formData.get("customerFullName"),
+        customerEmail: formData.get("customerEmail"),
+        customerPhone: formData.get("customerPhone"),
 
-        nextBtn.innerHTML =
-            "Saving...";
+        collectionFullName: formData.get("collectionFullName"),
+        collectionEmail: formData.get("collectionEmail"),
+        collectionPhone: formData.get("collectionPhone"),
 
-        nextBtn.style.opacity =
-            "0.85";
+        deliveryFullName: formData.get("deliveryFullName"),
+        deliveryEmail: formData.get("deliveryEmail"),
+        deliveryPhone: formData.get("deliveryPhone"),
 
-        setTimeout(() => {
+        collectionNotes: document.getElementById("collection-notes").value,
+        deliveryNotes: document.getElementById("delivery-notes").value
+    };
 
-            nextBtn.innerHTML =
-                "Continue";
+    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
 
-            nextBtn.style.opacity =
-                "1";
+    try {
+        nextBtn.innerHTML = "Saving...";
+        nextBtn.style.opacity = "0.85";
 
-        }, 1200);
+        const customer = await bring("/customers", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fullName: orderDetails.customerFullName,
+                email: orderDetails.customerEmail,
+                phone: orderDetails.customerPhone
+            })
+        });
 
-    });
+        localStorage.setItem("customerId", customer.id);
 
+        window.location.href = "checkout.html";
+} catch (error) {
+    console.error("Customer save failed:", error);
+    alert(error.message || "Could not save customer details.");
+    nextBtn.innerHTML = "Continue";
+    nextBtn.style.opacity = "1";
 }
+});
 
 // =========================
 // SAVE DATA
 // =========================
+const saveKey = "orderDraft";
 
 function saveOrderData() {
 
@@ -180,20 +208,18 @@ function saveOrderData() {
 
         if (field.type === "checkbox") {
 
-            data[`field_${index}`] =
-                field.checked;
+            data[`field_${index}`] = field.checked;
 
         } else {
 
-            data[`field_${index}`] =
-                field.value;
+            data[`field_${index}`] = field.value;
 
         }
 
     });
 
     localStorage.setItem(
-        "orderDetails",
+        saveKey,
         JSON.stringify(data)
     );
 
@@ -206,21 +232,17 @@ function saveOrderData() {
 function loadOrderData() {
 
     const saved =
-        localStorage.getItem(
-            "orderDetails"
-        );
+        localStorage.getItem(saveKey);
 
     if (!saved) return;
 
-    const data =
-        JSON.parse(saved);
+    const data = JSON.parse(saved);
 
     document.querySelectorAll(
         ".order-form input, .notes-area"
     ).forEach((field, index) => {
 
-        const value =
-            data[`field_${index}`];
+        const value = data[`field_${index}`];
 
         if (value === undefined) return;
 
@@ -240,9 +262,7 @@ function loadOrderData() {
                     );
 
                 if (target && value) {
-                    target.classList.add(
-                        "active"
-                    );
+                    target.classList.add("active");
                 }
 
             }

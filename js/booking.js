@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function loadCategories() {
-    const categories = await bring("/category");
+    const categories = await bring("/categories");
 
     categoriesContainer.innerHTML = `
         <button class="category-card active" data-category="all">
