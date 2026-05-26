@@ -80,17 +80,32 @@
                 Room-to-room. Always on time, always with care.</p>
             <br>
             <div class="hero-search-bar">
-                <div class="search-field">
-                    <div class="search-label">📍 Pick Up</div>
-                    <input type="text" placeholder="Enter pickup address">
-                </div>
-                <div class="search-divider"></div>
-                <div class="search-field">
-                    <div class="search-label">🏁 Drop Off</div>
-                    <input type="text" placeholder="Enter delivery address">
-                </div>
-                <button class="btn-search" onclick="window.location.href='booking.html'">Get Quote →</button>
-            </div>
+    <div class="search-field">
+        <div class="search-label">📍 Pick Up</div>
+        <input 
+            type="text" 
+            id="pickupAddress"
+            placeholder="Enter pickup address"
+            required
+        >
+    </div>
+
+    <div class="search-divider"></div>
+
+    <div class="search-field">
+        <div class="search-label">🏁 Drop Off</div>
+        <input 
+            type="text" 
+            id="dropoffAddress"
+            placeholder="Enter delivery address"
+            required
+        >
+    </div>
+
+    <button class="btn-search" id="getQuoteBtn">
+        Get Quote →
+    </button>
+</div>
 
             <div class="hero-stats">
                 <div class="stat">
