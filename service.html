@@ -63,182 +63,168 @@
             <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
         </div>
     </nav>
-<section class="program-page">
+    <section class="program-page">
 
-    <aside class="program-summary reveal-program">
-        <div class="summary-plan">
-            <h3>Proovia Standard</h3>
-            <span>£239.85</span>
-        </div>
+        <aside class="program-summary reveal-program">
+            <div class="summary-plan">
+                <h3 id="summaryPlanName">Loading...</h3>
+                <span id="summaryPlanPrice">£0.00</span>
+            </div>
 
-        <button class="summary-toggle" type="button">
-    See all details
-    <span>+</span>
-</button>
+            <button class="summary-toggle" type="button">
+                See all details
+                <span>+</span>
+            </button>
 
-<ul class="summary-list summary-hidden">
-            <li>Delivery timescale 2-4 working days</li>
-            <li>State of the art service</li>
-            <li>Two men team</li>
-            <li>Careful protection</li>
-            <li>In time delivery</li>
-            <li>Level of service room of choice</li>
-            <li>Damage cover up to £300</li>
-            <li>Time slot 2 hours</li>
-            <li>Tracking basic</li>
-            <li>Time slot the day before</li>
-            <li>Real time tracking</li>
-            <li>SMS updates</li>
-        </ul>
+            <ul class="summary-list summary-hidden" id="summaryPlanDetails"></ul>
 
-        <div class="fuel-card">
-            <span>Temporary Fuel Surcharge</span>
-            <strong>+ £8.87</strong>
-        </div>
+            <div class="fuel-card">
+                <span>Temporary Fuel Surcharge</span>
+                <strong id="fuelSurchargeText">+ £0.00</strong>
+            </div>
 
-      <div class="summary-bottom">
-    <div class="total-row">
-        <span>Total price:</span>
-        <strong>£248.72</strong>
-    </div>
+            <div class="summary-bottom">
+                <div class="total-row">
+                    <span>Total price:</span>
+                    <strong id="summaryTotalPrice">£0.00</strong>
+                </div>
 
-    <div class="summary-actions">
-        <button class="back-btn" onclick="history.back()">Back</button>
-        <button class="continue-btn" onclick="window.location.href='details.html'">Continue</button>
-    </div>
-</div>
-
-    </aside>
-
-    <main class="program-main">
-
-        <div class="program-header reveal-program">
-            <span class="program-badge">Booking details</span>
-            <h1>Program details</h1>
-            <p>Review your collection and delivery information before continuing.</p>
-        </div>
-
-        <div class="route-card reveal-program">
-
-            <div class="route-point">
-                <span>Collection</span>
-                <div class="route-box">
-                    <strong>15 May 2026</strong>
-                    <p>BN3 2WB</p>
+                <div class="summary-actions">
+                    <button class="back-btn" onclick="history.back()">Back</button>
+                    <button class="continue-btn" onclick="window.location.href='details.html'">Continue</button>
                 </div>
             </div>
 
-            <div class="route-line">
-                <a href="#">Change dates</a>
-                <div class="line">
-                    <span></span>
-                </div>
+        </aside>
+
+        <main class="program-main">
+
+            <div class="program-header reveal-program">
+                <span class="program-badge">Booking details</span>
+                <h1>Program details</h1>
+                <p>Review your collection and delivery information before continuing.</p>
             </div>
 
-            <div class="route-point">
-                <span>Delivery</span>
-                <div class="route-box">
-                    <strong class="green">16 May 2026</strong>
-                    <p>WA14 5RF</p>
-                </div>
-            </div>
+            <div class="route-card reveal-program">
 
-        </div>
-
-        <div class="details-grid">
-
-            <div class="details-card reveal-program">
-                <h3>Collection details</h3>
-
-                <div class="form-group">
-                    <label>Is parking available?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn">No</button>
-                        <button class="choice-btn active">Space outside</button>
-                        <button class="choice-btn">On street</button>
-                        <button class="choice-btn">Nearby</button>
+                <div class="route-point">
+                    <span>Collection</span>
+                    <div class="route-box">
+                        <strong>15 May 2026</strong>
+                        <p>BN3 2WB</p>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>What floor are you on?</label>
-                    <div class="floor-options">
-    <button class="floor-btn active">Ground</button>
-    <button class="floor-btn">First floor</button>
-    <button class="floor-btn">Second floor</button>
-    <button class="floor-btn">Third floor</button>
-</div>
-                </div>
-
-                <div class="form-group">
-                    <label>Are there any entrance steps?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn active">No</button>
-                        <button class="choice-btn">Yes</button>
+                <div class="route-line">
+                    <a href="#">Change dates</a>
+                    <div class="line">
+                        <span></span>
                     </div>
                 </div>
+
+                <div class="route-point">
+                    <span>Delivery</span>
+                    <div class="route-box">
+                        <strong class="green">16 May 2026</strong>
+                        <p>WA14 5RF</p>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="details-card reveal-program">
-                <h3>Delivery details</h3>
+            <div class="details-grid">
 
-                <div class="form-group">
-                    <label>Is parking available?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn">No</button>
-                        <button class="choice-btn">Space outside</button>
-                        <button class="choice-btn">On street</button>
-                        <button class="choice-btn active">Nearby</button>
+                <div class="details-card reveal-program">
+                    <h3>Collection details</h3>
+
+                    <div class="form-group">
+                        <label>Is parking available?</label>
+                        <div class="choice-group">
+                            <button class="choice-btn">No</button>
+                            <button class="choice-btn active">Space outside</button>
+                            <button class="choice-btn">On street</button>
+                            <button class="choice-btn">Nearby</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What floor are you on?</label>
+                        <div class="floor-options">
+                            <button class="floor-btn active">Ground</button>
+                            <button class="floor-btn">First floor</button>
+                            <button class="floor-btn">Second floor</button>
+                            <button class="floor-btn">Third floor</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Are there any entrance steps?</label>
+                        <div class="choice-group">
+                            <button class="choice-btn active">No</button>
+                            <button class="choice-btn">Yes</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>What floor are you on?</label>
-                    <div class="floor-options">
-    <button class="floor-btn active">Ground</button>
-    <button class="floor-btn">First floor</button>
-    <button class="floor-btn">Second floor</button>
-    <button class="floor-btn">Third floor</button>
-</div>
-                </div>
+                <div class="details-card reveal-program">
+                    <h3>Delivery details</h3>
 
-                <div class="form-group">
-                    <label>Are there any entrance steps?</label>
-                    <div class="choice-group">
-                        <button class="choice-btn active">No</button>
-                        <button class="choice-btn">Yes</button>
+                    <div class="form-group">
+                        <label>Is parking available?</label>
+                        <div class="choice-group">
+                            <button class="choice-btn">No</button>
+                            <button class="choice-btn">Space outside</button>
+                            <button class="choice-btn">On street</button>
+                            <button class="choice-btn active">Nearby</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What floor are you on?</label>
+                        <div class="floor-options">
+                            <button class="floor-btn active">Ground</button>
+                            <button class="floor-btn">First floor</button>
+                            <button class="floor-btn">Second floor</button>
+                            <button class="floor-btn">Third floor</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Are there any entrance steps?</label>
+                        <div class="choice-group">
+                            <button class="choice-btn active">No</button>
+                            <button class="choice-btn">Yes</button>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
+        </main>
+        <div class="dates-modal" id="datesModal">
+            <div class="dates-overlay"></div>
+
+            <div class="dates-box">
+
+                <div class="calendar-block">
+                    <h3>Collection date</h3>
+                    <div class="calendar-card" id="collectionCalendar"></div>
+                </div>
+
+                <div class="calendar-block">
+                    <h3>Delivery date</h3>
+                    <div class="calendar-card" id="deliveryCalendar"></div>
+                </div>
+
+                <div class="dates-actions">
+                    <button class="cancel-dates">Cancel</button>
+                    <button class="save-dates">Save</button>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-    </main>
-<div class="dates-modal" id="datesModal">
-    <div class="dates-overlay"></div>
-
-    <div class="dates-box">
-
-        <div class="calendar-block">
-            <h3>Collection date</h3>
-            <div class="calendar-card" id="collectionCalendar"></div>
-        </div>
-
-        <div class="calendar-block">
-            <h3>Delivery date</h3>
-            <div class="calendar-card" id="deliveryCalendar"></div>
-        </div>
-
-        <div class="dates-actions">
-            <button class="cancel-dates">Cancel</button>
-            <button class="save-dates">Save</button>
-        </div>
-
-    </div>
-</div>
-</section>
-
-    
     <footer>
         <div class="footer-top">
 
@@ -253,9 +239,11 @@
                 </p>
 
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank" class="social-btn">in</a>
+                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank"
+                        class="social-btn">in</a>
 
-                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank" class="social-btn">f</a>
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank"
+                        class="social-btn">f</a>
 
                     <a href="https://www.instagram.com/proovia.couriers/" target="_blank" class="social-btn">ig</a>
 

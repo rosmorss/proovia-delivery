@@ -1,6 +1,43 @@
 let savedCollectionDate = localStorage.getItem("collectionDate");
 let savedDeliveryDate = localStorage.getItem("deliveryDate");
+import { bring } from "./fetch.js";
 
+const selectedPlanId = localStorage.getItem("selectedPlanId");
+
+async function loadSelectedPlan() {
+    if (!selectedPlanId) {
+        alert("Please select a plan first.");
+        window.location.href = "plans.html";
+        return;
+    }
+
+    const plan = await bring(`/plan/${selectedPlanId}`);
+
+    const planPrice = Number(plan.price);
+    const fuelSurcharge = Number(plan.fuelSurcharge || 0);
+    const total = planPrice + fuelSurcharge;
+
+    document.getElementById("summaryPlanName").textContent = plan.name;
+    document.getElementById("summaryPlanPrice").textContent = `£${planPrice.toFixed(2)}`;
+    document.getElementById("fuelSurchargeText").textContent = `+ £${fuelSurcharge.toFixed(2)}`;
+    document.getElementById("summaryTotalPrice").textContent = `£${total.toFixed(2)}`;
+
+    document.getElementById("summaryPlanDetails").innerHTML = `
+        <li>Delivery timescale ${plan.deliveryTime || "—"}</li>
+        <li>Two men team ${plan.twoMenTeam ? "✓" : "—"}</li>
+        <li>Careful protection ${plan.carefulProtection || "—"}</li>
+        <li>Level of service ${plan.levelOfService || "—"}</li>
+        <li>Damage cover ${plan.damageCover || "—"}</li>
+        <li>Time slot ${plan.timeSlot || "—"}</li>
+        <li>Tracking ${plan.tracking ? "Real time tracking" : "—"}</li>
+        <li>SMS updates ${plan.smsUpdates ? "✓" : "—"}</li>
+    `;
+
+    localStorage.setItem("selectedPlan", JSON.stringify(plan));
+    localStorage.setItem("totalPrice", total);
+}
+
+loadSelectedPlan();
 let collectionDate = savedCollectionDate
     ? new Date(savedCollectionDate)
     : new Date(2026, 4, 15);
