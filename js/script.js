@@ -335,3 +335,20 @@ function initCookieBanner() {
         }
     });
 }
+/* Database connection*/
+const getQuoteBtn = document.getElementById("getQuoteBtn");
+
+getQuoteBtn.addEventListener("click", () => {
+    const pickupAddress = document.getElementById("pickupAddress").value.trim();
+    const dropoffAddress = document.getElementById("dropoffAddress").value.trim();
+
+    if (!pickupAddress || !dropoffAddress) {
+        alert("Please enter both pickup and drop off addresses.");
+        return;
+    }
+
+    localStorage.setItem("pickupAddress", pickupAddress);
+    localStorage.setItem("dropoffAddress", dropoffAddress);
+
+    window.location.href = "booking.html";
+});
