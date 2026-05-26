@@ -6,12 +6,12 @@ const searchInput = document.getElementById("searchItems");
 
 let allItems = [];
 let currentCategory = "all";
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 window.addEventListener("DOMContentLoaded", async () => {
     await loadCategories();
     await loadItems();
+    setupReveal();
 });
 
 async function loadCategories() {
@@ -35,12 +35,17 @@ async function loadCategories() {
 }
 
 async function loadItems() {
-    allItems = await bring("/item");
+    allItems = await bring("/items");
     renderItems(allItems);
 }
 
 function renderItems(items) {
     bookingItems.innerHTML = "";
+
+    if (!items.length) {
+        bookingItems.innerHTML = `<p>No items found.</p>`;
+        return;
+    }
 
     items.forEach(item => {
         bookingItems.innerHTML += `
@@ -51,7 +56,7 @@ function renderItems(items) {
                     <div>
                         <h4>${item.name}</h4>
                         <span>${item.category?.name || "No category"}</span>
-                        <p>£${item.basePrice}</p>
+                        <p>£${Number(item.basePrice).toFixed(2)}</p>
                     </div>
                 </div>
 
@@ -118,6 +123,8 @@ searchInput.addEventListener("input", (e) => {
 window.addToCart = function(id) {
     const item = allItems.find(item => item.id === id);
 
+    if (!item) return;
+
     const existingItem = cart.find(cartItem => cartItem.id === id);
 
     if (existingItem) {
@@ -134,12 +141,11 @@ window.addToCart = function(id) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-
     console.log("Cart:", cart);
 };
 
-const pickupAddress = localStorage.getItem("pickupAddress");
-const dropoffAddress = localStorage.getItem("dropoffAddress");
-
-console.log("Pickup:", pickupAddress);
-console.log("Dropoff:", dropoffAddress);
+function setupReveal() {
+    document.querySelector(".booking-categories")?.classList.add("show");
+    document.querySelector(".booking-top")?.classList.add("show");
+    document.querySelector(".booking-actions")?.classList.add("show");
+}
