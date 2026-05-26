@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 async function loadPlans() {
     try {
-        const plans = await bring("/plan");
+        const plans = await bring("/plans");
 
         plansWrapper.innerHTML = "";
 
