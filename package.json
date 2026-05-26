@@ -1,0 +1,27 @@
+{
+  "name": "proovia-delivery",
+  "version": "1.0.0",
+  "description": "Proovia Delivery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosmorss/proovia-delivery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rosmorss/proovia-delivery/issues"
+  },
+  "homepage": "https://github.com/rosmorss/proovia-delivery#readme",
+  "devDependencies": {
+    "vite": "^8.0.14"
+  }
+}
