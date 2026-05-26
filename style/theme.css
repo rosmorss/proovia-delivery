@@ -97,7 +97,79 @@ html[data-theme="light"] {
 
     --coverage-map-shadow: rgba(0, 0, 0, 0.18);
 }
+@font-face {
+    font-family: 'Bebas Neue';
 
+    src: url('../fonts/BebasNeue-Regular.ttf')
+    format('truetype');
+
+    font-weight: 400;
+
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+
+    src: url('../fonts/DMSans-Regular.ttf')
+    format('truetype');
+
+    font-weight: 400;
+
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+
+    src: url('../fonts/PlayfairDisplay-Bold.ttf')
+    format('truetype');
+
+    font-weight: 700;
+
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DMSans-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DMSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DMSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DMSans-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('../fonts/BebasNeue-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('../fonts/BebasNeue-Regular.woff2') format('woff2'),
+         url('../fonts/BebasNeue-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 /* =========================================
    PREVENT FLASH ON LOAD
 ========================================= */
