@@ -281,3 +281,9 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealElements.forEach(el => {
     revealObserver.observe(el);
 }); 
+
+const pickupAddress = localStorage.getItem("pickupAddress");
+const dropoffAddress = localStorage.getItem("dropoffAddress");
+
+console.log("Pickup:", pickupAddress);
+console.log("Dropoff:", dropoffAddress);
