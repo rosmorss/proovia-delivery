@@ -11,13 +11,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style/dashboard.css">
 
-    <!-- Apply saved theme before first paint (no flash) -->
-    <script>
-        (function () {
-            const t = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', t);
-        })();
-    </script>
+    <script src="js/theme-init.js"></script>
 </head>
 
 <body>
@@ -356,13 +350,11 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">Collection Address *</label>
-                                  <input class="form-input" id="createPickupAddress" placeholder="Collection address">
-                                        placeholder="Collection address">
+                                    <input class="form-input" id="createPickupAddress" placeholder="Collection address">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Delivery Address *</label>
                                     <input class="form-input" id="createDropoffAddress" placeholder="Delivery address">
-                                        placeholder="Delivery address">
                                 </div>
                             </div>
 
@@ -607,11 +599,11 @@
                                     <div class="discount-label">Current discount level</div>
                                 </div>
                                 <!-- Progress ring -->
-                                <svg width="80" height="80" viewBox="0 0 80 80">
-                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--bg3)" stroke-width="8" />
-                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--red)" stroke-width="8"
-                                        stroke-dasharray="0 201" stroke-linecap="round" class="ring-progress" />
-                                </svg>
+                                    <svg width="80" height="80" viewBox="0 0 80 80">
+                                        <circle cx="40" cy="40" r="32" fill="none" stroke="var(--bg3)" stroke-width="8" />
+                                        <circle cx="40" cy="40" r="32" fill="none" stroke="var(--red)" stroke-width="8"
+                                            stroke-dasharray="0 201" stroke-linecap="round" class="ring-progress" />
+                                    </svg>
                             </div>
 
                             <div class="price-list-title">Fixed Price Items:</div>

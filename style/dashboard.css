@@ -1436,3 +1436,84 @@ html[data-theme="light"] .theme-toggle-thumb {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+/* SVG icons moved from HTML */
+.nav-icon {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+}
+
+.topbar-search svg,
+.inline-search svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+.inline-search.sm svg {
+    width: 13px;
+    height: 13px;
+}
+
+.icon-btn svg,
+.btn-new-order svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+/* Discount circle */
+.discount-current svg {
+    width: 80px;
+    height: 80px;
+}
+
+.discount-current circle {
+    fill: none;
+    stroke-width: 8;
+}
+
+.discount-current circle:first-child {
+    stroke: var(--bg3);
+}
+
+.discount-current circle:last-child {
+    stroke: var(--red);
+    stroke-dasharray: 0 201;
+    stroke-linecap: round;
+}
+.search-icon {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+}
+
+.search-icon path {
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+.discount-ring {
+    width: 80px;
+    height: 80px;
+}
+
+.discount-ring circle {
+    fill: none;
+    stroke-width: 8;
+}
+
+.ring-bg {
+    stroke: var(--bg3);
+}
+
+.ring-progress {
+    stroke: var(--red);
+    stroke-dasharray: 0 201;
+    stroke-linecap: round;
+}
