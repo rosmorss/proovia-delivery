@@ -1,13 +1,46 @@
 import { bringAuth } from "./fetch.js";
 
+/* =========================
+   DATABASE DATA
+========================= */
+
 let currentUser = null;
 let userOrders = [];
 let userAddresses = [];
 let userClaims = [];
 
+/* =========================
+   PAGE TITLES
+========================= */
+
+const pageTitles = {
+    home: ["Dashboard", "Track, Manage, and Forecast Deliveries with Ease."],
+    create: ["Create New Order", "Fill in the details below to book your delivery."],
+    active: ["Active Orders", "Shipments currently in progress."],
+    history: ["Orders History", "Browse and search all your past orders."],
+    addresses: ["My Addresses", "Manage your saved collection and delivery addresses."],
+    discount: ["My Discount", "Your current pricing and discount level."],
+    claim: ["Report a Claim", "Describe the issue and we'll look into it."],
+    support: ["Support", "Get in touch with our team."],
+    settings: ["Settings", "Manage your account and security settings."]
+};
+
+/* =========================
+   START
+========================= */
+
 window.addEventListener("DOMContentLoaded", async () => {
     await loadDashboardData();
+
+    initChart();
+    initCalendar();
+    initSearch();
+    initOrderRows();
 });
+
+/* =========================
+   LOAD DATA FROM DATABASE
+========================= */
 
 async function loadDashboardData() {
     try {
@@ -28,119 +61,226 @@ async function loadDashboardData() {
         console.log("ORDERS:", userOrders);
         console.log("ADDRESSES:", userAddresses);
         console.log("CLAIMS:", userClaims);
+
         renderDashboard();
 
     } catch (error) {
         console.error("Dashboard error:", error);
-        alert(error.message);
+        showToast("Dashboard data could not be loaded");
     }
 }
+
+/* =========================
+   RENDER DASHBOARD
+========================= */
+
 function renderDashboard() {
-    const name = currentUser.username || "User";
+    const name = currentUser?.username || "User";
 
-    document.getElementById("topbar-title").textContent =
-        `Welcome back, ${name} 👋`;
+    setText("topbar-title", `Welcome back, ${name} 👋`);
+    setText("topbar-sub", "Track, Manage, and Forecast Deliveries with Ease.");
 
-    document.getElementById("sidebarUsername").textContent = name;
+    setText("sidebarUsername", name);
+    setText("sidebarAvatar", name.substring(0, 2).toUpperCase());
+    setText("sidebarUserRole", currentUser?.role || "Business Account");
 
-    document.getElementById("sidebarAvatar").textContent =
-        name.substring(0, 2).toUpperCase();
+    const activeOrders = userOrders.filter(order => order.status === "PROCESSING");
 
-    document.getElementById("sidebarUserRole").textContent =
-        currentUser.role || "Business Account";
+    setText("totalOrdersCount", userOrders.length);
+    setText("activeOrdersCount", activeOrders.length);
+    setText("activeOrdersBadge", activeOrders.length);
+    setText("quickActiveCount", `${activeOrders.length} active`);
 
-    document.getElementById("totalOrdersCount").textContent =
-        userOrders.length;
+    const discount = Number(currentUser?.discountPercent || 0);
 
-    document.getElementById("activeOrdersCount").textContent =
-        userOrders.filter(order => order.status === "PROCESSING").length;
+    setText("discountPercent", `${discount}%`);
+    setText("discountPagePercent", `${discount}%`);
 
-    document.getElementById("activeOrdersBadge").textContent =
-        userOrders.filter(order => order.status === "PROCESSING").length;
+    const pendingOrders = userOrders.filter(order => {
+        return order.isPaid === false || order.paymentStatus === "PENDING";
+    });
 
-    document.getElementById("discountPercent").textContent =
-        `${Number(currentUser.discountPercent || 0)}%`;
+    const pendingTotal = pendingOrders.reduce((sum, order) => {
+        return sum + Number(order.totalPrice || order.total || order.price || 0);
+    }, 0);
 
-    document.getElementById("discountPagePercent").textContent =
-        `${Number(currentUser.discountPercent || 0)}%`;
+    setText("pendingPaymentAmount", `£${pendingTotal.toFixed(2)}`);
+    setText("pendingPaymentCount", `${pendingOrders.length} unpaid`);
 }
-const pageTitles = {
-    home: ['Dashboard', 'Track, Manage, and Forecast Deliveries with Ease.'],
-    create: ['Create New Order', 'Fill in the details below to book your delivery.'],
-    active: ['Active Orders', '3 shipments currently in progress.'],
-    history: ['Orders History', 'Browse and search all your past orders.'],
-    addresses: ['My Addresses', 'Manage your saved collection and delivery addresses.'],
-    discount: ['My Discount', 'Your current pricing and discount level.'],
-    claim: ['Report a Claim', 'Describe the issue and we\'ll look into it.'],
-    support: ['Support', 'Get in touch with our team.'],
-    settings: ['Settings', 'Manage your account and security settings.'],
-};
+
+function setText(id, value) {
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.textContent = value;
+    }
+}
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
 
 function showPage(id, btn) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    const [h, p] = pageTitles[id] || ['Dashboard', ''];
-    document.getElementById('topbar-title').textContent = h;
-    document.getElementById('topbar-sub').textContent = p;
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const page = document.getElementById("page-" + id);
+
+    if (!page) {
+        console.error("Page not found:", "page-" + id);
+        return;
+    }
+
+    page.classList.add("active");
+
+    document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
+    });
+
+    if (btn) {
+        btn.classList.add("active");
+    } else {
+        const navButton = document.querySelector(`.nav-item[onclick*="'${id}'"]`);
+
+        if (navButton) {
+            navButton.classList.add("active");
+        }
+    }
+
+    const [title, subtitle] = pageTitles[id] || ["Dashboard", ""];
+
+    setText("topbar-title", title);
+    setText("topbar-sub", subtitle);
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
-// ── MINI BARS CHART ──
-function buildChart(el, data) {
+window.showPage = showPage;
+
+/* =========================
+   MINI CHART
+========================= */
+
+function initChart() {
+    const chart = document.getElementById("chart1");
+
+    if (!chart) return;
+
+    buildChart(chart, [38, 52, 45, 61, 55, 72, 69, 84, 77, 91, 88, 95]);
+}
+
+function buildChart(element, data) {
     const max = Math.max(...data);
-    el.innerHTML = data.map((v, i) => {
-        const h = Math.round((v / max) * 38);
-        const active = i === data.length - 1 ? 'active' : '';
-        return `<div class="bar ${active}" style="height:${h}px"><div class="bar-tooltip">${v} orders</div></div>`;
-    }).join('');
+
+    element.innerHTML = data.map((value, index) => {
+        const height = Math.round((value / max) * 38);
+        const active = index === data.length - 1 ? "active" : "";
+
+        return `
+            <div class="bar ${active}" style="height:${height}px">
+                <div class="bar-tooltip">${value} orders</div>
+            </div>
+        `;
+    }).join("");
 }
 
-const c1 = document.getElementById('chart1');
-if (c1) buildChart(c1, [38, 52, 45, 61, 55, 72, 69, 84, 77, 91, 88, 95]);
+/* =========================
+   TOAST
+========================= */
 
-// ── TOAST ──
 let toastTimer;
-function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
 }
 
-// ── CALENDAR CLICK INTERACTION ──
-document.querySelectorAll('.cal-day:not(.grey)').forEach(d => {
-    d.addEventListener('click', function () {
-        const cal = this.closest('.calendar-mini');
-        cal.querySelectorAll('.cal-day').forEach(x => {
-            x.classList.remove('today', 'next-day');
+window.showToast = showToast;
+
+/* =========================
+   CALENDAR
+========================= */
+
+function initCalendar() {
+    document.querySelectorAll(".cal-day:not(.grey)").forEach(day => {
+        day.addEventListener("click", function () {
+            const calendar = this.closest(".calendar-mini");
+
+            if (!calendar) return;
+
+            calendar.querySelectorAll(".cal-day").forEach(item => {
+                item.classList.remove("today", "next-day");
+            });
+
+            const calendars = document.querySelectorAll(".calendar-mini");
+            const selectedClass = calendar === calendars[0] ? "today" : "next-day";
+
+            this.classList.add(selectedClass);
         });
-        this.classList.add(cal === document.querySelectorAll('.calendar-mini')[0] ? 'today' : 'next-day');
     });
-});
+}
 
-// ── ORDER ROW EXPAND (fake) ──
-document.querySelectorAll('.order-row').forEach(row => {
-    row.addEventListener('click', () => {
-        showToast('📋 Order details opened');
+/* =========================
+   ORDER ROW CLICK
+========================= */
+
+function initOrderRows() {
+    document.querySelectorAll(".order-row").forEach(row => {
+        row.addEventListener("click", () => {
+            showToast("📋 Order details opened");
+        });
     });
-});
-// ── SEARCH ORDERS ──
-const ordersSearch = document.getElementById('ordersSearch');
+}
 
-if (ordersSearch) {
-    ordersSearch.addEventListener('input', function () {
+/* =========================
+   SEARCH ORDERS
+========================= */
+
+function initSearch() {
+    const ordersSearch = document.getElementById("ordersSearch");
+
+    if (!ordersSearch) return;
+
+    ordersSearch.addEventListener("input", function () {
         const value = this.value.toLowerCase().trim();
 
-        document.querySelectorAll('.order-row').forEach(row => {
+        document.querySelectorAll(".order-row").forEach(row => {
             const text = row.textContent.toLowerCase();
 
-            if (text.includes(value)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+            row.style.display = text.includes(value) ? "" : "none";
         });
     });
-}   
+}
+
+/* =========================
+   THEME SAFETY
+========================= */
+
+window.toggleTheme = window.toggleTheme || function () {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute("data-theme") || "dark";
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+    html.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("theme", nextTheme);
+
+    const thumb = document.getElementById("themeThumb");
+
+    if (thumb) {
+        thumb.textContent = nextTheme === "dark" ? "🌙" : "☀️";
+    }
+};
