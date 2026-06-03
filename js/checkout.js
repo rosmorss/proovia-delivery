@@ -65,13 +65,12 @@ function renderCheckout() {
 
     if (!totalPrice) {
         const planPrice = Number(selectedPlan?.price || 0);
-        const fuel = Number(selectedPlan?.fuelSurcharge || 0);
 
         const itemsTotal = cart.reduce((sum, item) => {
             return sum + Number(item.basePrice || item.price || 0) * Number(item.quantity || 1);
         }, 0);
 
-        totalPrice = planPrice + fuel + itemsTotal;
+        totalPrice = planPrice + itemsTotal;
     }
 
     payBtn.textContent = `Pay £${totalPrice.toFixed(2)}`;
