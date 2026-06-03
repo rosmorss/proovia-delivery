@@ -118,22 +118,6 @@ footer {
     font-size: 14px;
 }
 
-.fuel-card {
-    margin-top: 18px;
-    background: var(--surface2);
-    border-radius: 14px;
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    color: var(--text);
-}
-
-.fuel-card strong {
-    color: var(--red-light);
-    white-space: nowrap;
-}
-
 .summary-bottom {
     margin-top: 16px;
     border-top: 1px solid var(--red);
@@ -835,12 +819,6 @@ footer {
     .summary-list li {
         font-size: 14px;
         padding: 9px 0 9px 36px;
-    }
-
-    .fuel-card {
-        border-radius: 18px;
-        padding: 16px;
-        font-size: 14px;
     }
 
     .summary-bottom {
