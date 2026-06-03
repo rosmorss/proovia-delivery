@@ -11,7 +11,6 @@ const checkoutForm = document.getElementById("checkoutForm");
 const customerId = localStorage.getItem("customerId");
 const selectedPlanId = localStorage.getItem("selectedPlanId");
 
-const selectedPlan = JSON.parse(localStorage.getItem("selectedPlan")) || null;
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const serviceDetails = JSON.parse(localStorage.getItem("serviceDetails")) || null;
 
@@ -35,14 +34,23 @@ function formatDate(dateString) {
     });
 }
 
-function renderCheckout() {
+async function renderCheckout() {
     if (!customerId || !selectedPlanId) {
         alert("Missing booking data. Please start again.");
         window.location.href = "index.html";
         return;
     }
 
-    planNameEl.textContent = selectedPlan?.name || "Selected Plan";
+    const cartItems = await bring("/items?items=" + cart.map(i => i.id).join(","))
+    console.log("Cart items from server:", cartItems);
+    const selectedPlan = await bring(`/plans/${selectedPlanId}`);
+
+    totalPrice = Number(selectedPlan.price || 0) + cartItems.reduce((sum, item) => {
+        const quantity = cart.find(i => i.id === item.id)?.quantity || 1;
+        return sum + Number(item.basePrice || item.price || 0) * Number(quantity);
+    }, 0);
+
+    planNameEl.textContent = selectedPlan.name || "Selected Plan";
 
     datesEl.textContent = `${formatDate(collectionDate)} - ${formatDate(deliveryDate)}`;
 
@@ -51,9 +59,9 @@ function renderCheckout() {
 
     itemsEl.innerHTML = "";
 
-    cart.forEach(item => {
+    cartItems.forEach(item => {
         const itemPrice = Number(item.basePrice || item.price || 0);
-        const quantity = Number(item.quantity || 1);
+        const quantity = cart.find(i => i.id === item.id)?.quantity || 1;
 
         itemsEl.innerHTML += `
             <div class="checkout-item">
@@ -66,8 +74,9 @@ function renderCheckout() {
     if (!totalPrice) {
         const planPrice = Number(selectedPlan?.price || 0);
 
-        const itemsTotal = cart.reduce((sum, item) => {
-            return sum + Number(item.basePrice || item.price || 0) * Number(item.quantity || 1);
+        const itemsTotal = cartItems.reduce((sum, item) => {
+            const quantity = cart.find(i => i.id === item.id)?.quantity || 1;
+            return sum + Number(item.basePrice || item.price || 0) * Number(quantity);
         }, 0);
 
         totalPrice = planPrice + itemsTotal;
@@ -174,4 +183,4 @@ checkoutForm.addEventListener("submit", async (e) => {
     }
 });
 
-renderCheckout();
+await renderCheckout();

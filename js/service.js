@@ -31,7 +31,6 @@ async function loadSelectedPlan() {
         <li>SMS updates ${plan.smsUpdates ? "✓" : "—"}</li>
     `;
 
-    localStorage.setItem("selectedPlan", JSON.stringify(plan));
     localStorage.setItem("totalPrice", total);
 }
 
