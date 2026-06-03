@@ -398,6 +398,20 @@
         gap: 14px;
     }
 
+    .pagination {
+        margin: 30px 0 15px;
+    }
+
+    .pagination button {
+        padding: 9px 12px;
+        font-size: 12px;
+        border-radius: 8px;
+    }
+
+    .pagination .page-number {
+        min-width: 36px;
+    }
+
     .booking-badge {
         margin-bottom: 14px;
     }
@@ -524,6 +538,21 @@
         width: 100%;
     }
 
+    .pagination {
+        gap: 6px;
+        margin: 20px 0 10px;
+    }
+
+    .pagination button {
+        padding: 8px 11px;
+        font-size: 11px;
+        border-radius: 8px;
+    }
+
+    .pagination .page-number {
+        min-width: 32px;
+    }
+
     .booking-actions {
         gap: 10px;
     }
@@ -601,4 +630,137 @@
     transition:
         opacity 0.7s ease 0.25s,
         transform 0.7s ease 0.25s;
+}
+
+/* PAGINATION */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 40px 0 20px;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-main);
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: var(--red);
+    color: white;
+    border-color: var(--red);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(200, 0, 0, 0.3);
+}
+
+.pagination button.active {
+    background-color: var(--red);
+    color: white;
+    border-color: var(--red);
+    box-shadow: 0 8px 18px rgba(200, 0, 0, 0.3);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination .page-number {
+    min-width: 40px;
+    text-align: center;
+}
+
+/* ─────────────────────────
+   PAGINATION
+───────────────────────── */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 40px 0 20px;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-main);
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: var(--red);
+    color: white;
+    border-color: var(--red);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(200, 0, 0, 0.3);
+}
+
+.pagination button.active {
+    background-color: var(--red);
+    color: white;
+    border-color: var(--red);
+    box-shadow: 0 8px 18px rgba(200, 0, 0, 0.3);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination .page-number {
+    min-width: 40px;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .pagination {
+        margin: 30px 0 15px;
+    }
+
+    .pagination button {
+        padding: 9px 12px;
+        font-size: 12px;
+        border-radius: 8px;
+    }
+
+    .pagination .page-number {
+        min-width: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pagination {
+        gap: 6px;
+        margin: 20px 0 10px;
+    }
+
+    .pagination button {
+        padding: 8px 11px;
+        font-size: 11px;
+        border-radius: 8px;
+    }
+
+    .pagination .page-number {
+        min-width: 32px;
+    }
 }
