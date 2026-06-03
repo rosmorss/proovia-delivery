@@ -1,9 +1,9 @@
 .checkout-page {
     min-height: 100vh;
     padding: 70px 20px;
-    background: #f7f7f7;
+    background: var(--bg);
     font-family: Arial, sans-serif;
-    color: #222;
+    color: var(--text);
 }
 
 .checkout-container {
@@ -12,8 +12,9 @@
 }
 
 .checkout-container h1 {
+    margin-top: 7%;
     text-align: center;
-    color: #a73535;
+    color: var(--red);
     margin-bottom: 25px;
     font-size: 28px;
 }
@@ -29,7 +30,7 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: #a73535;
+    background: var(--red);
     color: white;
     display: flex;
     align-items: center;
@@ -44,11 +45,11 @@
 }
 
 .checkout-card {
-    background: #fff;
+    background: var(--surface);
     border-radius: 28px;
     padding: 18px 22px;
     margin-bottom: 18px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-md);
     display: flex;
     align-items: center;
     gap: 18px;
@@ -56,7 +57,7 @@
 
 .main-info strong {
     text-transform: uppercase;
-    color: #2b2b38;
+    color: var(--text);
 }
 
 .main-info p {
@@ -65,19 +66,19 @@
 
 .icon {
     font-size: 28px;
-    color: #a73535;
+    color: var(--red);
 }
 
 .address-card strong {
     display: block;
-    color: #a73535;
+    color: var(--red);
     text-transform: uppercase;
     margin-bottom: 5px;
 }
 
 .address-card p {
     margin: 0;
-    color: #333;
+    color: var(--text-soft);
 }
 
 .items-card {
@@ -86,14 +87,14 @@
 
 .items-card h3 {
     margin-bottom: 15px;
-    color: #a73535;
+    color: var(--red);
 }
 
 .checkout-item {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border);
 }
 
 .checkout-item:last-child {
@@ -124,15 +125,16 @@
 .form-group input {
     height: 46px;
     border-radius: 13px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border);
     padding: 0 14px;
     font-size: 15px;
     outline: none;
-    background: white;
+    background: var(--input-bg);
+    color: var(--text);
 }
 
 .form-group input:focus {
-    border-color: #a73535;
+    border-color: var(--red)
 }
 
 .check-line {
@@ -149,7 +151,7 @@
 }
 
 .check-line a {
-    color: #a73535;
+    color: var(--red);
 }
 
 #payBtn {
@@ -158,7 +160,7 @@
     padding: 14px 36px;
     border: none;
     border-radius: 30px;
-    background: #a73535;
+    background: var(--red);
     color: white;
     font-weight: 700;
     font-size: 15px;
@@ -168,7 +170,7 @@
 
 #payBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(167,53,53,0.35);
+    box-shadow: 0 8px 18px var(--red-glow);
 }
 
 @media (max-width: 700px) {
@@ -184,4 +186,98 @@
     .step-line {
         width: 120px;
     }
+}
+.checkout-card {
+    border: 1px solid var(--border);
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+.checkout-container h1,
+.checkout-steps,
+.checkout-card,
+.payment-form {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: checkoutFadeUp 0.7s ease forwards;
+}
+
+.checkout-container h1 {
+    animation-delay: 0.1s;
+}
+
+.checkout-steps {
+    animation-delay: 0.2s;
+}
+
+.checkout-card:nth-of-type(1) {
+    animation-delay: 0.3s;
+}
+
+.checkout-card:nth-of-type(2) {
+    animation-delay: 0.4s;
+}
+
+.checkout-card:nth-of-type(3) {
+    animation-delay: 0.5s;
+}
+
+.checkout-card:nth-of-type(4) {
+    animation-delay: 0.6s;
+}
+
+.payment-form {
+    animation-delay: 0.75s;
+}
+
+@keyframes checkoutFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.checkout-item {
+    animation: itemFade 0.45s ease forwards;
+}
+
+@keyframes itemFade {
+    from {
+        opacity: 0;
+        transform: translateX(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+#payBtn {
+    position: relative;
+    overflow: hidden;
+}
+
+#payBtn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+#payBtn:hover::after {
+    left: 120%;
 }

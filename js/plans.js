@@ -113,7 +113,6 @@ function selectPlan(planId) {
     window.location.href = "service.html";
 }
 
-window.selectPlan = selectPlan;
 
 function setupPlanButtons() {
     document.querySelectorAll(".more-details-btn").forEach((btn) => {
