@@ -79,7 +79,7 @@ async function renderCheckout() {
 
     itemsEl.innerHTML += `
         <div class="checkout-item">
-            <span>${selectedPlan.name || "Selected plan"} (${quote.planPercent.toFixed(2).replace(/\.00$/, "")}%)</span>
+            <span>${selectedPlan.name || "Selected plan"} (${quote.planLabel})</span>
             <strong>${formatMoney(quote.planFee)}</strong>
         </div>
     `;
