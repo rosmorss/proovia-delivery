@@ -31,7 +31,7 @@
     height: 42px;
     border-radius: 50%;
     background: var(--red);
-    color: white;
+    color: var(--text-on-accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +41,7 @@
 .step-line {
     width: 190px;
     height: 1px;
-    background: #555;
+    background: var(--divider-strong);
 }
 
 .checkout-card {
@@ -161,7 +161,7 @@
     border: none;
     border-radius: 30px;
     background: var(--red);
-    color: white;
+    color: var(--text-on-accent);
     font-weight: 700;
     font-size: 15px;
     cursor: pointer;
@@ -272,7 +272,7 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.35),
+        var(--shine-highlight),
         transparent
     );
     transition: 0.5s;
@@ -280,4 +280,83 @@
 
 #payBtn:hover::after {
     left: 120%;
+}
+
+@media (max-width: 700px) {
+    .checkout-page {
+        padding: 94px 14px 44px;
+        font-family: var(--font-main);
+    }
+
+    .checkout-container h1 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 30px;
+        line-height: 1.1;
+    }
+
+    .checkout-steps {
+        gap: 8px;
+        margin-bottom: 28px;
+    }
+
+    .step {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        font-size: 13px;
+    }
+
+    .step-line {
+        width: clamp(42px, 23vw, 86px);
+    }
+
+    .checkout-card {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr);
+        gap: 12px;
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .icon {
+        font-size: 22px;
+        line-height: 1;
+    }
+
+    .checkout-item {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: start;
+        font-size: 14px;
+    }
+
+    .payment-form {
+        margin-top: 22px;
+    }
+
+    .form-group input {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .check-line {
+        align-items: flex-start;
+        line-height: 1.45;
+    }
+
+    .check-line input {
+        flex: 0 0 18px;
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+    }
+
+    #payBtn {
+        width: 100%;
+        min-height: 50px;
+        margin-top: 24px;
+        border-radius: 16px;
+    }
 }

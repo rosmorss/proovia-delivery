@@ -145,3 +145,56 @@
     transform: scale(1) translate(0, 0);
   }
 }
+
+@media (max-width: 768px) {
+  .auth-section {
+    min-height: auto;
+    padding: 96px 14px 44px;
+    align-items: flex-start;
+  }
+
+  .auth-box {
+    max-width: 100%;
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .auth-box h2 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .auth-box p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .form-group input {
+    min-height: 48px;
+    border-radius: 14px;
+    font-size: 16px;
+  }
+
+  .btn {
+    min-height: 48px;
+    border-radius: 14px;
+    font-size: 15px;
+  }
+
+  .terms-glow {
+    width: 280px;
+    height: 280px;
+    filter: blur(90px);
+  }
+
+  .floating-cta {
+    display: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .auth-box {
+    padding: 22px 16px;
+  }
+}

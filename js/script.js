@@ -1,4 +1,24 @@
+import { bring } from "./fetch.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    const clearIndexTransientInputs = () => {
+        document
+            .querySelectorAll("#pickupAddress, #dropoffAddress, .track-bar input")
+            .forEach(input => {
+                input.value = "";
+                input.defaultValue = "";
+                input.setAttribute("autocomplete", "off");
+            });
+    };
+
+    clearIndexTransientInputs();
+
+    window.addEventListener("pageshow", event => {
+        if (event.persisted) {
+            clearIndexTransientInputs();
+        }
+    });
 
     /* =========================
        REVEAL ANIMATIONS
@@ -145,9 +165,23 @@ document.addEventListener("DOMContentLoaded", () => {
        TRACK BUTTON
     ========================= */
 
+    const trackingInput = document.querySelector(".track-bar input");
+
+    trackingInput?.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.querySelector(".track-btn")?.click();
+        }
+    });
+
     document.querySelector(".track-btn")?.addEventListener("click", () => {
-        const input = document.querySelector(".track-bar input");
+        const input = trackingInput || document.querySelector(".track-bar input");
         const value = input?.value.trim();
+
+        if (value) {
+            window.location.href = `tracking.html?trackingNumber=${encodeURIComponent(value)}`;
+            return;
+        }
 
         if (!value) {
             showToast("Please enter a tracking number.", "error");
@@ -162,7 +196,49 @@ document.addEventListener("DOMContentLoaded", () => {
        CONTACT FORM
     ========================= */
 
-    document.querySelector(".btn-submit")?.addEventListener("click", (e) => {
+    document.getElementById("contactForm")?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        const submitButton = form.querySelector(".btn-submit");
+        const formData = new FormData(form);
+        const payload = {
+            firstName: String(formData.get("firstName") || "").trim(),
+            lastName: String(formData.get("lastName") || "").trim(),
+            email: String(formData.get("email") || "").trim(),
+            phone: String(formData.get("phone") || "").trim(),
+            serviceType: String(formData.get("serviceType") || "").trim(),
+            message: String(formData.get("message") || "").trim()
+        };
+
+        if (!payload.firstName || !payload.email || !payload.message) {
+            showToast("Please fill in your name, email and message.", "error");
+            return;
+        }
+
+        try {
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending...";
+
+            await bring("/contact-messages", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            showToast("Message sent! We'll be in touch soon.", "success");
+            form.reset();
+        } catch (error) {
+            showToast(error.message || "Message could not be sent. Please try again.", "error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Send Message ->";
+        }
+    });
+
+    document.querySelector(".legacy-contact-submit")?.addEventListener("click", (e) => {
         e.preventDefault();
 
         const fields = document.querySelectorAll(

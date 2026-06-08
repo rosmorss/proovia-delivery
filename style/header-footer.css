@@ -1,0 +1,78 @@
+/* Mobile-only compatibility layer for shared header and footer. */
+
+@media (max-width: 900px) {
+    nav#navbar {
+        height: 64px;
+        padding: 0 14px;
+    }
+
+    nav#navbar .nav-logo-img {
+        height: 30px;
+    }
+
+    nav#navbar .nav-right {
+        gap: 8px;
+        margin-left: auto;
+    }
+
+    nav#navbar .theme-toggle {
+        width: 46px;
+        height: 28px;
+    }
+
+    nav#navbar .theme-toggle-thumb {
+        top: 4px;
+        left: 4px;
+        width: 18px;
+        height: 18px;
+    }
+
+    html[data-theme="light"] nav#navbar .theme-toggle-thumb {
+        transform: translateX(20px);
+    }
+
+    nav#navbar .hamburger {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--surface2);
+    }
+
+    #mobile-overlay.show,
+    #mobile-overlay.open {
+        display: block;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    #mobile-menu {
+        right: -100vw;
+        width: min(86vw, 320px);
+        padding: 78px 18px max(32px, env(safe-area-inset-bottom));
+        box-shadow: -18px 0 50px rgba(0, 0, 0, 0.28);
+    }
+
+    #mobile-menu a {
+        display: flex;
+        align-items: center;
+        min-height: 46px;
+        color: var(--text);
+        line-height: 1.2;
+    }
+
+    #mobile-menu .mobile-menu-account {
+        justify-content: center;
+        color: var(--text-on-accent);
+    }
+}
+
+@media (max-width: 560px) {
+    footer {
+        padding: 32px 16px max(22px, env(safe-area-inset-bottom));
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

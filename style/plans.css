@@ -157,6 +157,39 @@
     margin-bottom: 16px;
 }
 
+.plan-percent {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-soft);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.plan-cost-breakdown {
+    position: relative;
+    display: grid;
+    gap: 7px;
+    margin-bottom: 14px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface2);
+}
+
+.plan-cost-breakdown div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--text-soft);
+    font-size: 12px;
+}
+
+.plan-cost-breakdown strong {
+    color: var(--text);
+    font-size: 13px;
+}
+
 .plan-date {
     position: relative;
     text-align: center;
@@ -325,6 +358,16 @@
         font-size: 22px;
         margin: 0;
         line-height: 1;
+    }
+
+    .plan-percent {
+        font-size: 10px;
+    }
+
+    .plan-cost-breakdown {
+        margin-top: 14px;
+        margin-bottom: 12px;
+        padding: 10px;
     }
 
     .plan-date {
@@ -552,5 +595,62 @@
 
     .floating-cta {
         display: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .plans-section {
+        padding-top: 92px;
+        padding-bottom: 44px;
+    }
+
+    .plans-header {
+        display: block;
+        text-align: left;
+        margin: 0 0 18px;
+    }
+
+    .plans-badge {
+        margin-bottom: 12px;
+        font-size: 10px;
+        line-height: 1.35;
+        white-space: normal;
+    }
+
+    .plans-header h1 {
+        font-size: 36px;
+        line-height: 0.98;
+        margin-bottom: 10px;
+    }
+
+    .plans-header p {
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+    .plan-card h3 {
+        padding-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .plan-price {
+        position: static;
+        text-align: left;
+        margin-bottom: 10px;
+        font-size: 26px;
+    }
+
+    .plan-cost-breakdown div,
+    .plan-card li {
+        align-items: flex-start;
+    }
+
+    .plan-card li b {
+        max-width: none;
+        text-align: right;
+    }
+
+    .plan-card > button:first-of-type {
+        min-height: 46px;
     }
 }

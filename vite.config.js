@@ -21,7 +21,9 @@ export default defineConfig({
         plans: path.resolve(__dirname, 'plans.html'),
         register: path.resolve(__dirname, 'register.html'),
         service: path.resolve(__dirname, 'service.html'),
+        success: path.resolve(__dirname, 'success.html'),
         terms: path.resolve(__dirname, 'terms.html'),
+        tracking: path.resolve(__dirname, 'tracking.html'),
       },
       output: {
         entryFileNames: 'js/[name].bundle.js',
