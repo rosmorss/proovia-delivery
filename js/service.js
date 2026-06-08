@@ -11,15 +11,13 @@ async function loadSelectedPlan() {
         return;
     }
 
-    const plan = await bring(`/plan/${selectedPlanId}`);
+    const plan = await bring(`/plans/${selectedPlanId}`);
 
     const planPrice = Number(plan.price);
-    const fuelSurcharge = Number(plan.fuelSurcharge || 0);
-    const total = planPrice + fuelSurcharge;
+    const total = planPrice;
 
     document.getElementById("summaryPlanName").textContent = plan.name;
     document.getElementById("summaryPlanPrice").textContent = `£${planPrice.toFixed(2)}`;
-    document.getElementById("fuelSurchargeText").textContent = `+ £${fuelSurcharge.toFixed(2)}`;
     document.getElementById("summaryTotalPrice").textContent = `£${total.toFixed(2)}`;
 
     document.getElementById("summaryPlanDetails").innerHTML = `
