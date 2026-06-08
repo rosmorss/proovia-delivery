@@ -383,3 +383,101 @@
     }
 
 }
+
+@media(max-width: 700px) {
+    .order-page {
+        padding: 94px 14px 42px;
+    }
+
+    .order-header {
+        text-align: left;
+        margin-bottom: 28px;
+    }
+
+    .order-badge {
+        margin-bottom: 14px;
+        font-size: 10px;
+        line-height: 1.35;
+        white-space: normal;
+    }
+
+    .order-header h1 {
+        font-size: 34px;
+        line-height: 1.02;
+    }
+
+    .order-steps {
+        justify-content: flex-start;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 2px;
+    }
+
+    .order-steps::-webkit-scrollbar {
+        display: none;
+    }
+
+    .step {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        font-size: 13px;
+    }
+
+    .step-line {
+        width: 52px;
+        flex: 0 0 52px;
+    }
+
+    .order-form {
+        gap: 16px;
+    }
+
+    .order-section {
+        padding: 20px 16px;
+        border-radius: 22px;
+    }
+
+    .section-title {
+        margin-bottom: 18px;
+    }
+
+    .section-title h2 {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .section-title span {
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .input-grid {
+        gap: 12px;
+    }
+
+    .input-grid input,
+    .notes-area {
+        min-height: 50px;
+        padding: 14px 15px;
+        border-radius: 15px;
+        font-size: 16px;
+    }
+
+    .custom-check,
+    .notes-toggle {
+        align-items: flex-start;
+        line-height: 1.45;
+    }
+
+    .custom-check span,
+    .notes-toggle span {
+        flex: 0 0 22px;
+    }
+
+    .back-btn,
+    .next-btn {
+        min-height: 48px;
+        border-radius: 16px;
+    }
+}

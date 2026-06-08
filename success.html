@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful - Proovia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <script>
+        const _savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", _savedTheme);
+    </script>
+    <link rel="stylesheet" href="style/theme.css">
+    <link rel="stylesheet" href="style/success.css">
+</head>
+
+<body>
+    <div id="mobile-overlay"></div>
+
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <a href="log.html" class="mobile-menu-account">My Account</a>
+    </div>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="photo/logo.png" alt="Proovia Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <button id="hamburger" class="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                <div class="theme-toggle-thumb" id="themeThumb">sun</div>
+            </div>
+            <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
+        </div>
+    </nav>
+
+    <main class="success-page">
+        <div class="success-shell">
+            <section class="success-panel confirmation-panel" aria-labelledby="successTitle">
+                <div class="success-mark" aria-hidden="true"></div>
+                <p class="success-eyebrow">Booking confirmed</p>
+                <h1 id="successTitle">Payment successful</h1>
+                <p class="success-lead">
+                    Your order has been placed. Keep this tracking number for delivery updates and support.
+                </p>
+
+                <div class="tracking-box" id="trackingBox">
+                    <span>Tracking number</span>
+                    <strong id="successTrackingNumber">Loading...</strong>
+                    <button type="button" id="copyTrackingBtn" class="copy-btn">Copy</button>
+                </div>
+
+                <div class="success-actions">
+                    <a href="tracking.html" id="trackOrderBtn" class="success-btn primary">Track order</a>
+                    <a href="dashboard.html" class="success-btn secondary">Dashboard</a>
+                </div>
+            </section>
+
+            <aside class="success-panel summary-panel" aria-labelledby="summaryTitle">
+                <div class="summary-header">
+                    <p class="success-eyebrow">Order summary</p>
+                    <h2 id="summaryTitle">Delivery details</h2>
+                </div>
+
+                <dl class="summary-list">
+                    <div>
+                        <dt>Booking ID</dt>
+                        <dd id="successBookingId">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Total paid</dt>
+                        <dd id="successTotalPaid">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Plan</dt>
+                        <dd id="successPlan">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Items</dt>
+                        <dd id="successItems">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Route</dt>
+                        <dd id="successRoute">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Dates</dt>
+                        <dd id="successDates">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Paid at</dt>
+                        <dd id="successPaidAt">Pending</dd>
+                    </div>
+                </dl>
+
+                <a class="new-booking-link" href="index.html#home">Create another booking</a>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="photo/logo.png" alt="Proovia Logo" class="hero-logo">
+                </a>
+
+                <p>
+                    Reliable nationwide delivery and moving services across England.
+                    Founded in Birmingham in 2014.
+                </p>
+
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank"
+                        class="social-btn">in</a>
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank"
+                        class="social-btn">f</a>
+                    <a href="https://www.instagram.com/proovia.couriers/" target="_blank" class="social-btn">ig</a>
+                    <a href="https://maps.app.goo.gl/aRXeHiQcLu9KFJcKA" target="_blank" class="social-btn">G</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#coverage">Coverage</a></li>
+                    <li><a href="index.html#how">How It Works</a></li>
+                    <li><a href="index.html#reviews">Reviews</a></li>
+                    <li><a href="infod.html">Drivers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Support</h5>
+                <ul>
+                    <li><a href="log.html" target="_blank">My Account</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html" target="_blank">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="tel:+441213149848">(+44) 121 314 9848</a></li>
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+                    <li>
+                        <a href="https://maps.app.goo.gl/6gp5m9FH1mfmsye67" target="_blank">
+                            Office, Fort Dunlop, 110 Fort Pkwy, Birmingham B24 9FE, United Kingdom
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Proovia Couriers LTD. All rights reserved.</p>
+            <p>Built for fast, secure and reliable delivery across England.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/success.js"></script>
+</body>
+
+</html>

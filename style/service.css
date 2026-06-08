@@ -970,3 +970,45 @@ footer {
     background: var(--red);
     color: #fff;
 }
+
+@media (max-width: 768px) {
+    .dates-box {
+        width: min(96vw, 420px);
+        padding: 16px;
+        border-radius: 22px;
+    }
+
+    .calendar-card {
+        padding: 12px;
+    }
+
+    .calendar-head {
+        gap: 18px;
+        margin-bottom: 14px;
+    }
+
+    .calendar-grid {
+        gap: 6px;
+    }
+
+    .calendar-grid span,
+    .date-btn {
+        min-height: 34px;
+        font-size: 12px;
+    }
+
+    .date-btn {
+        padding: 8px 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .choice-group,
+    .floor-options {
+        grid-template-columns: 1fr;
+    }
+
+    .program-header h1 {
+        font-size: 26px;
+    }
+}

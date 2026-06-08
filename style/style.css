@@ -1,62 +1,54 @@
-    /* ── HERO ── */
-    .hero {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+/* ── HERO ── */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-        padding: 120px 48px 80px;
-        position: relative;
-        overflow: hidden;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
 
-        background:
-            linear-gradient(to right,
-                rgba(10, 10, 10, 0.85) 0%,
-                rgba(10, 10, 10, 0.6) 40%,
-                rgba(10, 10, 10, 0.3) 70%,
-                rgba(10, 10, 10, 0.1) 100%),
-            url('../photo/herobg.png');
+    background: url('../photo/herobg.png') center / cover no-repeat;
+}
 
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+.hero-video {
+    position: absolute;
+    inset: 0;
 
-    /* ── BACKGROUND ELEMENTS ── */
-    .hero-bg-lines {
-        position: absolute;
-        inset: 0;
-        background-image:
-            linear-gradient(rgba(178, 34, 34, 0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(178, 34, 34, 0.06) 1px, transparent 1px);
-        background-size: 60px 60px;
-        mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
-    }
+    width: 100%;
+    height: 100%;
 
-    .hero-orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(60px);
-        pointer-events: none;
-    }
+    object-fit: cover;
+    z-index: 0;
+}
 
-    .orb1 {
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(178, 34, 34, 0.25), transparent 70%);
-        top: -100px;
-        right: -100px;
-        animation: orb-float 8s ease-in-out infinite;
-    }
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
 
-    .orb2 {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(212, 168, 90, 0.12), transparent 70%);
-        bottom: 50px;
-        left: -80px;
-        animation: orb-float 10s ease-in-out infinite reverse;
-    }
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,.65) 0%,
+        rgba(0,0,0,.45) 25%,
+        rgba(0,0,0,.25) 50%,
+        rgba(0,0,0,.10) 75%,
+        rgba(0, 0, 0, 0.068) 100%
+    );
+}
+
+.hero-bg-lines,
+.hero-orb {
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
 
     @keyframes orb-float {
 

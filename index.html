@@ -68,6 +68,16 @@
 
     <!-- HERO -->
     <section class="hero" id="home">
+         <video
+    class="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto">
+    <source src="video/proovia-hero.mp4" type="video/mp4">
+</video>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-pill">
                 <div class="hero-pill-dot"></div>
@@ -85,6 +95,7 @@
         <input 
             type="text" 
             id="pickupAddress"
+            autocomplete="off"
             placeholder="Enter pickup address"
             required
         >
@@ -97,6 +108,7 @@
         <input 
             type="text" 
             id="dropoffAddress"
+            autocomplete="off"
             placeholder="Enter delivery address"
             required
         >
@@ -187,7 +199,7 @@
                     furniture or printers, we help transfer your items safely and efficiently.
                 </p>
             </div>
-        </div>
+        </form>
     </section>
 
     <!-- WHY US -->
@@ -495,11 +507,11 @@
     </section>
 
     <!-- TRACK SECTION -->
-    <div class="track-section">
+    <div class="track-section" id="tracking">
         <h2>TRACK YOUR ORDER</h2>
         <p>Enter your tracking number below for real-time delivery updates</p>
         <div class="track-bar">
-            <input type="text" placeholder="e.g. 246310002304801">
+            <input type="text" autocomplete="off" placeholder="e.g. 246310002304801">
             <button class="track-btn">Track Now 🔍</button>
         </div>
     </div>
@@ -538,28 +550,28 @@
             </div>
         </div>
 
-        <div class="contact-form reveal-right">
+        <form class="contact-form reveal-right" id="contactForm">
             <div class="form-row">
                 <div class="form-field">
                     <label>First Name</label>
-                    <input type="text" placeholder="John">
+                    <input type="text" name="firstName" autocomplete="given-name" placeholder="John" required>
                 </div>
                 <div class="form-field">
                     <label>Last Name</label>
-                    <input type="text" placeholder="Smith">
+                    <input type="text" name="lastName" autocomplete="family-name" placeholder="Smith">
                 </div>
             </div>
             <div class="form-field">
                 <label>Email Address</label>
-                <input type="email" placeholder="john@example.com">
+                <input type="email" name="email" autocomplete="email" placeholder="john@example.com" required>
             </div>
             <div class="form-field">
                 <label>Phone Number</label>
-                <input type="tel" placeholder="+44 7700 900000">
+                <input type="tel" name="phone" autocomplete="tel" placeholder="+44 7700 900000">
             </div>
             <div class="form-field">
                 <label>Service Type</label>
-                <select>
+                <select name="serviceType">
                     <option>Single Item Delivery</option>
                     <option>Residential Removal</option>
                     <option>Commercial / Office</option>
@@ -569,10 +581,10 @@
             </div>
             <div class="form-field">
                 <label>Message</label>
-                <textarea placeholder="Tell us about your delivery..."></textarea>
+                <textarea name="message" placeholder="Tell us about your delivery..." required></textarea>
             </div>
             <button class="btn-submit">Send Message →</button>
-        </div>
+        </form>
     </section>
 
 

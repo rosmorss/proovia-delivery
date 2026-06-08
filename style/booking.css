@@ -764,3 +764,31 @@
         min-width: 32px;
     }
 }
+
+@media (max-width: 600px) {
+    .booking-section {
+        padding-bottom: max(48px, env(safe-area-inset-bottom));
+    }
+
+    .booking-badge {
+        white-space: normal;
+        line-height: 1.35;
+    }
+
+    .booking-item-left > div {
+        min-width: 0;
+    }
+
+    .booking-item-left h4,
+    .booking-item-left span {
+        overflow-wrap: anywhere;
+    }
+
+    .booking-item button {
+        min-height: 44px;
+    }
+
+    .booking-actions {
+        bottom: max(10px, env(safe-area-inset-bottom));
+    }
+}

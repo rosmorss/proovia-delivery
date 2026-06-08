@@ -1,8 +1,15 @@
 let savedCollectionDate = localStorage.getItem("collectionDate");
 let savedDeliveryDate = localStorage.getItem("deliveryDate");
 import { bring } from "./fetch.js";
+import {
+    calculateItemsSubtotal,
+    calculatePlanQuote,
+    formatMoney,
+    loadCartItems
+} from "./customerPricing.js";
 
 const selectedPlanId = localStorage.getItem("selectedPlanId");
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 async function loadSelectedPlan() {
     if (!selectedPlanId) {
@@ -11,16 +18,21 @@ async function loadSelectedPlan() {
         return;
     }
 
-    const plan = await bring(`/plans/${selectedPlanId}`);
-
-    const planPrice = Number(plan.price);
-    const total = planPrice;
+    const [plan, cartItems] = await Promise.all([
+        bring(`/plans/${selectedPlanId}`),
+        loadCartItems(bring, cart)
+    ]);
+    const itemsSubtotal = calculateItemsSubtotal(cartItems);
+    const serviceDetails = JSON.parse(localStorage.getItem("serviceDetails")) || null;
+    const quote = calculatePlanQuote(itemsSubtotal, plan, serviceDetails?.extraPrice || 0);
 
     document.getElementById("summaryPlanName").textContent = plan.name;
-    document.getElementById("summaryPlanPrice").textContent = `£${planPrice.toFixed(2)}`;
-    document.getElementById("summaryTotalPrice").textContent = `£${total.toFixed(2)}`;
+    document.getElementById("summaryPlanPrice").textContent = `${quote.planPercent.toFixed(2).replace(/\.00$/, "")}%`;
+    document.getElementById("summaryTotalPrice").textContent = formatMoney(quote.total);
 
     document.getElementById("summaryPlanDetails").innerHTML = `
+        <li>Items subtotal ${formatMoney(quote.itemsSubtotal)}</li>
+        <li>Plan increase ${formatMoney(quote.planFee)}</li>
         <li>Delivery timescale ${plan.deliveryTime || "—"}</li>
         <li>Two men team ${plan.twoMenTeam ? "✓" : "—"}</li>
         <li>Careful protection ${plan.carefulProtection || "—"}</li>
@@ -31,18 +43,22 @@ async function loadSelectedPlan() {
         <li>SMS updates ${plan.smsUpdates ? "✓" : "—"}</li>
     `;
 
-    localStorage.setItem("totalPrice", total);
+    localStorage.setItem("selectedPlanQuote", JSON.stringify(quote));
+    localStorage.setItem("totalPrice", quote.total);
 }
 
 loadSelectedPlan();
 let collectionDate = savedCollectionDate
     ? new Date(savedCollectionDate)
-    : new Date(2026, 4, 15);
+    : new Date();
 
 let deliveryDate = savedDeliveryDate
     ? new Date(savedDeliveryDate)
-    : new Date(2026, 4, 16);
+    : new Date();
 
+if (!savedDeliveryDate) {
+    deliveryDate.setDate(collectionDate.getDate() + 1);
+}
 let collectionViewDate = new Date(collectionDate);
 let deliveryViewDate = new Date(deliveryDate);
 // =========================
@@ -77,6 +93,7 @@ revealProgram.forEach((card, index) => {
 });
 
 // =========================
+
 // CHOICE BUTTONS
 // =========================
 
@@ -108,29 +125,27 @@ choiceGroups.forEach(group => {
 // CONTINUE BUTTON EFFECT
 // =========================
 
-const continueBtn =
-    document.querySelector(".continue-btn");
+const continueBtn = document.querySelector(".continue-btn");
+
+function saveDatesToLocalStorage() {
+    localStorage.setItem("collectionDate", collectionDate.toISOString());
+    localStorage.setItem("deliveryDate", deliveryDate.toISOString());
+}
 
 if (continueBtn) {
+    continueBtn.addEventListener("click", (e) => {
+        e.preventDefault();
 
-    continueBtn.addEventListener("click", () => {
+        saveProgramDetails();
+        saveDatesToLocalStorage();
 
-        continueBtn.innerHTML =
-            "Loading...";
-
+        continueBtn.innerHTML = "Loading...";
         continueBtn.style.opacity = "0.85";
 
         setTimeout(() => {
-
-            continueBtn.innerHTML =
-                "Continue";
-
-            continueBtn.style.opacity = "1";
-
-        }, 1200);
-
+            window.location.href = "checkout.html";
+        }, 500);
     });
-
 }
 
 // =========================
@@ -363,13 +378,13 @@ document.addEventListener("click", (e) => {
         const year = Number(target.dataset.year);
 
         if (type === "collection") {
-    collectionDate = new Date(year, month, day);
+            collectionDate = new Date(year, month, day);
 
-    deliveryDate = new Date(collectionDate);
-    deliveryDate.setDate(collectionDate.getDate() + 1);
+            deliveryDate = new Date(collectionDate);
+            deliveryDate.setDate(collectionDate.getDate() + 1);
 
-    deliveryViewDate = new Date(deliveryDate);
-}
+            deliveryViewDate = new Date(deliveryDate);
+        }
 
         if (type === "delivery") {
             const selectedDelivery = new Date(year, month, day);
@@ -381,11 +396,11 @@ document.addEventListener("click", (e) => {
 
         renderAllCalendars();
         collectionDateText.textContent = formatDate(collectionDate);
-deliveryDateText.textContent = formatDate(deliveryDate);
+        deliveryDateText.textContent = formatDate(deliveryDate);
     }
 });
 
-saveDatesBtn?.addEventListener("click", () => {
+saveDatesBtn.addEventListener("click", () => {
     collectionDateText.textContent = formatDate(collectionDate);
     deliveryDateText.textContent = formatDate(deliveryDate);
 
@@ -422,6 +437,11 @@ function saveProgramDetails() {
                 select.value;
         });
     });
+
+    if (!savedCollectionDate || !savedDeliveryDate) {
+        localStorage.setItem("collectionDate", collectionDate.toISOString());
+        localStorage.setItem("deliveryDate", deliveryDate.toISOString());
+    }
 
     localStorage.setItem(saveKey, JSON.stringify(data));
 }

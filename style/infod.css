@@ -257,6 +257,7 @@
     max-width: 900px;
     margin: auto;
      gap: 18px;
+     margin-top: 25px;
 }
 
 /* ARROWS */
@@ -837,4 +838,96 @@
         transform: scale(1);
     }
 
+}
+
+@media (max-width: 768px) {
+    .driver-hero {
+        height: auto;
+        min-height: 100svh;
+        padding: 112px 18px 56px;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 360px;
+        margin-top: 0;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(38px, 12vw, 52px);
+        line-height: 1;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+    }
+
+    .btn-primary,
+    .btn-outline {
+        width: 100%;
+        min-height: 48px;
+        margin-top: 0;
+        padding: 0 18px;
+        animation: none;
+    }
+
+    .benefits,
+    .steps,
+    .apply-section,
+    .dashboard-section,
+    .info {
+        padding: 56px 16px;
+    }
+
+    .section-header {
+        margin-bottom: 26px;
+        text-align: left;
+    }
+
+    .section-title {
+        font-size: 30px;
+        line-height: 1.05;
+    }
+
+    .section-desc {
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .apply-section {
+        border-radius: 0;
+    }
+
+    .apply-form input,
+    .apply-form select,
+    .apply-form textarea {
+        min-height: 48px;
+        font-size: 16px;
+        border-radius: 14px;
+    }
+
+    .apply-form button {
+        min-height: 50px;
+        border-radius: 16px;
+    }
+
+    .dashboard-wrap {
+        grid-template-columns: 1fr;
+        border-radius: 22px;
+        min-height: auto;
+    }
+
+    .toast {
+        left: 14px;
+        right: 14px;
+        white-space: normal;
+        text-align: center;
+    }
 }
