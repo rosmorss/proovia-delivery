@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proovia — Dashboard</title>
+    <title>Proovia - Dashboard</title>
     <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
@@ -14,191 +14,16 @@
     <script src="js/theme-init.js"></script>
 </head>
 
-<body>
+<body data-dashboard-page="home">
 
     <div class="layout">
+        <div id="dashboardSidebarMount"></div>
 
-        <!-- ════════════════════════════════
-         SIDEBAR
-         ════════════════════════════════ -->
-        <aside class="sidebar">
-
-            <!-- Logo -->
-            <div class="sidebar-logo">
-                <a href="index.html">
-                    <img src="photo/logo.png" alt="Proovia" class="logo-img">
-                </a>
-                <span class="logo-sub">Business Portal</span>
-            </div>
-
-            <!-- User -->
-            <div class="sidebar-user">
-                <div class="user-avatar" id="sidebarAvatar">U</div>
-                <div>
-                    <div class="user-name" id="sidebarUsername">Loading...</div>
-                    <div class="user-role" id="sidebarUserRole">Business Account</div>
-                </div>
-            </div>
-
-            <!-- Navigation -->
-            <nav class="sidebar-nav">
-                <div class="nav-section-label">Main</div>
-
-                <button class="nav-item active" onclick="showPage('home', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    Home
-                </button>
-
-                <button class="nav-item" onclick="showPage('create', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                    </svg>
-                    Create Order
-                </button>
-
-                <button class="nav-item" onclick="showPage('active', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    Active Orders
-                    <span class="nav-badge" id="activeOrdersBadge">0</span>
-                </button>
-
-                <button class="nav-item" onclick="showPage('history', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Orders History
-                </button>
-
-                <button class="nav-item" onclick="showPage('tracking', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                    </svg>
-                    Tracking
-                </button>
-
-                <button class="nav-item" onclick="showPage('addresses', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    My Addresses
-                </button>
-
-                <button class="nav-item" onclick="showPage('discount', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                    </svg>
-                    My Discount
-                </button>
-
-                <div class="nav-section-label support-label">Support</div>
-
-                <button class="nav-item" onclick="showPage('claim', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                    Report a Claim
-                </button>
-
-                <button class="nav-item" onclick="showPage('support', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                    Support
-                </button>
-
-                <button class="nav-item" onclick="showPage('settings', this)">
-                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    Settings
-                </button>
-            </nav>
-
-            <!-- CTA -->
-            <div class="sidebar-bottom">
-                <button class="btn-new-order" onclick="showPage('create', document.querySelector('[onclick*=create]'))">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
-                    </svg>
-                    Create New Order
-                </button>
-            </div>
-
-        </aside><!-- /sidebar -->
-
-
-        <!-- ════════════════════════════════
-         MAIN
-         ════════════════════════════════ -->
         <main class="main">
-
-            <!-- Topbar -->
-            <div class="topbar">
-                <a href="index.html" class="mobile-top-logo">
-                    <img src="photo/logo.png" alt="Proovia">
-                </a>
-                <div class="topbar-greeting">
-                    <h2 id="topbar-title">Welcome back 👋</h2>
-                    <p id="topbar-sub">Track, Manage, and Forecast Deliveries with Ease.</p>
-                </div>
-
-                <div class="topbar-right">
-
-                    <!-- Theme toggle -->
-                    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-                        <div class="theme-toggle-thumb" id="themeThumb">🌙</div>
-                    </div>
-
-                    <!-- Search -->
-                    <div class="topbar-search">
-
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-
-                            <circle cx="11" cy="11" r="8" />
-
-                            <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
-                        </svg>
-
-                        <input type="text" id="ordersSearch" placeholder="Search orders…">
-
-                    </div>
-
-                    <!-- Notifications -->
-                    <div class="icon-btn" title="Notifications" onclick="showToast('No new notifications')">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                        <div class="notif-dot"></div>
-                    </div>
-
-                </div>
-            </div><!-- /topbar -->
-
+            <div id="dashboardTopbarMount"></div>
 
             <div class="content">
-
-                <!-- ════════════════════════
-                 HOME PAGE
-                 ════════════════════════ -->
-                <section class="page active" id="page-home">
+<section class="page active" id="page-home">
 
                     <!-- Stat cards -->
                     <div class="stats-grid">
@@ -237,7 +62,7 @@
                         <div class="panel">
                             <div class="panel-header">
                                 <span class="panel-title">Recent Orders</span>
-                                <a class="panel-link" onclick="showPage('history', null)">View all →</a>
+                                <a class="panel-link" href="dashboard-history.html">View all →</a>
                             </div>
                             <div id="recentOrdersContainer"></div>
                         </div><!-- /recent orders -->
@@ -250,22 +75,22 @@
                                     <span class="panel-title">Quick Actions</span>
                                 </div>
                                 <div class="actions-grid">
-                                    <a class="action-card" onclick="showPage('create', null)">
+                                    <a class="action-card" href="dashboard-create.html">
                                         <div class="action-icon">➕</div>
                                         <span class="action-label">New Order</span>
                                         <span class="action-sub">Create delivery</span>
                                     </a>
-                                    <a class="action-card" onclick="showPage('tracking', null)">
+                                    <a class="action-card" href="dashboard-tracking.html">
                                         <div class="action-icon">🚚</div>
                                         <span class="action-label">Track Orders</span>
                                         <span class="action-sub" id="quickActiveCount">0 active</span>
                                     </a>
-                                    <a class="action-card" onclick="showPage('claim', null)">
+                                    <a class="action-card" href="dashboard-claim.html">
                                         <div class="action-icon">⚠️</div>
                                         <span class="action-label">File Claim</span>
                                         <span class="action-sub">Report issue</span>
                                     </a>
-                                    <a class="action-card" onclick="showPage('support', null)">
+                                    <a class="action-card" href="dashboard-support.html">
                                         <div class="action-icon">💬</div>
                                         <span class="action-label">Support</span>
                                         <span class="action-sub">Get help</span>
@@ -276,7 +101,7 @@
                             <div class="panel">
                                 <div class="panel-header">
                                     <span class="panel-title">Saved Addresses</span>
-                                    <a class="panel-link" onclick="showPage('addresses', null)">Manage →</a>
+                                    <a class="panel-link" href="dashboard-addresses.html">Manage →</a>
                                 </div>
                                 <div class="addr-list" id="homeAddressesContainer"></div>
                             </div><!-- /panel-stack -->
@@ -289,7 +114,7 @@
                             <div class="panel">
                                 <div class="panel-header">
                                     <span class="panel-title">My Discount &amp; Pricing</span>
-                                    <a class="panel-link" onclick="showPage('discount', null)">Details →</a>
+                                    <a class="panel-link" href="dashboard-discount.html">Details →</a>
                                 </div>
                                 <div class="discount-inner">
                                     <div class="discount-current">
@@ -319,7 +144,7 @@
                             <div class="panel">
                                 <div class="panel-header">
                                     <span class="panel-title">Contact Support</span>
-                                    <a class="panel-link" onclick="showPage('support', null)">Full page →</a>
+                                    <a class="panel-link" href="dashboard-support.html">Full page →</a>
                                 </div>
                                 <div class="support-inner">
                                     <div class="support-item">
@@ -347,434 +172,13 @@
 
                         </div><!-- /bottom-grid -->
                 </section><!-- /page-home -->
-
-
-                <!-- ════════════════════════
-                 CREATE ORDER PAGE
-                 ════════════════════════ -->
-                <section class="page" id="page-create">
-                    <div class="panel panel-narrow panel-animated">
-                        <div class="panel-header">
-                            <span class="panel-title">Create New Order</span>
-                        </div>
-                        <div class="form-section">
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">Collection Address *</label>
-                                    <input class="form-input" id="createPickupAddress" list="pickupAddressOptions"
-                                        placeholder="Collection address">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Delivery Address *</label>
-                                    <input class="form-input" id="createDropoffAddress" list="dropoffAddressOptions"
-                                        placeholder="Delivery address">
-                                </div>
-                            </div>
-                            <datalist id="pickupAddressOptions"></datalist>
-                            <datalist id="dropoffAddressOptions"></datalist>
-
-                            <div class="form-group form-group-mb">
-                                <label class="form-label">Items *</label>
-                                <div class="item-picker-row">
-                                    <select class="form-input" id="createItemSelect">
-                                        <option value="">Loading items...</option>
-                                    </select>
-                                    <button class="btn-add-item" id="addItemButton" type="button">+ Add</button>
-                                </div>
-                                <div class="selected-items empty" id="selectedItemsContainer">
-                                    Select one or more items for this order.
-                                </div>
-                            </div>
-
-                            <!-- Calendars -->
-                            <div class="create-order-grid">
-                                <div>
-                                    <label class="form-label">Collection Date</label>
-                                    <div class="calendar-mini" id="collectionCalendar"></div>
-                                </div>
-
-                                <div>
-                                    <label class="form-label">Delivery Date</label>
-                                    <div class="calendar-mini" id="deliveryCalendar"></div>
-                                </div>
-                            </div>
-
-                            <div class="form-row form-row-mt">
-                                <div class="form-group">
-                                    <label class="form-label">Collection Contact</label>
-                                    <input class="form-input" id="collectionContact" placeholder="Full Name">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Delivery Contact</label>
-                                    <input class="form-input" id="deliveryContact" placeholder="Full Name">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">Reference Label</label>
-                                    <input class="form-input" id="referenceLabel" placeholder="Optional reference">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Total Pieces</label>
-                                    <input class="form-input" id="createPiecesTotal" type="number" value="0" min="0" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group form-group-mb">
-                                <label class="form-label">Order Notes</label>
-                                <textarea class="form-textarea" id="createOrderNotes"
-                                    placeholder="Optional delivery notes"></textarea>
-                            </div>
-
-                            <div class="order-total-bar order-total-stack">
-                                <div class="order-total-line">
-                                    <span class="order-total-label">Subtotal</span>
-                                    <span class="order-total-mini" id="createSubtotal">£0.00</span>
-                                </div>
-                                <div class="order-total-line discount-line">
-                                    <span class="order-total-label" id="createDiscountLabel">Personal discount</span>
-                                    <span class="order-total-mini" id="createDiscountAmount">-£0.00</span>
-                                </div>
-                                <div class="order-total-line fee-line">
-                                    <span class="order-total-label">Service fee (1.5%)</span>
-                                    <span class="order-total-mini" id="createServiceFeeAmount">£0.00</span>
-                                </div>
-                                <div class="order-total-line total-line">
-                                    <span class="order-total-label">TOTAL</span>
-                                    <span class="order-total-value" id="createOrderTotal">£0.00</span>
-                                </div>
-                            </div>
-
-                            <div class="btn-row">
-                                <button class="btn-submit" id="submitCreateOrder" type="button">Create Order</button>
-                                <button class="btn-submit dark" id="clearCreateOrder" type="button">Clear</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </section><!-- /page-create -->
-
-
-                <!-- ════════════════════════
-                 ACTIVE ORDERS PAGE
-                 ════════════════════════ -->
-                <section class="page" id="page-active">
-                    <div class="panel panel-animated">
-                        <div class="panel-header">
-                            <span class="panel-title">Active Orders</span>
-                            <span class="panel-sub-note">0 in progress</span>
-                        </div>
-                        <div id="activeOrdersContainer"></div>
-                    </div>
-                </section><!-- /page-active -->
-
-
-                <!-- ════════════════════════
-                 HISTORY PAGE
-                 ════════════════════════ -->
-                <section class="page" id="page-history">
-                    <div class="panel panel-animated">
-                        <div class="panel-header">
-                            <span class="panel-title">Orders History</span>
-                        </div>
-
-                        <div class="inline-search-wrap">
-                            <div class="inline-search">
-                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <circle cx="11" cy="11" r="8" />
-                                    <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
-                                </svg>
-                                <input placeholder="Search orders…">
-                            </div>
-                        </div>
-                        <div id="historyOrdersContainer"></div>
-
-                    </div>
-                </section><!-- /page-history -->
-
-
-                <!-- ════════════════════════
-                 ADDRESSES PAGE
-                 ════════════════════════ -->
-                <!-- ORDER DETAILS PAGE -->
-                <section class="page" id="page-order-details">
-                    <div id="orderDetailsContainer"></div>
-                </section><!-- /page-order-details -->
-
-
-                <!-- TRACKING PAGE -->
-                <section class="page" id="page-tracking">
-                    <div class="tracking-dashboard-grid">
-                        <div class="panel panel-animated">
-                            <div class="panel-header tracking-panel-header">
-                                <div>
-                                    <span class="panel-title">Track an Order</span>
-                                    <p class="panel-sub-copy">Choose a recent order or enter a tracking number.</p>
-                                </div>
-                            </div>
-
-                            <div class="tracking-search-section">
-                                <div class="tracking-input-wrap">
-                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <circle cx="11" cy="11" r="8" />
-                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
-                                    </svg>
-                                    <input id="dashboardTrackingInput" type="text" autocomplete="off"
-                                        placeholder="Enter tracking number">
-                                </div>
-                                <button class="btn-submit tracking-submit" id="dashboardTrackingButton"
-                                    type="button">Track</button>
-                            </div>
-
-                            <div class="tracking-recent-section">
-                                <div class="tracking-section-title">Latest orders</div>
-                                <div id="dashboardTrackingRecent" class="tracking-chip-list"></div>
-                            </div>
-                        </div>
-
-                        <div id="dashboardTrackingResult" class="tracking-result-shell"></div>
-                    </div>
-                </section><!-- /page-tracking -->
-
-
-                <section class="page" id="page-addresses">
-                    <div class="addresses-grid">
-
-                        <!-- Collection -->
-                        <div class="panel">
-                            <div class="panel-header">
-                                <span class="panel-title">Collection Addresses</span>
-                            </div>
-
-                            <div class="addr-list" id="collectionAddressesContainer"></div>
-                        </div>
-
-                        <!-- Delivery -->
-                        <div class="panel">
-                            <div class="panel-header">
-                                <span class="panel-title">Delivery Addresses</span>
-                            </div>
-                            <div class="inline-search-wrap">
-                                <div class="inline-search sm">
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <circle cx="11" cy="11" r="8" />
-                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
-                                    </svg>
-                                    <input placeholder="Search…">
-                                </div>
-                            </div>
-                            <div class="addr-list" id="deliveryAddressesContainer"></div>
-                        </div>
-
-                    </div>
-                </section><!-- /page-addresses -->
-
-
-                <!-- ════════════════════════
-                 DISCOUNT PAGE
-                 ════════════════════════ -->
-                <section class="page" id="page-discount">
-                    <div class="panel panel-sm panel-animated">
-                        <div class="panel-header">
-                            <span class="panel-title">My Discount</span>
-                        </div>
-                        <div class="discount-inner">
-                            <div class="discount-current">
-                                <div>
-                                    <div class="discount-pct" id="discountPagePercent">0%</div>
-                                    <div class="discount-label">Current discount level</div>
-                                </div>
-                                <!-- Progress ring -->
-                                <svg width="80" height="80" viewBox="0 0 80 80">
-                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--bg3)" stroke-width="8" />
-                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--red)" stroke-width="8"
-                                        stroke-dasharray="0 201" stroke-linecap="round" class="ring-progress" />
-                                </svg>
-                            </div>
-
-                            <div class="price-list-title">Fixed Price Items:</div>
-                            <div class="price-list">
-                                <div class="price-row"><span class="price-name">Bird Cage</span><span
-                                        class="price-val">£45.00</span></div>
-                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
-                                        Large</span><span class="price-val">£70.00</span></div>
-                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
-                                        Medium</span><span class="price-val">£65.00</span></div>
-                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
-                                        Small</span><span class="price-val">£60.00</span></div>
-                                <div class="price-row"><span class="price-name">Picture Frame</span><span
-                                        class="price-val">£50.00</span></div>
-                                <div class="price-row"><span class="price-name">Wood Panel</span><span
-                                        class="price-val">£70.00</span></div>
-                            </div>
-                            <div class="discount-tip">
-                                * Place orders <strong>5 times a week or more</strong>? Contact us for exclusive pricing
-                                and personalised support. Start saving now!
-                            </div>
-                        </div>
-                    </div>
-                </section><!-- /page-discount -->
-
-
-                <!-- ════════════════════════
-                 CLAIM PAGE
-                 ════════════════════════ -->
-                <section class="page" id="page-claim">
-                    <div class="panel panel-md panel-animated">
-                        <div class="panel-header">
-                            <span class="panel-title">Report a Claim</span>
-                        </div>
-                        <div class="form-section">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">Order Number *</label>
-                                    <input class="form-input" placeholder="Search an order…">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Issue Type *</label>
-                                    <select class="form-input">
-                                        <option value="">Select a type</option>
-                                        <option>Damaged item</option>
-                                        <option>Missing item</option>
-                                        <option>Late delivery</option>
-                                        <option>Wrong address</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group form-group-mb">
-                                <label class="form-label">Description *</label>
-                                <textarea class="form-textarea"
-                                    placeholder="Please describe the issue with as much detail as possible…"></textarea>
-                            </div>
-
-                            <div class="upload-area">
-                                <div class="upload-icon">📎</div>
-                                <div class="upload-text">Click to upload supporting photos or documents</div>
-                            </div>
-
-                            <div class="checkbox-row">
-                                <input type="checkbox" id="confirm-check">
-                                <label for="confirm-check">I confirm that the information provided is accurate to the
-                                    best of my knowledge.</label>
-                            </div>
-
-                            <button class="btn-submit" type="button"
-                                onclick="showToast('✅ Claim submitted successfully!')">Submit Claim</button>
-                        </div>
-                    </div>
-                </section><!-- /page-claim -->
-
-
-                <!-- ════════════════════════
-                 SUPPORT PAGE
-                 ════════════════════════ -->
-                <section class="page" id="page-support">
-                    <div class="panel panel-xs panel-animated">
-                        <div class="panel-header">
-                            <span class="panel-title">Support</span>
-                        </div>
-                        <div class="support-inner">
-                            <div class="support-item">
-                                <div class="support-ico">📞</div>
-                                <div>
-                                    <div class="support-label">Phone</div>
-                                    <div class="support-val">+44 121 314 2780</div>
-                                </div>
-                            </div>
-                            <div class="support-item">
-                                <div class="support-ico">✉️</div>
-                                <div>
-                                    <div class="support-label">Email</div>
-                                    <div class="support-val">businesscustomers@proovia.co.uk</div>
-                                </div>
-                            </div>
-                            <div class="support-hours-title">
-                                <div class="support-label">Working Hours</div>
-                                <div class="hours-grid">
-                                    <div class="hours-item">
-                                        <div class="hours-day">Monday – Sunday</div>
-                                        <div class="hours-time">9:00 AM – 8:00 PM</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section><!-- /page-support -->
-
-
-                <!-- ════════════════════════
-                 SETTINGS PAGE
-                 ════════════════════════ -->
-                <section class="page" id="page-settings">
-                    <div class="panel panel-md panel-animated">
-                        <div class="panel-header">
-                            <span class="panel-title">Settings</span>
-                        </div>
-
-                        <!-- Profile -->
-                        <div class="settings-section">
-                            <div class="settings-title">Edit Profile</div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">Email</label>
-                                    <input class="form-input" id="settingsEmail" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Phone Number</label>
-                                    <input class="form-input" id="settingsPhone">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">First Name</label>
-                                    <input class="form-input" id="settingsUsername">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Last Name</label>
-                                    <input class="form-input" id="settingsLastName">
-                                </div>
-                            </div>
-                            <button class="btn-update" type="button" onclick="showToast('✅ Profile updated!')">Update
-                                Profile</button>
-                        </div>
-
-                        <!-- Security -->
-                        <div class="settings-section">
-                            <div class="settings-title">Security</div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">Current Password</label>
-                                    <input class="form-input" type="password" placeholder="••••••••">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">New Password</label>
-                                    <input class="form-input" type="password" placeholder="••••••••">
-                                </div>
-                            </div>
-                            <div class="form-group form-group-narrow">
-                                <label class="form-label">Confirm New Password</label>
-                                <input class="form-input" type="password" placeholder="••••••••">
-                            </div>
-                            <button class="btn-update" type="button" onclick="showToast('✅ Password updated!')">Update
-                                Password</button>
-                        </div>
-
-                    </div>
-                </section><!-- /page-settings -->
-
             </div><!-- /content -->
         </main><!-- /main -->
-
     </div><!-- /layout -->
 
-    <!-- Toast -->
     <div class="toast" id="toast"></div>
 
-    <!-- Scripts -->
+    <script type="module" src="js/dashboard-shell.js"></script>
     <script type="module" src="js/dashboard.js"></script>
     <script type="module" src="js/theme.js"></script>
 

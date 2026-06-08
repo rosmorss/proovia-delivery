@@ -44,6 +44,21 @@ const pageTitles = {
     settings: ["Settings", "Manage your account and security settings."]
 };
 
+const pageUrls = {
+    home: "dashboard.html",
+    create: "dashboard-create.html",
+    active: "dashboard-active.html",
+    history: "dashboard-history.html",
+    "order-details": "dashboard-order-details.html",
+    tracking: "dashboard-tracking.html",
+    checkout: "dashboard-checkout.html",
+    addresses: "dashboard-addresses.html",
+    discount: "dashboard-discount.html",
+    claim: "dashboard-claim.html",
+    support: "dashboard-support.html",
+    settings: "dashboard-settings.html"
+};
+
 const months = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -167,6 +182,7 @@ function renderAll() {
     renderTrackingPage();
     initChart();
     hydrateSettings();
+    hydrateDashboardRoute();
 }
 
 function renderDashboardStats() {
@@ -185,8 +201,7 @@ function renderDashboardStats() {
     });
     const pendingTotal = pendingOrders.reduce((sum, order) => sum + Number(order.totalPrice || 0), 0);
 
-    setText("topbar-title", `Welcome back, ${name}`);
-    setText("topbar-sub", "Track, Manage, and Forecast Deliveries with Ease.");
+    renderDashboardTitle(name);
     setText("sidebarUsername", name);
     setText("sidebarAvatar", name.substring(0, 2).toUpperCase());
     setText("sidebarUserRole", currentUser?.companyName || currentUser?.role || "Business Account");
@@ -586,7 +601,7 @@ function initTrackingControls() {
 
         const backButton = event.target.closest("[data-order-back]");
         if (backButton) {
-            showPage(lastOrderListPage || "active", null);
+            showPage(backButton.dataset.orderBack || lastOrderListPage || "active", null);
             return;
         }
 
@@ -596,10 +611,8 @@ function initTrackingControls() {
             const order = findOrderById(orderId);
 
             if (order) {
-                dashboardTrackingOrderId = order.id;
-                setValue("dashboardTrackingInput", order.trackingNumber || "");
-                renderTrackingPage();
-                showPage("tracking", null);
+                const params = new URLSearchParams({ orderId: String(order.id) });
+                showPage("tracking", null, params);
             }
         }
     });
@@ -743,7 +756,7 @@ function initCheckoutControls() {
             event.stopPropagation();
 
             const orderId = Number(payButton.dataset.orderId);
-            const returnPage = document.querySelector(".page.active")?.id?.replace("page-", "") || "active";
+            const returnPage = currentDashboardPage();
             openDashboardCheckout(orderId, returnPage === "checkout" ? checkoutReturnPage : returnPage);
             return;
         }
@@ -775,6 +788,16 @@ function openDashboardCheckout(orderId, returnPage = "active") {
 
     if (!order) {
         showToast("Order could not be found");
+        return;
+    }
+
+    const container = document.getElementById("dashboardCheckoutContainer");
+    if (currentDashboardPage() !== "checkout" || !container) {
+        const params = new URLSearchParams({
+            orderId: String(order.id),
+            return: returnPage || "active"
+        });
+        navigateDashboardPage("checkout", params);
         return;
     }
 
@@ -955,7 +978,14 @@ function openOrderDetails(orderId) {
     }
 
     const container = document.getElementById("orderDetailsContainer");
-    if (!container) return;
+    if (currentDashboardPage() !== "order-details" || !container) {
+        const params = new URLSearchParams({
+            orderId: String(order.id),
+            return: lastOrderListPage || "active"
+        });
+        navigateDashboardPage("order-details", params);
+        return;
+    }
 
     container.innerHTML = `
         <div class="order-detail-toolbar">
@@ -1384,7 +1414,31 @@ function mergeOrder(order) {
    NAVIGATION
 ========================= */
 
-function showPage(id, btn) {
+function currentDashboardPage() {
+    return document.body.dataset.dashboardPage
+        || document.querySelector(".page.active")?.id?.replace("page-", "")
+        || "home";
+}
+
+function dashboardPageUrl(id, params = null) {
+    const baseUrl = pageUrls[id] || pageUrls.home;
+    const query = params instanceof URLSearchParams
+        ? params.toString()
+        : new URLSearchParams(params || {}).toString();
+
+    return query ? `${baseUrl}?${query}` : baseUrl;
+}
+
+function navigateDashboardPage(id, params = null) {
+    window.location.href = dashboardPageUrl(id, params);
+}
+
+function showPage(id, btn, params = null) {
+    if (currentDashboardPage() !== id && pageUrls[id]) {
+        navigateDashboardPage(id, params);
+        return;
+    }
+
     document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
 
     const page = document.getElementById("page-" + id);
@@ -1396,7 +1450,7 @@ function showPage(id, btn) {
     if (btn) {
         btn.classList.add("active");
     } else {
-        const navButton = document.querySelector(`.nav-item[onclick*="'${id}'"]`);
+        const navButton = document.querySelector(`.nav-item[data-dashboard-nav="${id}"]`);
         navButton?.classList.add("active");
     }
 
@@ -1408,6 +1462,50 @@ function showPage(id, btn) {
 }
 
 window.showPage = showPage;
+
+function renderDashboardTitle(name = "User") {
+    const page = currentDashboardPage();
+
+    if (page === "home") {
+        setText("topbar-title", `Welcome back, ${name}`);
+        setText("topbar-sub", "Track, Manage, and Forecast Deliveries with Ease.");
+        return;
+    }
+
+    const [title, subtitle] = pageTitles[page] || pageTitles.home;
+    setText("topbar-title", title);
+    setText("topbar-sub", subtitle);
+}
+
+function hydrateDashboardRoute() {
+    const page = currentDashboardPage();
+    const params = new URLSearchParams(window.location.search);
+    const orderId = Number(params.get("orderId"));
+    const returnPage = params.get("return");
+
+    if (returnPage && pageUrls[returnPage]) {
+        lastOrderListPage = returnPage;
+        checkoutReturnPage = returnPage;
+    }
+
+    if (page === "tracking") {
+        const routeOrderId = Number(params.get("orderId"));
+        if (routeOrderId) {
+            dashboardTrackingOrderId = routeOrderId;
+            renderTrackingPage();
+        }
+    }
+
+    if (page === "order-details" && orderId) {
+        openOrderDetails(orderId);
+    }
+
+    if (page === "checkout" && orderId) {
+        openDashboardCheckout(orderId, returnPage || "active");
+    }
+
+    renderDashboardTitle(currentUser?.username || "User");
+}
 
 /* =========================
    CHART

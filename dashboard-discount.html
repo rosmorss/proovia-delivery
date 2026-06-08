@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia - Dashboard</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/dashboard.css">
+
+    <script src="js/theme-init.js"></script>
+</head>
+
+<body data-dashboard-page="discount">
+
+    <div class="layout">
+        <div id="dashboardSidebarMount"></div>
+
+        <main class="main">
+            <div id="dashboardTopbarMount"></div>
+
+            <div class="content">
+<section class="page active" id="page-discount">
+                    <div class="panel panel-sm panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">My Discount</span>
+                        </div>
+                        <div class="discount-inner">
+                            <div class="discount-current">
+                                <div>
+                                    <div class="discount-pct" id="discountPagePercent">0%</div>
+                                    <div class="discount-label">Current discount level</div>
+                                </div>
+                                <!-- Progress ring -->
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--bg3)" stroke-width="8" />
+                                    <circle cx="40" cy="40" r="32" fill="none" stroke="var(--red)" stroke-width="8"
+                                        stroke-dasharray="0 201" stroke-linecap="round" class="ring-progress" />
+                                </svg>
+                            </div>
+
+                            <div class="price-list-title">Fixed Price Items:</div>
+                            <div class="price-list">
+                                <div class="price-row"><span class="price-name">Bird Cage</span><span
+                                        class="price-val">£45.00</span></div>
+                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
+                                        Large</span><span class="price-val">£70.00</span></div>
+                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
+                                        Medium</span><span class="price-val">£65.00</span></div>
+                                <div class="price-row"><span class="price-name">No More Props / Tight Space Unit –
+                                        Small</span><span class="price-val">£60.00</span></div>
+                                <div class="price-row"><span class="price-name">Picture Frame</span><span
+                                        class="price-val">£50.00</span></div>
+                                <div class="price-row"><span class="price-name">Wood Panel</span><span
+                                        class="price-val">£70.00</span></div>
+                            </div>
+                            <div class="discount-tip">
+                                * Place orders <strong>5 times a week or more</strong>? Contact us for exclusive pricing
+                                and personalised support. Start saving now!
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /page-discount -->
+            </div><!-- /content -->
+        </main><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/dashboard-shell.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
+
+</body>
+
+</html>
