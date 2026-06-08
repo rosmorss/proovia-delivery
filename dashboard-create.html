@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia - Dashboard</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/dashboard.css">
+
+    <script src="js/theme-init.js"></script>
+</head>
+
+<body data-dashboard-page="create">
+
+    <div class="layout">
+        <div id="dashboardSidebarMount"></div>
+
+        <main class="main">
+            <div id="dashboardTopbarMount"></div>
+
+            <div class="content">
+<section class="page active" id="page-create">
+                    <div class="panel panel-narrow panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Create New Order</span>
+                        </div>
+                        <div class="form-section">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Collection Address *</label>
+                                    <input class="form-input" id="createPickupAddress" list="pickupAddressOptions"
+                                        placeholder="Collection address">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Delivery Address *</label>
+                                    <input class="form-input" id="createDropoffAddress" list="dropoffAddressOptions"
+                                        placeholder="Delivery address">
+                                </div>
+                            </div>
+                            <datalist id="pickupAddressOptions"></datalist>
+                            <datalist id="dropoffAddressOptions"></datalist>
+
+                            <div class="form-group form-group-mb">
+                                <label class="form-label">Items *</label>
+                                <div class="item-picker-row">
+                                    <select class="form-input" id="createItemSelect">
+                                        <option value="">Loading items...</option>
+                                    </select>
+                                    <button class="btn-add-item" id="addItemButton" type="button">+ Add</button>
+                                </div>
+                                <div class="selected-items empty" id="selectedItemsContainer">
+                                    Select one or more items for this order.
+                                </div>
+                            </div>
+
+                            <!-- Calendars -->
+                            <div class="create-order-grid">
+                                <div>
+                                    <label class="form-label">Collection Date</label>
+                                    <div class="calendar-mini" id="collectionCalendar"></div>
+                                </div>
+
+                                <div>
+                                    <label class="form-label">Delivery Date</label>
+                                    <div class="calendar-mini" id="deliveryCalendar"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-row form-row-mt">
+                                <div class="form-group">
+                                    <label class="form-label">Collection Contact</label>
+                                    <input class="form-input" id="collectionContact" placeholder="Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Delivery Contact</label>
+                                    <input class="form-input" id="deliveryContact" placeholder="Full Name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Reference Label</label>
+                                    <input class="form-input" id="referenceLabel" placeholder="Optional reference">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Total Pieces</label>
+                                    <input class="form-input" id="createPiecesTotal" type="number" value="0" min="0" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-mb">
+                                <label class="form-label">Order Notes</label>
+                                <textarea class="form-textarea" id="createOrderNotes"
+                                    placeholder="Optional delivery notes"></textarea>
+                            </div>
+
+                            <div class="order-total-bar order-total-stack">
+                                <div class="order-total-line">
+                                    <span class="order-total-label">Subtotal</span>
+                                    <span class="order-total-mini" id="createSubtotal">£0.00</span>
+                                </div>
+                                <div class="order-total-line discount-line">
+                                    <span class="order-total-label" id="createDiscountLabel">Personal discount</span>
+                                    <span class="order-total-mini" id="createDiscountAmount">-£0.00</span>
+                                </div>
+                                <div class="order-total-line fee-line">
+                                    <span class="order-total-label">Service fee (1.5%)</span>
+                                    <span class="order-total-mini" id="createServiceFeeAmount">£0.00</span>
+                                </div>
+                                <div class="order-total-line total-line">
+                                    <span class="order-total-label">TOTAL</span>
+                                    <span class="order-total-value" id="createOrderTotal">£0.00</span>
+                                </div>
+                            </div>
+
+                            <div class="btn-row">
+                                <button class="btn-submit" id="submitCreateOrder" type="button">Create Order</button>
+                                <button class="btn-submit dark" id="clearCreateOrder" type="button">Clear</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </section><!-- /page-create -->
+            </div><!-- /content -->
+        </main><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/dashboard-shell.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
+
+</body>
+
+</html>
