@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - Proovia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <script>
+        const _savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", _savedTheme);
+    </script>
+    <link rel="stylesheet" href="style/theme.css">
+    <link rel="stylesheet" href="style/tracking.css">
+</head>
+
+<body>
+    <div id="mobile-overlay"></div>
+
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <a href="log.html" class="mobile-menu-account">My Account</a>
+    </div>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="photo/logo.png" alt="Proovia Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#tracking">Tracking</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <button id="hamburger" class="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                <div class="theme-toggle-thumb" id="themeThumb">sun</div>
+            </div>
+            <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
+        </div>
+    </nav>
+
+    <main class="tracking-page">
+        <section class="tracking-shell">
+            <div class="tracking-hero">
+                <p class="tracking-eyebrow">Delivery tracking</p>
+                <h1>Track your order</h1>
+                <p class="tracking-lead">
+                    Enter your tracking number to see the current status, completed steps, route details and estimated arrival.
+                </p>
+
+                <form id="trackingForm" class="tracking-search">
+                    <input id="trackingInput" type="text" autocomplete="off" placeholder="e.g. 246310002304801">
+                    <button type="submit">Track</button>
+                </form>
+            </div>
+
+            <section id="trackingEmpty" class="tracking-state">
+                <h2>Enter a tracking number</h2>
+                <p>Your delivery timeline and ETA will appear here.</p>
+            </section>
+
+            <section id="trackingLoading" class="tracking-state is-hidden">
+                <div class="tracking-loader" aria-hidden="true"></div>
+                <h2>Loading tracking details</h2>
+                <p>We are checking the latest status for this order.</p>
+            </section>
+
+            <section id="trackingNotFound" class="tracking-state is-hidden">
+                <h2>Tracking number not found</h2>
+                <p id="trackingNotFoundText">Check the number and try again.</p>
+            </section>
+
+            <section id="trackingContent" class="tracking-content is-hidden">
+                <article class="tracking-card tracking-overview">
+                    <div>
+                        <p class="tracking-eyebrow">Current status</p>
+                        <h2 id="trackingStatusText">Pending</h2>
+                        <p id="trackingCurrentLocation" class="overview-location">Loading current location...</p>
+                    </div>
+                    <span id="trackingStatusBadge" class="status-pill">Pending</span>
+
+                    <div class="overview-meta">
+                        <div>
+                            <span>Tracking number</span>
+                            <strong id="trackingNumberDisplay">Pending</strong>
+                        </div>
+                        <div>
+                            <span>Estimated arrival</span>
+                            <strong id="trackingEta">Pending</strong>
+                        </div>
+                        <div>
+                            <span>Last update</span>
+                            <strong id="trackingUpdated">Pending</strong>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tracking-card timeline-card">
+                    <div class="card-heading">
+                        <p class="tracking-eyebrow">Progress</p>
+                        <h2>Delivery timeline</h2>
+                    </div>
+                    <ol id="trackingTimeline" class="tracking-timeline"></ol>
+                </article>
+
+                <aside class="tracking-card details-card">
+                    <div class="card-heading">
+                        <p class="tracking-eyebrow">Route</p>
+                        <h2>Delivery details</h2>
+                    </div>
+                    <dl class="detail-list">
+                        <div>
+                            <dt>Collection</dt>
+                            <dd id="trackingPickup">Pending</dd>
+                        </div>
+                        <div>
+                            <dt>Delivery</dt>
+                            <dd id="trackingDropoff">Pending</dd>
+                        </div>
+                        <div>
+                            <dt>Collection date</dt>
+                            <dd id="trackingPickupDate">Pending</dd>
+                        </div>
+                        <div>
+                            <dt>Delivery date</dt>
+                            <dd id="trackingDeliveryDate">Pending</dd>
+                        </div>
+                        <div>
+                            <dt>Service</dt>
+                            <dd id="trackingPlan">Pending</dd>
+                        </div>
+                        <div>
+                            <dt>Payment</dt>
+                            <dd id="trackingPayment">Pending</dd>
+                        </div>
+                    </dl>
+                </aside>
+
+                <article class="tracking-card items-card">
+                    <div class="card-heading">
+                        <p class="tracking-eyebrow">Shipment</p>
+                        <h2>Items</h2>
+                    </div>
+                    <div id="trackingItems" class="tracking-items"></div>
+                </article>
+
+                <article class="tracking-card service-card">
+                    <div class="card-heading">
+                        <p class="tracking-eyebrow">Access notes</p>
+                        <h2>Service details</h2>
+                    </div>
+                    <dl id="trackingServiceDetails" class="detail-list compact"></dl>
+                </article>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="photo/logo.png" alt="Proovia Logo" class="hero-logo">
+                </a>
+
+                <p>
+                    Reliable nationwide delivery and moving services across England.
+                    Founded in Birmingham in 2014.
+                </p>
+
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank"
+                        class="social-btn">in</a>
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank"
+                        class="social-btn">f</a>
+                    <a href="https://www.instagram.com/proovia.couriers/" target="_blank" class="social-btn">ig</a>
+                    <a href="https://maps.app.goo.gl/aRXeHiQcLu9KFJcKA" target="_blank" class="social-btn">G</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#coverage">Coverage</a></li>
+                    <li><a href="index.html#how">How It Works</a></li>
+                    <li><a href="index.html#reviews">Reviews</a></li>
+                    <li><a href="infod.html">Drivers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Support</h5>
+                <ul>
+                    <li><a href="log.html" target="_blank">My Account</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html" target="_blank">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="tel:+441213149848">(+44) 121 314 9848</a></li>
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+                    <li>
+                        <a href="https://maps.app.goo.gl/6gp5m9FH1mfmsye67" target="_blank">
+                            Office, Fort Dunlop, 110 Fort Pkwy, Birmingham B24 9FE, United Kingdom
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Proovia Couriers LTD. All rights reserved.</p>
+            <p>Built for fast, secure and reliable delivery across England.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/tracking.js"></script>
+</body>
+
+</html>

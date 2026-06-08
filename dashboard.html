@@ -76,6 +76,14 @@
                     Orders History
                 </button>
 
+                <button class="nav-item" onclick="showPage('tracking', this)">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    Tracking
+                </button>
+
                 <button class="nav-item" onclick="showPage('addresses', this)">
                     <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -197,14 +205,15 @@
                         <div class="stat-card red">
                             <div class="stat-label">Total Orders</div>
                             <div class="stat-value" id="totalOrdersCount">0</div>
-                            <div class="stat-delta up">↑ 12% this month</div>
+                            <div class="stat-delta up" id="totalOrdersDelta">Loading...</div>
                             <div class="stat-icon">📦</div>
                             <div class="mini-chart" id="chart1"></div>
                         </div>
+
                         <div class="stat-card green">
                             <div class="stat-label">Active Orders</div>
                             <div class="stat-value" id="activeOrdersCount">0</div>
-                            <div class="stat-delta up">↑ In transit</div>
+                            <div class="stat-delta up" id="activeOrdersDelta">↑ In transit</div>
                             <div class="stat-icon">🚚</div>
                         </div>
                         <div class="stat-card orange">
@@ -216,7 +225,7 @@
                         <div class="stat-card gold">
                             <div class="stat-label">My Discount</div>
                             <div class="stat-value" id="discountPercent">0%</div>
-                            <div class="stat-delta gold-clr">Order 5×/wk to unlock</div>
+                            <div class="stat-delta gold-clr" id="discountPagePercent">Order 5×/wk to unlock</div>
                             <div class="stat-icon">⭐</div>
                         </div>
                     </div>
@@ -246,7 +255,7 @@
                                         <span class="action-label">New Order</span>
                                         <span class="action-sub">Create delivery</span>
                                     </a>
-                                    <a class="action-card" onclick="showPage('active', null)">
+                                    <a class="action-card" onclick="showPage('tracking', null)">
                                         <div class="action-icon">🚚</div>
                                         <span class="action-label">Track Orders</span>
                                         <span class="action-sub" id="quickActiveCount">0 active</span>
@@ -353,159 +362,94 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">Collection Address *</label>
-                                    <input class="form-input" id="createPickupAddress" placeholder="Collection address">
+                                    <input class="form-input" id="createPickupAddress" list="pickupAddressOptions"
+                                        placeholder="Collection address">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Delivery Address *</label>
-                                    <input class="form-input" id="createDropoffAddress" placeholder="Delivery address">
+                                    <input class="form-input" id="createDropoffAddress" list="dropoffAddressOptions"
+                                        placeholder="Delivery address">
                                 </div>
                             </div>
+                            <datalist id="pickupAddressOptions"></datalist>
+                            <datalist id="dropoffAddressOptions"></datalist>
 
                             <div class="form-group form-group-mb">
-                                <label class="form-label">Item *</label>
-                                <input class="form-input" placeholder="Search items… (e.g. Sofa Chair)">
+                                <label class="form-label">Items *</label>
+                                <div class="item-picker-row">
+                                    <select class="form-input" id="createItemSelect">
+                                        <option value="">Loading items...</option>
+                                    </select>
+                                    <button class="btn-add-item" id="addItemButton" type="button">+ Add</button>
+                                </div>
+                                <div class="selected-items empty" id="selectedItemsContainer">
+                                    Select one or more items for this order.
+                                </div>
                             </div>
 
                             <!-- Calendars -->
                             <div class="create-order-grid">
                                 <div>
                                     <label class="form-label">Collection Date</label>
-                                    <div class="calendar-mini">
-                                        <div class="cal-header">
-                                            <span class="cal-month">May 2026</span>
-                                            <button class="cal-nav" type="button">›</button>
-                                        </div>
-                                        <div class="cal-grid">
-                                            <div class="cal-day-label">Mo</div>
-                                            <div class="cal-day-label">Tu</div>
-                                            <div class="cal-day-label">We</div>
-                                            <div class="cal-day-label">Th</div>
-                                            <div class="cal-day-label">Fr</div>
-                                            <div class="cal-day-label">Sa</div>
-                                            <div class="cal-day-label">Su</div>
-                                            <div class="cal-day grey">27</div>
-                                            <div class="cal-day grey">28</div>
-                                            <div class="cal-day grey">29</div>
-                                            <div class="cal-day grey">30</div>
-                                            <div class="cal-day">1</div>
-                                            <div class="cal-day">2</div>
-                                            <div class="cal-day">3</div>
-                                            <div class="cal-day">4</div>
-                                            <div class="cal-day">5</div>
-                                            <div class="cal-day today">7</div>
-                                            <div class="cal-day">8</div>
-                                            <div class="cal-day">9</div>
-                                            <div class="cal-day">10</div>
-                                            <div class="cal-day">11</div>
-                                            <div class="cal-day">12</div>
-                                            <div class="cal-day">13</div>
-                                            <div class="cal-day">14</div>
-                                            <div class="cal-day">15</div>
-                                            <div class="cal-day">16</div>
-                                            <div class="cal-day">17</div>
-                                            <div class="cal-day">18</div>
-                                            <div class="cal-day">19</div>
-                                            <div class="cal-day">20</div>
-                                            <div class="cal-day">21</div>
-                                            <div class="cal-day">22</div>
-                                            <div class="cal-day">23</div>
-                                            <div class="cal-day">24</div>
-                                            <div class="cal-day">25</div>
-                                            <div class="cal-day">26</div>
-                                            <div class="cal-day">27</div>
-                                            <div class="cal-day">28</div>
-                                            <div class="cal-day">29</div>
-                                            <div class="cal-day">30</div>
-                                            <div class="cal-day">31</div>
-                                        </div>
-                                    </div>
+                                    <div class="calendar-mini" id="collectionCalendar"></div>
                                 </div>
+
                                 <div>
                                     <label class="form-label">Delivery Date</label>
-                                    <div class="calendar-mini">
-                                        <div class="cal-header">
-                                            <span class="cal-month">May 2026</span>
-                                            <button class="cal-nav" type="button">›</button>
-                                        </div>
-                                        <div class="cal-grid">
-                                            <div class="cal-day-label">Mo</div>
-                                            <div class="cal-day-label">Tu</div>
-                                            <div class="cal-day-label">We</div>
-                                            <div class="cal-day-label">Th</div>
-                                            <div class="cal-day-label">Fr</div>
-                                            <div class="cal-day-label">Sa</div>
-                                            <div class="cal-day-label">Su</div>
-                                            <div class="cal-day grey">27</div>
-                                            <div class="cal-day grey">28</div>
-                                            <div class="cal-day grey">29</div>
-                                            <div class="cal-day grey">30</div>
-                                            <div class="cal-day">1</div>
-                                            <div class="cal-day">2</div>
-                                            <div class="cal-day">3</div>
-                                            <div class="cal-day">4</div>
-                                            <div class="cal-day">5</div>
-                                            <div class="cal-day">7</div>
-                                            <div class="cal-day next-day">8</div>
-                                            <div class="cal-day">9</div>
-                                            <div class="cal-day">10</div>
-                                            <div class="cal-day">11</div>
-                                            <div class="cal-day">12</div>
-                                            <div class="cal-day">13</div>
-                                            <div class="cal-day">14</div>
-                                            <div class="cal-day">15</div>
-                                            <div class="cal-day">16</div>
-                                            <div class="cal-day">17</div>
-                                            <div class="cal-day">18</div>
-                                            <div class="cal-day">19</div>
-                                            <div class="cal-day">20</div>
-                                            <div class="cal-day">21</div>
-                                            <div class="cal-day">22</div>
-                                            <div class="cal-day">23</div>
-                                            <div class="cal-day">24</div>
-                                            <div class="cal-day">25</div>
-                                            <div class="cal-day">26</div>
-                                            <div class="cal-day">27</div>
-                                            <div class="cal-day">28</div>
-                                            <div class="cal-day">29</div>
-                                            <div class="cal-day">30</div>
-                                            <div class="cal-day">31</div>
-                                        </div>
-                                    </div>
+                                    <div class="calendar-mini" id="deliveryCalendar"></div>
                                 </div>
                             </div>
 
                             <div class="form-row form-row-mt">
                                 <div class="form-group">
                                     <label class="form-label">Collection Contact</label>
-                                    <input class="form-input" placeholder="Full Name">
+                                    <input class="form-input" id="collectionContact" placeholder="Full Name">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Delivery Contact</label>
-                                    <input class="form-input" placeholder="Full Name">
+                                    <input class="form-input" id="deliveryContact" placeholder="Full Name">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">Reference Label</label>
-                                    <input class="form-input" placeholder="Optional reference">
+                                    <input class="form-input" id="referenceLabel" placeholder="Optional reference">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Number of Pieces</label>
-                                    <input class="form-input" type="number" placeholder="1" min="1">
+                                    <label class="form-label">Total Pieces</label>
+                                    <input class="form-input" id="createPiecesTotal" type="number" value="0" min="0" disabled>
                                 </div>
                             </div>
 
-                            <div class="order-total-bar">
-                                <span class="order-total-label">TOTAL</span>
-                                <span class="order-total-value">£0.00</span>
+                            <div class="form-group form-group-mb">
+                                <label class="form-label">Order Notes</label>
+                                <textarea class="form-textarea" id="createOrderNotes"
+                                    placeholder="Optional delivery notes"></textarea>
+                            </div>
+
+                            <div class="order-total-bar order-total-stack">
+                                <div class="order-total-line">
+                                    <span class="order-total-label">Subtotal</span>
+                                    <span class="order-total-mini" id="createSubtotal">£0.00</span>
+                                </div>
+                                <div class="order-total-line discount-line">
+                                    <span class="order-total-label" id="createDiscountLabel">Personal discount</span>
+                                    <span class="order-total-mini" id="createDiscountAmount">-£0.00</span>
+                                </div>
+                                <div class="order-total-line fee-line">
+                                    <span class="order-total-label">Service fee (1.5%)</span>
+                                    <span class="order-total-mini" id="createServiceFeeAmount">£0.00</span>
+                                </div>
+                                <div class="order-total-line total-line">
+                                    <span class="order-total-label">TOTAL</span>
+                                    <span class="order-total-value" id="createOrderTotal">£0.00</span>
+                                </div>
                             </div>
 
                             <div class="btn-row">
-                                <button class="btn-submit" type="button"
-                                    onclick="showToast('✅ Order added to cart!')">Add to Cart</button>
-                                <button class="btn-submit dark" type="button"
-                                    onclick="showToast('✅ Order submitted for checkout!')">Checkout</button>
+                                <button class="btn-submit" id="submitCreateOrder" type="button">Create Order</button>
+                                <button class="btn-submit dark" id="clearCreateOrder" type="button">Clear</button>
                             </div>
 
                         </div>
@@ -554,6 +498,47 @@
                 <!-- ════════════════════════
                  ADDRESSES PAGE
                  ════════════════════════ -->
+                <!-- ORDER DETAILS PAGE -->
+                <section class="page" id="page-order-details">
+                    <div id="orderDetailsContainer"></div>
+                </section><!-- /page-order-details -->
+
+
+                <!-- TRACKING PAGE -->
+                <section class="page" id="page-tracking">
+                    <div class="tracking-dashboard-grid">
+                        <div class="panel panel-animated">
+                            <div class="panel-header tracking-panel-header">
+                                <div>
+                                    <span class="panel-title">Track an Order</span>
+                                    <p class="panel-sub-copy">Choose a recent order or enter a tracking number.</p>
+                                </div>
+                            </div>
+
+                            <div class="tracking-search-section">
+                                <div class="tracking-input-wrap">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
+                                    </svg>
+                                    <input id="dashboardTrackingInput" type="text" autocomplete="off"
+                                        placeholder="Enter tracking number">
+                                </div>
+                                <button class="btn-submit tracking-submit" id="dashboardTrackingButton"
+                                    type="button">Track</button>
+                            </div>
+
+                            <div class="tracking-recent-section">
+                                <div class="tracking-section-title">Latest orders</div>
+                                <div id="dashboardTrackingRecent" class="tracking-chip-list"></div>
+                            </div>
+                        </div>
+
+                        <div id="dashboardTrackingResult" class="tracking-result-shell"></div>
+                    </div>
+                </section><!-- /page-tracking -->
+
+
                 <section class="page" id="page-addresses">
                     <div class="addresses-grid">
 

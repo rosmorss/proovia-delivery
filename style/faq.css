@@ -186,3 +186,52 @@ body.page-loaded nav {
     border-left-color: var(--red);
     padding-left: 22px;
 }
+
+@media (max-width: 700px) {
+    .faq-section {
+        margin: 96px auto 56px;
+        padding: 0 14px;
+    }
+
+    .faq-header {
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .faq-header h2 {
+        font-size: 34px;
+        line-height: 1.05;
+        letter-spacing: 0;
+    }
+
+    .faq-header p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    .faq-question {
+        min-height: 58px;
+        gap: 14px;
+        padding: 16px;
+        font-size: 15px;
+        line-height: 1.35;
+    }
+
+    .faq-question span {
+        flex: 0 0 auto;
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    .faq-answer {
+        padding: 0 16px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 420px;
+        padding: 0 16px 18px;
+    }
+}

@@ -1,18 +1,55 @@
 import { bring } from "./fetch.js";
+import {
+    calculateItemsSubtotal,
+    calculatePlanQuote,
+    formatMoney,
+    loadCartItems
+} from "./customerPricing.js";
 
 const plansWrapper = document.getElementById("plansWrapper");
+let cartItems = [];
+let itemsSubtotal = 0;
+let plansById = new Map();
 
 window.addEventListener("DOMContentLoaded", async () => {
     await loadPlans();
 });
 
+
+window.selectPlan = function (planId) {
+    const plan = plansById.get(Number(planId));
+    const quote = calculatePlanQuote(itemsSubtotal, plan);
+
+    localStorage.setItem("selectedPlanId", planId);
+    localStorage.setItem("selectedPlanQuote", JSON.stringify({
+        planId: Number(planId),
+        itemsSubtotal: quote.itemsSubtotal,
+        planPercent: quote.planPercent,
+        planFee: quote.planFee,
+        total: quote.total
+    }));
+    localStorage.setItem("totalPrice", quote.total);
+
+    window.location.href = "service.html";
+}
+
+
 async function loadPlans() {
     try {
-        const plans = await bring("/plans");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const [plans, loadedCartItems] = await Promise.all([
+            bring("/plans"),
+            loadCartItems(bring, cart)
+        ]);
 
         plansWrapper.innerHTML = "";
+        cartItems = loadedCartItems;
+        itemsSubtotal = calculateItemsSubtotal(cartItems);
+        plansById = new Map(plans.map(plan => [Number(plan.id), plan]));
 
         plans.forEach((plan) => {
+            const quote = calculatePlanQuote(itemsSubtotal, plan);
+
             plansWrapper.innerHTML += `
                 <div class="plan-card ${plan.isPopular ? "featured" : ""} ${plan.styleClass || ""}">
                     
@@ -21,7 +58,13 @@ async function loadPlans() {
                     <h3>${plan.name}</h3>
 
                     <div class="plan-price">
-                        £${Number(plan.price).toFixed(2)}
+                        ${formatMoney(quote.total)}
+                        <span class="plan-percent">Items + ${quote.planPercent.toFixed(2).replace(/\.00$/, "")}%</span>
+                    </div>
+
+                    <div class="plan-cost-breakdown">
+                        <div><span>Items</span><strong>${formatMoney(quote.itemsSubtotal)}</strong></div>
+                        <div><span>Plan increase</span><strong>${formatMoney(quote.planFee)}</strong></div>
                     </div>
 
                     <div class="plan-date">
@@ -89,8 +132,8 @@ async function loadPlans() {
                         </li>
                     </ul>
 
-                    <button onclick="selectPlan(${plan.id})">
-                        Select Plan
+                    <button onclick="${itemsSubtotal > 0 ? `selectPlan(${plan.id})` : "window.location.href='booking.html'"}">
+                        ${itemsSubtotal > 0 ? "Select Plan" : "Select items first"}
                     </button>
 
                     <button class="more-details-btn" type="button">
@@ -106,11 +149,6 @@ async function loadPlans() {
     } catch (error) {
         console.error("Plans loading failed:", error);
     }
-}
-
-function selectPlan(planId) {
-    localStorage.setItem("selectedPlanId", planId);
-    window.location.href = "service.html";
 }
 
 
