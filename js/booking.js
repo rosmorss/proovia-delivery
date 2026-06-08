@@ -1,4 +1,5 @@
 import { bring } from "./fetch.js";
+// import { OrderSessionManager, initOrderSession } from "./orderSessionManager.js";
 
 const bookingItems = document.getElementById("bookingItems");
 const categoriesContainer = document.getElementById("categoriesList");
@@ -11,6 +12,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const ITEMS_PER_PAGE = 5;
 
 window.addEventListener("DOMContentLoaded", async () => {
+    // initOrderSession();
     await loadCategories();
     loadStateFromURL();
     setupReveal();
@@ -250,15 +252,12 @@ window.addToCart = function (id) {
     } else {
         cart.push({
             id: item.id,
-            name: item.name,
-            image: item.image,
-            basePrice: item.basePrice,
-            categoryId: item.categoryId,
             quantity: 1
         });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
+    // OrderSessionManager.setCart(cart);
     console.log("Cart:", cart);
 };
 
