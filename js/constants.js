@@ -1,1 +1,3 @@
-export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'localhost:3000';
+const envBackendUrl = import.meta.env?.VITE_BACKEND_URL;
+
+export const BACKEND_URL = (envBackendUrl || "http://localhost:3000").replace(/\/$/, "");
