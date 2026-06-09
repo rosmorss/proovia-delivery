@@ -1,25 +1,39 @@
 import { bring } from "./fetch.js";
-// import { OrderSessionManager, initOrderSession } from "./orderSessionManager.js";
 
 const bookingItems = document.getElementById("bookingItems");
 const categoriesContainer = document.getElementById("categoriesList");
 const searchInput = document.getElementById("searchItems");
+const paginationContainer = document.getElementById("pagination");
+const cartSummary = document.getElementById("bookingCartSummary");
+const toastStack = document.getElementById("bookingToastStack");
 
 let categories = [];
 let currentCategory = "all";
 let currentPage = 1;
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = readCart();
+
 const ITEMS_PER_PAGE = 5;
+const TOAST_DURATION = 4500;
+const toastTimers = new Map();
 
 window.addEventListener("DOMContentLoaded", async () => {
-    // initOrderSession();
     await loadCategories();
     loadStateFromURL();
+    renderCartSummary();
     setupReveal();
 });
 
 window.addEventListener("popstate", () => {
     loadStateFromURL();
+});
+
+bookingItems?.addEventListener("click", handleCartAction);
+cartSummary?.addEventListener("click", handleCartAction);
+toastStack?.addEventListener("click", handleCartAction);
+
+searchInput?.addEventListener("input", () => {
+    currentPage = 1;
+    renderItems();
 });
 
 async function loadCategories() {
@@ -38,7 +52,7 @@ function renderCategories() {
     categories.forEach(category => {
         categoriesContainer.innerHTML += `
             <button class="category-card" data-category="${category.id}">
-                ${category.name}
+                ${escapeHtml(category.name)}
             </button>
         `;
     });
@@ -49,14 +63,14 @@ function getAllItems() {
         return categories.flatMap(cat => cat.items || []);
     }
 
-    const category = categories.find(cat => cat.id == currentCategory);
+    const category = categories.find(cat => Number(cat.id) === Number(currentCategory));
     return category?.items || [];
 }
 
 function getFilteredItems() {
     let items = getAllItems();
-
     const searchValue = searchInput.value.toLowerCase().trim();
+
     if (searchValue !== "") {
         items = items.filter(item =>
             item.name.toLowerCase().includes(searchValue)
@@ -70,43 +84,40 @@ function renderItems() {
     const filteredItems = getFilteredItems();
     const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
 
-    // Ensure currentPage is valid
     if (currentPage > totalPages && totalPages > 0) {
         currentPage = totalPages;
     }
 
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const itemsToDisplay = filteredItems.slice(startIndex, endIndex);
+    const itemsToDisplay = filteredItems.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
     bookingItems.innerHTML = "";
 
     if (!itemsToDisplay.length) {
-        bookingItems.innerHTML = `<p>No items found.</p>`;
+        bookingItems.innerHTML = `<p class="booking-empty-state">No items found.</p>`;
         renderPagination(0);
         return;
     }
 
-    itemsToDisplay.forEach(item => {
-        const categoryName = categories.find(cat => cat.id == item.categoryId)?.name || "No category";
-        bookingItems.innerHTML += `
+    bookingItems.innerHTML = itemsToDisplay.map(item => {
+        const categoryName = getCategoryName(item.categoryId);
+
+        return `
             <div class="booking-item">
                 <div class="booking-item-left">
-                    <img src="${item.image || "photo/no-image.png"}" alt="${item.name}">
+                    <img src="${escapeAttribute(item.image || "photo/no-image.png")}" alt="${escapeAttribute(item.name)}">
 
                     <div>
-                        <h4>${item.name}</h4>
-                        <span>${categoryName}</span>
-                        <p>£${Number(item.basePrice).toFixed(2)}</p>
+                        <h4>${escapeHtml(item.name)}</h4>
+                        <span>${escapeHtml(categoryName)}</span>
+                        <p>${formatMoney(item.basePrice)}</p>
                     </div>
                 </div>
 
-                <button onclick="addToCart(${item.id})">
-                    Add
-                </button>
+                ${renderItemAction(item.id)}
             </div>
         `;
-    });
+    }).join("");
 
     setTimeout(() => {
         document.querySelectorAll(".booking-item").forEach((item, index) => {
@@ -119,60 +130,128 @@ function renderItems() {
     renderPagination(totalPages);
 }
 
-function renderPagination(totalPages) {
-    let paginationContainer = document.getElementById("pagination");
-    if (!paginationContainer) {
-        paginationContainer = document.createElement("div");
-        paginationContainer.id = "pagination";
-        paginationContainer.className = "pagination";
-        bookingItems.parentElement.appendChild(paginationContainer);
+function renderItemAction(itemId) {
+    const quantity = getCartQuantity(itemId);
+
+    if (quantity > 0) {
+        return renderQuantityControl(itemId, quantity, "booking-item-qty");
     }
+
+    return `
+        <button class="booking-add-btn" type="button" data-cart-action="increment" data-item-id="${itemId}">
+            Add
+        </button>
+    `;
+}
+
+function renderQuantityControl(itemId, quantity, extraClass = "") {
+    return `
+        <div class="booking-qty-control ${extraClass}" role="group" aria-label="Item quantity">
+            <button type="button" data-cart-action="decrement" data-item-id="${itemId}" aria-label="Remove one item">-</button>
+            <span>${quantity}</span>
+            <button type="button" data-cart-action="increment" data-item-id="${itemId}" aria-label="Add one item">+</button>
+        </div>
+    `;
+}
+
+function renderPagination(totalPages) {
+    if (!paginationContainer) return;
 
     paginationContainer.innerHTML = "";
 
     if (totalPages <= 1) return;
 
-    const prevButton = document.createElement("button");
-    prevButton.textContent = "Previous";
-    prevButton.disabled = currentPage === 1;
-    prevButton.addEventListener("click", () => {
-        if (currentPage > 1) {
-            goToPage(currentPage - 1);
+    paginationContainer.appendChild(createPageButton("‹", currentPage - 1, {
+        disabled: currentPage === 1,
+        label: "Previous page",
+        className: "pagination-arrow"
+    }));
+
+    getVisiblePages(totalPages).forEach(page => {
+        if (page === "ellipsis") {
+            const dots = document.createElement("span");
+            dots.className = "pagination-ellipsis";
+            dots.textContent = "...";
+            paginationContainer.appendChild(dots);
+            return;
+        }
+
+        paginationContainer.appendChild(createPageButton(String(page), page, {
+            active: page === currentPage,
+            className: "page-number",
+            label: `Page ${page}`
+        }));
+    });
+
+    paginationContainer.appendChild(createPageButton("›", currentPage + 1, {
+        disabled: currentPage === totalPages,
+        label: "Next page",
+        className: "pagination-arrow"
+    }));
+}
+
+function createPageButton(text, page, options = {}) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = text;
+
+    if (options.className) button.classList.add(options.className);
+    if (options.active) button.classList.add("active");
+    if (options.label) button.setAttribute("aria-label", options.label);
+    button.disabled = Boolean(options.disabled);
+
+    button.addEventListener("click", () => {
+        if (!button.disabled) {
+            goToPage(page);
         }
     });
 
-    paginationContainer.appendChild(prevButton);
+    return button;
+}
 
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement("button");
-        pageButton.textContent = i;
-        pageButton.classList.add("page-number");
-        if (i === currentPage) {
-            pageButton.classList.add("active");
-        }
-        pageButton.addEventListener("click", () => {
-            goToPage(i);
-        });
-        paginationContainer.appendChild(pageButton);
+function getVisiblePages(totalPages) {
+    if (totalPages <= 7) {
+        return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
 
-    const nextButton = document.createElement("button");
-    nextButton.textContent = "Next";
-    nextButton.disabled = currentPage === totalPages;
-    nextButton.addEventListener("click", () => {
-        if (currentPage < totalPages) {
-            goToPage(currentPage + 1);
+    const pages = new Set([1, totalPages]);
+    const range = currentPage <= 3 || currentPage >= totalPages - 2 ? 2 : 1;
+
+    for (let page = currentPage - range; page <= currentPage + range; page += 1) {
+        if (page > 1 && page < totalPages) {
+            pages.add(page);
         }
+    }
+
+    if (currentPage <= 3) {
+        [2, 3, 4].forEach(page => pages.add(page));
+    }
+
+    if (currentPage >= totalPages - 2) {
+        [totalPages - 3, totalPages - 2, totalPages - 1].forEach(page => {
+            if (page > 1) pages.add(page);
+        });
+    }
+
+    const sortedPages = [...pages].sort((a, b) => a - b);
+    const visible = [];
+
+    sortedPages.forEach((page, index) => {
+        if (index > 0 && page - sortedPages[index - 1] > 1) {
+            visible.push("ellipsis");
+        }
+
+        visible.push(page);
     });
 
-    paginationContainer.appendChild(nextButton);
+    return visible;
 }
 
 function goToPage(pageNum) {
     currentPage = pageNum;
     updateURL();
     renderItems();
-    bookingItems.scrollIntoView({ behavior: "smooth" });
+    bookingItems.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function setupCategoryListeners() {
@@ -197,24 +276,25 @@ function selectCategory(categoryValue) {
 
 function updateActiveCategoryButton() {
     const categoryButtons = document.querySelectorAll(".category-card");
+
     categoryButtons.forEach(btn => {
         const btnCategory = btn.dataset.category === "all" ? "all" : Number(btn.dataset.category);
-        if (btnCategory === currentCategory || (currentCategory === "all" && btn.dataset.category === "all")) {
-            btn.classList.add("active");
-        } else {
-            btn.classList.remove("active");
-        }
+        const isActive = btnCategory === currentCategory || (currentCategory === "all" && btn.dataset.category === "all");
+        btn.classList.toggle("active", isActive);
     });
 }
 
 function updateURL() {
     const params = new URLSearchParams();
+
     if (currentCategory !== "all") {
         params.set("category", currentCategory);
     }
+
     if (currentPage > 1) {
         params.set("page", currentPage);
     }
+
     const newURL = params.toString() ? `?${params.toString()}` : window.location.pathname;
     window.history.pushState({ category: currentCategory, page: currentPage }, "", newURL);
 }
@@ -231,38 +311,229 @@ function loadStateFromURL() {
     renderItems();
 }
 
-searchInput.addEventListener("input", () => {
-    currentPage = 1;
-    renderItems();
-});
+function handleCartAction(event) {
+    const button = event.target.closest("[data-cart-action]");
+    if (!button) return;
 
-window.addToCart = function (id) {
-    let item = null;
-    for (const category of categories) {
-        item = category.items?.find(i => i.id === id);
-        if (item) break;
+    const itemId = Number(button.dataset.itemId);
+    const action = button.dataset.cartAction;
+
+    if (action === "increment") {
+        incrementCartItem(itemId);
     }
 
+    if (action === "decrement") {
+        decrementCartItem(itemId);
+    }
+}
+
+function incrementCartItem(itemId, options = {}) {
+    const item = findItemById(itemId);
     if (!item) return;
 
-    const existingItem = cart.find(cartItem => cartItem.id === id);
+    const existingItem = cart.find(cartItem => Number(cartItem.id) === Number(itemId));
 
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
-        cart.push({
-            id: item.id,
-            quantity: 1
-        });
+        cart.push({ id: item.id, quantity: 1 });
     }
 
+    syncCart();
+    showCartToast(item);
+}
+
+function decrementCartItem(itemId) {
+    const item = findItemById(itemId);
+    const existingItem = cart.find(cartItem => Number(cartItem.id) === Number(itemId));
+
+    if (!existingItem) return;
+
+    existingItem.quantity -= 1;
+
+    if (existingItem.quantity <= 0) {
+        cart = cart.filter(cartItem => Number(cartItem.id) !== Number(itemId));
+        removeCartToast(itemId);
+    }
+
+    syncCart();
+
+    if (item && getCartQuantity(itemId) > 0) {
+        showCartToast(item);
+    }
+}
+
+function syncCart() {
+    cart = cart
+        .map(item => ({
+            id: Number(item.id),
+            quantity: Math.max(0, Number(item.quantity || 0))
+        }))
+        .filter(item => item.id > 0 && item.quantity > 0);
+
     localStorage.setItem("cart", JSON.stringify(cart));
-    // OrderSessionManager.setCart(cart);
-    console.log("Cart:", cart);
+    renderItems();
+    renderCartSummary();
+}
+
+function renderCartSummary() {
+    if (!cartSummary) return;
+
+    const cartItems = getCartItemsWithData();
+    const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+    if (!cartItems.length) {
+        cartSummary.innerHTML = `
+            <div class="booking-cart-head">
+                <div>
+                    <span>Shopping cart</span>
+                    <strong>0 products</strong>
+                </div>
+                <p>No items selected yet.</p>
+            </div>
+        `;
+        return;
+    }
+
+    cartSummary.innerHTML = `
+        <div class="booking-cart-head">
+            <div>
+                <span>Shopping cart</span>
+                <strong>${totalQuantity} ${totalQuantity === 1 ? "product" : "products"}</strong>
+            </div>
+            <p>${formatMoney(getCartSubtotal(cartItems))}</p>
+        </div>
+
+        <div class="booking-cart-list">
+            ${cartItems.map(item => `
+                <div class="booking-cart-row">
+                    <div>
+                        <strong>${escapeHtml(item.name)}</strong>
+                        <span>${escapeHtml(getCategoryName(item.categoryId))}</span>
+                    </div>
+                    ${renderQuantityControl(item.id, item.quantity, "booking-cart-qty")}
+                </div>
+            `).join("")}
+        </div>
+    `;
+}
+
+function showCartToast(item) {
+    if (!toastStack) return;
+
+    const quantity = getCartQuantity(item.id);
+    if (quantity <= 0) return;
+
+    const toastId = `booking-toast-${item.id}`;
+    let toast = document.getElementById(toastId);
+
+    if (!toast) {
+        toast = document.createElement("div");
+        toast.id = toastId;
+        toast.className = "booking-toast";
+        toast.dataset.toastId = String(item.id);
+        toastStack.prepend(toast);
+    }
+
+    toast.innerHTML = `
+        <div class="booking-toast-copy">
+            <strong>${escapeHtml(item.name)}</strong>
+            <span>Quantity: ${quantity}</span>
+        </div>
+        ${renderQuantityControl(item.id, quantity, "booking-toast-qty")}
+    `;
+
+    requestAnimationFrame(() => toast.classList.add("show"));
+
+    clearTimeout(toastTimers.get(item.id));
+    toastTimers.set(item.id, setTimeout(() => {
+        removeCartToast(item.id);
+    }, TOAST_DURATION));
+}
+
+function removeCartToast(itemId) {
+    const toast = document.getElementById(`booking-toast-${itemId}`);
+    clearTimeout(toastTimers.get(itemId));
+    toastTimers.delete(itemId);
+
+    if (!toast) return;
+
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 180);
+}
+
+function getCartItemsWithData() {
+    return cart
+        .map(cartItem => {
+            const item = findItemById(cartItem.id);
+            if (!item) return null;
+
+            return {
+                ...item,
+                quantity: Number(cartItem.quantity || 0)
+            };
+        })
+        .filter(Boolean);
+}
+
+function getCartSubtotal(items) {
+    return items.reduce((sum, item) => {
+        return sum + Number(item.basePrice || 0) * Number(item.quantity || 0);
+    }, 0);
+}
+
+function getCartQuantity(itemId) {
+    return cart.find(cartItem => Number(cartItem.id) === Number(itemId))?.quantity || 0;
+}
+
+function findItemById(itemId) {
+    for (const category of categories) {
+        const item = category.items?.find(categoryItem => Number(categoryItem.id) === Number(itemId));
+        if (item) return item;
+    }
+
+    return null;
+}
+
+function getCategoryName(categoryId) {
+    return categories.find(cat => Number(cat.id) === Number(categoryId))?.name || "No category";
+}
+
+function readCart() {
+    try {
+        const parsedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+        return Array.isArray(parsedCart) ? parsedCart : [];
+    } catch (error) {
+        console.warn("Cart could not be parsed:", error);
+        return [];
+    }
+}
+
+function formatMoney(value) {
+    return `£${Number(value || 0).toFixed(2)}`;
+}
+
+function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+    }[char]));
+}
+
+function escapeAttribute(value) {
+    return escapeHtml(value).replace(/`/g, "&#096;");
+}
+
+window.addToCart = function (id) {
+    incrementCartItem(Number(id));
 };
 
 function setupReveal() {
     document.querySelector(".booking-categories")?.classList.add("show");
     document.querySelector(".booking-top")?.classList.add("show");
     document.querySelector(".booking-actions")?.classList.add("show");
+    document.querySelector(".booking-cart-summary")?.classList.add("show");
 }
