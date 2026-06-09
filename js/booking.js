@@ -11,6 +11,7 @@ let categories = [];
 let currentCategory = "all";
 let currentPage = 1;
 let cart = readCart();
+const imageCache = new Map();
 
 const ITEMS_PER_PAGE = 5;
 const TOAST_DURATION = 4500;
@@ -36,26 +37,71 @@ searchInput?.addEventListener("input", () => {
     renderItems();
 });
 
+async function loadImageForItem(item) {
+    if (item.image) return item.image;
+
+    const cachedImage = imageCache.get(item.id);
+    if (cachedImage) return cachedImage;
+
+    const categoryName = getCategoryName(item.categoryId);
+
+    const result = await bring(
+        `/items/furniture-image?name=${encodeURIComponent(item.name)}&category=${encodeURIComponent(categoryName)}`
+    );
+
+    const image = result.image || "photo/no-image.png";
+
+    imageCache.set(item.id, image);
+    item.image = image;
+
+    return image;
+}
+
 async function loadCategories() {
     categories = await bring("/categories");
+
+    // for (const category of categories) {
+    //     for (const item of category.items || []) {
+    //         if (!item.image) {
+    //             const result = await bring(
+    //                 `/items/furniture-image?name=${encodeURIComponent(item.name)}&category=${encodeURIComponent(category.name)}`
+    //             );
+
+    //             item.image = result.image;
+    //         }
+    //     }
+    // }
+
     renderCategories();
     setupCategoryListeners();
 }
 
 function renderCategories() {
     categoriesContainer.innerHTML = `
-        <button class="category-card active" data-category="all">
-            All Items
-        </button>
-    `;
+            <button class="category-card active" data-category="all">
+                All Items
+            </button>
+        `;
 
     categories.forEach(category => {
         categoriesContainer.innerHTML += `
-            <button class="category-card" data-category="${category.id}">
-                ${escapeHtml(category.name)}
-            </button>
-        `;
+                <button class="category-card" data-category="${category.id}">
+                    ${escapeHtml(category.name)}
+                </button>
+            `;
     });
+}
+
+async function loadImagesForDisplayedItems(itemsToDisplay) {
+    for (const item of itemsToDisplay) {
+        const imageUrl = await loadImageForItem(item);
+
+        const img = document.querySelector(`[data-item-image="${item.id}"]`);
+
+        if (img) {
+            img.src = imageUrl;
+        }
+    }
 }
 
 function getAllItems() {
@@ -103,22 +149,26 @@ function renderItems() {
         const categoryName = getCategoryName(item.categoryId);
 
         return `
-            <div class="booking-item">
-                <div class="booking-item-left">
-                    <img src="${escapeAttribute(item.image || "photo/no-image.png")}" alt="${escapeAttribute(item.name)}">
-
-                    <div>
-                        <h4>${escapeHtml(item.name)}</h4>
-                        <span>${escapeHtml(categoryName)}</span>
-                        <p>${formatMoney(item.basePrice)}</p>
+                <div class="booking-item">
+                    <div class="booking-item-left">
+                    <img 
+                        src="${escapeAttribute(item.image || "photo/no-image.png")}" 
+                        alt="${escapeAttribute(item.name)}"
+                        data-item-image="${item.id}"
+                        loading="lazy"
+                    >
+                        <div>
+                            <h4>${escapeHtml(item.name)}</h4>
+                            <span>${escapeHtml(categoryName)}</span>
+                            <p>${formatMoney(item.basePrice)}</p>
+                        </div>
                     </div>
+
+                    ${renderItemAction(item.id)}
                 </div>
-
-                ${renderItemAction(item.id)}
-            </div>
-        `;
+            `;
     }).join("");
-
+    loadImagesForDisplayedItems(itemsToDisplay);
     setTimeout(() => {
         document.querySelectorAll(".booking-item").forEach((item, index) => {
             setTimeout(() => {
@@ -138,20 +188,20 @@ function renderItemAction(itemId) {
     }
 
     return `
-        <button class="booking-add-btn" type="button" data-cart-action="increment" data-item-id="${itemId}">
-            Add
-        </button>
-    `;
+            <button class="booking-add-btn" type="button" data-cart-action="increment" data-item-id="${itemId}">
+                Add
+            </button>
+        `;
 }
 
 function renderQuantityControl(itemId, quantity, extraClass = "") {
     return `
-        <div class="booking-qty-control ${extraClass}" role="group" aria-label="Item quantity">
-            <button type="button" data-cart-action="decrement" data-item-id="${itemId}" aria-label="Remove one item">-</button>
-            <span>${quantity}</span>
-            <button type="button" data-cart-action="increment" data-item-id="${itemId}" aria-label="Add one item">+</button>
-        </div>
-    `;
+            <div class="booking-qty-control ${extraClass}" role="group" aria-label="Item quantity">
+                <button type="button" data-cart-action="decrement" data-item-id="${itemId}" aria-label="Remove one item">-</button>
+                <span>${quantity}</span>
+                <button type="button" data-cart-action="increment" data-item-id="${itemId}" aria-label="Add one item">+</button>
+            </div>
+        `;
 }
 
 function renderPagination(totalPages) {
@@ -384,38 +434,46 @@ function renderCartSummary() {
 
     if (!cartItems.length) {
         cartSummary.innerHTML = `
-            <div class="booking-cart-head">
-                <div>
-                    <span>Shopping cart</span>
-                    <strong>0 products</strong>
+                <div class="booking-cart-head">
+                    <div>
+                        <span>Shopping cart</span>
+                        <strong>0 products</strong>
+                    </div>
+                    <p>No items selected yet.</p>
                 </div>
-                <p>No items selected yet.</p>
-            </div>
-        `;
+            `;
         return;
     }
 
     cartSummary.innerHTML = `
-        <div class="booking-cart-head">
-            <div>
-                <span>Shopping cart</span>
-                <strong>${totalQuantity} ${totalQuantity === 1 ? "product" : "products"}</strong>
-            </div>
-            <p>${formatMoney(getCartSubtotal(cartItems))}</p>
-        </div>
-
-        <div class="booking-cart-list">
-            ${cartItems.map(item => `
-                <div class="booking-cart-row">
-                    <div>
-                        <strong>${escapeHtml(item.name)}</strong>
-                        <span>${escapeHtml(getCategoryName(item.categoryId))}</span>
-                    </div>
-                    ${renderQuantityControl(item.id, item.quantity, "booking-cart-qty")}
+            <div class="booking-cart-head">
+                <div>
+                    <span>Shopping cart</span>
+                    <strong>${totalQuantity} ${totalQuantity === 1 ? "product" : "products"}</strong>
                 </div>
-            `).join("")}
-        </div>
-    `;
+                <p>${formatMoney(getCartSubtotal(cartItems))}</p>
+            </div>
+
+            <div class="booking-cart-list">
+                ${cartItems.map(item => `
+                    <div class="booking-cart-row">
+                        <div>
+                            <strong>${escapeHtml(item.name)}</strong>
+                            <span>${escapeHtml(getCategoryName(item.categoryId))}</span>
+                        </div>
+                        ${renderQuantityControl(item.id, item.quantity, "booking-cart-qty")}
+                    </div>
+                `).join("")}
+            </div>
+        `;
+}
+
+function getFurnitureImage(item) {
+    const category = encodeURIComponent(
+        getCategoryName(item.categoryId)
+    );
+
+    return `https://source.unsplash.com/300x220/?${category},furniture`;
 }
 
 function showCartToast(item) {
@@ -435,13 +493,14 @@ function showCartToast(item) {
         toastStack.prepend(toast);
     }
 
+
     toast.innerHTML = `
-        <div class="booking-toast-copy">
-            <strong>${escapeHtml(item.name)}</strong>
-            <span>Quantity: ${quantity}</span>
-        </div>
-        ${renderQuantityControl(item.id, quantity, "booking-toast-qty")}
-    `;
+            <div class="booking-toast-copy">
+                <strong>${escapeHtml(item.name)}</strong>
+                <span>Quantity: ${quantity}</span>
+            </div>
+            ${renderQuantityControl(item.id, quantity, "booking-toast-qty")}
+        `;
 
     requestAnimationFrame(() => toast.classList.add("show"));
 
@@ -537,3 +596,4 @@ function setupReveal() {
     document.querySelector(".booking-actions")?.classList.add("show");
     document.querySelector(".booking-cart-summary")?.classList.add("show");
 }
+

@@ -4,14 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proovia - Dashboard</title>
+    <title>My Addresses | Proovia Dashboard</title>
+    <meta name="description" content="Manage saved collection and delivery addresses in the Proovia business dashboard.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://proovia.co.uk/dashboard-addresses.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Addresses | Proovia Dashboard">
+    <meta property="og:description" content="Manage saved collection and delivery addresses in the Proovia business dashboard.">
+    <meta property="og:url" content="https://proovia.co.uk/dashboard-addresses.html">
+    <meta property="og:image" content="https://proovia.co.uk/photo/herobg.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Addresses | Proovia Dashboard">
+    <meta name="twitter:description" content="Manage saved collection and delivery addresses in the Proovia business dashboard.">
+    <meta name="twitter:image" content="https://proovia.co.uk/photo/herobg.png">
     <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem("theme") || "dark";
+                if (theme !== "light" && theme !== "dark") theme = "dark";
+                document.documentElement.setAttribute("data-theme", theme);
+                document.documentElement.classList.add("theme-preload");
+            } catch (error) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="style/dashboard.css">
-
-    <script src="js/theme-init.js"></script>
 </head>
 
 <body data-dashboard-page="addresses">
@@ -23,8 +45,19 @@
             <div id="dashboardTopbarMount"></div>
 
             <div class="content">
-<section class="page active" id="page-addresses">
+                <section class="page active" id="page-addresses">
                     <div class="addresses-grid">
+                        <div class="panel addresses-search-panel">
+                            <div class="inline-search-wrap">
+                                <div class="inline-search sm">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
+                                    </svg>
+                                    <input id="addressesSearch" type="text" placeholder="Search addresses...">
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Collection -->
                         <div class="panel">
@@ -39,15 +72,6 @@
                         <div class="panel">
                             <div class="panel-header">
                                 <span class="panel-title">Delivery Addresses</span>
-                            </div>
-                            <div class="inline-search-wrap">
-                                <div class="inline-search sm">
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <circle cx="11" cy="11" r="8" />
-                                        <path d="m21 21-4.35-4.35" stroke-linecap="round" stroke-width="2" />
-                                    </svg>
-                                    <input placeholder="Search…">
-                                </div>
                             </div>
                             <div class="addr-list" id="deliveryAddressesContainer"></div>
                         </div>
