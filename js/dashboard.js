@@ -9,7 +9,7 @@ const USER_ORDER_FEE_PERCENT = 1.5;
 const ACTIVE_STATUSES = new Set([
     "DRAFT",
     "PENDING_PAYMENT",
-    "PAID",
+    "PAID", 
     "PROCESSING",
     "COLLECTED",
     "IN_TRANSIT"
@@ -111,6 +111,7 @@ let dashboardTrackingOrderId = null;
 let isInitialDashboardTrackingRender = true;
 let checkoutOrderId = null;
 let checkoutReturnPage = "active";
+let addressSearchQuery = "";
 
 /* =========================
    START
@@ -269,18 +270,46 @@ function renderOrderList(containerId, orders, emptyMessage, opensDetails = false
 }
 
 function renderAddresses() {
+    const filteredAddresses = filterAddressesBySearch(userAddresses);
+    const hasAddressSearch = addressSearchQuery.length > 0;
+
     renderAddressList("homeAddressesContainer", userAddresses.slice(0, 3), "No saved addresses yet.");
     renderAddressList(
         "collectionAddressesContainer",
-        userAddresses.filter(address => address.type === "PICKUP" || address.type === "BOTH"),
-        "No collection addresses yet."
+        filteredAddresses.filter(address => address.type === "PICKUP" || address.type === "BOTH"),
+        hasAddressSearch ? "No collection addresses match your search." : "No collection addresses yet."
     );
     renderAddressList(
         "deliveryAddressesContainer",
-        userAddresses.filter(address => address.type === "DROPOFF" || address.type === "BOTH"),
-        "No delivery addresses yet."
+        filteredAddresses.filter(address => address.type === "DROPOFF" || address.type === "BOTH"),
+        hasAddressSearch ? "No delivery addresses match your search." : "No delivery addresses yet."
     );
     hydrateAddressOptions();
+}
+
+function filterAddressesBySearch(addresses) {
+    if (!addressSearchQuery) return addresses;
+
+    return addresses.filter(address => {
+        const searchableText = [
+            address.address,
+            address.city,
+            address.postcode,
+            address.type,
+            addressTypeSearchTerms(address.type)
+        ].filter(Boolean).join(" ").toLowerCase();
+
+        return searchableText.includes(addressSearchQuery);
+    });
+}
+
+function addressTypeSearchTerms(type) {
+    const normalizedType = String(type || "BOTH").toUpperCase();
+
+    if (normalizedType === "PICKUP") return "pickup collection";
+    if (normalizedType === "DROPOFF") return "dropoff delivery";
+
+    return "both pickup collection dropoff delivery";
 }
 
 function renderAddressList(containerId, addresses, emptyMessage) {
@@ -1703,16 +1732,28 @@ function getOrderListPageFromRow(row) {
 
 function initSearch() {
     const ordersSearch = document.getElementById("ordersSearch");
-    if (!ordersSearch) return;
 
-    ordersSearch.addEventListener("input", function () {
-        const value = this.value.toLowerCase().trim();
+    if (ordersSearch) {
+        ordersSearch.addEventListener("input", function () {
+            const value = this.value.toLowerCase().trim();
 
-        document.querySelectorAll(".order-row").forEach(row => {
-            const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(value) ? "" : "none";
+            document.querySelectorAll(".order-row").forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(value) ? "" : "none";
+            });
         });
-    });
+    }
+
+    const addressesSearch = document.getElementById("addressesSearch");
+
+    if (addressesSearch) {
+        addressSearchQuery = addressesSearch.value.toLowerCase().trim();
+
+        addressesSearch.addEventListener("input", function () {
+            addressSearchQuery = this.value.toLowerCase().trim();
+            renderAddresses();
+        });
+    }
 }
 
 /* =========================
