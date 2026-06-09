@@ -87,22 +87,17 @@
 
             <form id="registerForm">
                 <div class="form-group">
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text" placeholder="Username" required name="username">
+
+                    <input type="email" placeholder="Email Address" required name="email">
+
+                    <input type="password" id="password" placeholder="Password" required name="password">
+
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required
+                        name="confpassword">
                 </div>
 
-                <div class="form-group">
-                    <input type="email" placeholder="Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="password" id="password" placeholder="Password" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                </div>
-
-                <button class="btn" type="button" onclick="window.location.href='log.html'">
+                <button class="btn" type="submit">
                     Create Account
                 </button>
             </form>
@@ -115,7 +110,7 @@
     </section>
     </section>
 
-   
+
     <footer>
         <div class="footer-top">
 
@@ -130,9 +125,11 @@
                 </p>
 
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank" class="social-btn">in</a>
+                    <a href="https://www.linkedin.com/company/proovia-couriers" target="_blank"
+                        class="social-btn">in</a>
 
-                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank" class="social-btn">f</a>
+                    <a href="https://www.facebook.com/p/Proovia-Couriers-100026635063876" target="_blank"
+                        class="social-btn">f</a>
 
                     <a href="https://www.instagram.com/proovia.couriers/" target="_blank" class="social-btn">ig</a>
 
