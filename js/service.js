@@ -27,7 +27,7 @@ async function loadSelectedPlan() {
     const quote = calculatePlanQuote(itemsSubtotal, plan, serviceDetails?.extraPrice || 0);
 
     document.getElementById("summaryPlanName").textContent = plan.name;
-    document.getElementById("summaryPlanPrice").textContent = `${quote.planPercent.toFixed(2).replace(/\.00$/, "")}%`;
+    document.getElementById("summaryPlanPrice").textContent = quote.planLabel.replace("Items + ", "");
     document.getElementById("summaryTotalPrice").textContent = formatMoney(quote.total);
 
     document.getElementById("summaryPlanDetails").innerHTML = `

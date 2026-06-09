@@ -96,6 +96,7 @@ function selectPlan(planId) {
         planId: numericPlanId,
         itemsSubtotal: quote.itemsSubtotal,
         planPercent: quote.planPercent,
+        planLabel: quote.planLabel,
         planFee: quote.planFee,
         total: quote.total
     }));
@@ -107,7 +108,6 @@ function selectPlan(planId) {
 function renderPlanCard(plan) {
     const planId = Number(plan.id);
     const quote = calculatePlanQuote(itemsSubtotal, plan);
-    const percent = quote.planPercent.toFixed(2).replace(/\.00$/, "");
     const detailsId = `plan-details-${planId}`;
     const cardClasses = getPlanClasses(plan);
     const canSelect = itemsSubtotal > 0;
@@ -121,7 +121,7 @@ function renderPlanCard(plan) {
 
                 <div class="plan-price">
                     ${formatMoney(quote.total)}
-                    <span class="plan-percent">Items + ${percent}%</span>
+                    <span class="plan-percent">${quote.planLabel}</span>
                 </div>
             </div>
 
