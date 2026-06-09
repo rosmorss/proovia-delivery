@@ -1,5 +1,7 @@
 import { bring } from "./fetch.js";
 
+const saveKey = "orderDraft";
+
 // =========================
 // REVEAL ANIMATION
 // =========================
@@ -142,26 +144,30 @@ formInputs.forEach(input => {
 const orderForm = document.querySelector(".order-form");
 const nextBtn = document.querySelector(".next-btn");
 
+function cleanFieldValue(formData, key) {
+    return String(formData.get(key) || "").trim();
+}
+
 orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const formData = new FormData(orderForm);
 
     const orderDetails = {
-        customerFullName: formData.get("customerFullName"),
-        customerEmail: formData.get("customerEmail"),
-        customerPhone: formData.get("customerPhone"),
+        customerFullName: cleanFieldValue(formData, "customerFullName"),
+        customerEmail: cleanFieldValue(formData, "customerEmail"),
+        customerPhone: cleanFieldValue(formData, "customerPhone"),
 
-        collectionFullName: formData.get("collectionFullName"),
-        collectionEmail: formData.get("collectionEmail"),
-        collectionPhone: formData.get("collectionPhone"),
+        collectionFullName: cleanFieldValue(formData, "collectionFullName"),
+        collectionEmail: cleanFieldValue(formData, "collectionEmail"),
+        collectionPhone: cleanFieldValue(formData, "collectionPhone"),
 
-        deliveryFullName: formData.get("deliveryFullName"),
-        deliveryEmail: formData.get("deliveryEmail"),
-        deliveryPhone: formData.get("deliveryPhone"),
+        deliveryFullName: cleanFieldValue(formData, "deliveryFullName"),
+        deliveryEmail: cleanFieldValue(formData, "deliveryEmail"),
+        deliveryPhone: cleanFieldValue(formData, "deliveryPhone"),
 
-        collectionNotes: document.getElementById("collection-notes").value,
-        deliveryNotes: document.getElementById("delivery-notes").value
+        collectionNotes: document.getElementById("collection-notes").value.trim(),
+        deliveryNotes: document.getElementById("delivery-notes").value.trim()
     };
 
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
@@ -196,7 +202,6 @@ orderForm.addEventListener("submit", async (e) => {
 // =========================
 // SAVE DATA
 // =========================
-const saveKey = "orderDraft";
 
 function saveOrderData() {
 
@@ -226,58 +231,46 @@ function saveOrderData() {
 }
 
 // =========================
-// LOAD DATA
+// CLEAN DATA
 // =========================
 
-function loadOrderData() {
+function cleanDetailsInputs() {
+    localStorage.removeItem(saveKey);
+    localStorage.removeItem("orderDetails");
+    localStorage.removeItem("customerId");
 
-    const saved =
-        localStorage.getItem(saveKey);
+    orderForm?.reset();
 
-    if (!saved) return;
+    document.querySelectorAll(".order-form input").forEach(input => {
+        input.removeAttribute("readonly");
+        input.setAttribute("autocomplete", "off");
 
-    const data = JSON.parse(saved);
-
-    document.querySelectorAll(
-        ".order-form input, .notes-area"
-    ).forEach((field, index) => {
-
-        const value = data[`field_${index}`];
-
-        if (value === undefined) return;
-
-        if (field.type === "checkbox") {
-
-            field.checked = value;
-
-            if (
-                field.classList.contains(
-                    "notes-check"
-                )
-            ) {
-
-                const target =
-                    document.querySelector(
-                        `#${field.dataset.target}`
-                    );
-
-                if (target && value) {
-                    target.classList.add("active");
-                }
-
-            }
-
-        } else {
-
-            field.value = value;
-
+        if (input.type === "checkbox") {
+            input.checked = false;
+            input.defaultChecked = false;
+            return;
         }
 
+        input.value = "";
+        input.defaultValue = "";
     });
 
+    document.querySelectorAll(".notes-area").forEach(area => {
+        area.value = "";
+        area.defaultValue = "";
+        area.classList.remove("active");
+        area.setAttribute("autocomplete", "off");
+    });
 }
 
-loadOrderData();
+cleanDetailsInputs();
+requestAnimationFrame(cleanDetailsInputs);
+
+window.addEventListener("pageshow", event => {
+    if (event.persisted) {
+        cleanDetailsInputs();
+    }
+});
 
 // =========================
 // SHOW ANIMATION CLASS

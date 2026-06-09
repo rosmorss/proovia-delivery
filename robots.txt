@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+Disallow: /dashboard.html
+Disallow: /dashboard-active.html
+Disallow: /dashboard-addresses.html
+Disallow: /dashboard-checkout.html
+Disallow: /dashboard-claim.html
+Disallow: /dashboard-create.html
+Disallow: /dashboard-discount.html
+Disallow: /dashboard-history.html
+Disallow: /dashboard-order-details.html
+Disallow: /dashboard-settings.html
+Disallow: /dashboard-support.html
+Disallow: /dashboard-tracking.html
+Disallow: /checkout.html
+Disallow: /details.html
+Disallow: /log.html
+Disallow: /register.html
+Disallow: /success.html
+
+Sitemap: https://proovia.co.uk/sitemap.xml
