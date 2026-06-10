@@ -46,6 +46,7 @@ const pageTitles = {
     "order-details": ["Order Details", "Items, route and delivery progress."],
     tracking: ["Tracking", "Find the current stage for a business order."],
     checkout: ["Checkout", "Complete payment for your business order."],
+    "payment-failed": ["Payment Failed", "Review the failed payment and try again."],
     addresses: ["My Addresses", "Manage your saved collection and delivery addresses."],
     discount: ["My Discount", "Your current pricing and discount level."],
     claim: ["Report a Claim", "Describe the issue and we'll look into it."],
@@ -61,6 +62,7 @@ const pageUrls = {
     "order-details": "dashboard-order-details.html",
     tracking: "dashboard-tracking.html",
     checkout: "dashboard-checkout.html",
+    "payment-failed": "dashboard-payment-failed.html",
     addresses: "dashboard-addresses.html",
     discount: "dashboard-discount.html",
     claim: "dashboard-claim.html",
@@ -969,6 +971,67 @@ function renderDashboardCheckout(order) {
     setupPaymentInputFormatting(container.querySelector("#dashboardCheckoutForm"), showToast);
 }
 
+function renderDashboardPaymentFailed(orderId) {
+    const container = document.getElementById("dashboardPaymentFailedContainer");
+
+    if (currentDashboardPage() !== "payment-failed" || !container) {
+        const params = new URLSearchParams();
+        if (orderId) params.set("orderId", String(orderId));
+        navigateDashboardPage("payment-failed", params);
+        return;
+    }
+
+    const failedData = readDashboardPaymentFailed();
+    const order = findOrderById(orderId || failedData.orderId);
+    const reason = failedData.reason || "Payment failed. Please check the card details and try again.";
+    const total = order?.totalPrice ?? failedData.totalPrice;
+    const tracking = order?.trackingNumber || failedData.trackingNumber || "Tracking pending";
+    const failedAt = failedData.failedAt ? formatDateTime(failedData.failedAt) : "Just now";
+
+    container.innerHTML = `
+        <div class="payment-failed-layout">
+            <article class="panel payment-failed-panel">
+                <div class="payment-failed-mark" aria-hidden="true"></div>
+                <div>
+                    <span class="panel-title">Payment was not completed</span>
+                    <p class="panel-sub-copy">
+                        The order is still unpaid. Review the message below and try the payment again when ready.
+                    </p>
+                </div>
+
+                <div class="payment-failed-reason">
+                    <span>Failure reason</span>
+                    <strong>${escapeHtml(reason)}</strong>
+                </div>
+
+                <div class="btn-row checkout-actions">
+                    ${order ? `
+                        <button class="btn-submit" type="button" data-pay-order data-order-id="${order.id}">
+                            Try payment again
+                        </button>
+                    ` : ""}
+                    <a class="btn-submit dark as-link" href="dashboard-active.html">Back to active orders</a>
+                </div>
+            </article>
+
+            <article class="panel payment-failed-summary">
+                <div class="panel-header">
+                    <span class="panel-title">Order summary</span>
+                    <span class="panel-sub-note">${escapeHtml(formatStatus(normalizeOrderStatus(order)))}</span>
+                </div>
+                <dl class="order-detail-list compact">
+                    ${renderDetailRow("Order", order ? `#${order.id}` : failedData.orderId ? `#${failedData.orderId}` : "Pending")}
+                    ${renderDetailRow("Tracking", tracking)}
+                    ${renderDetailRow("Total due", formatCurrency(total))}
+                    ${renderDetailRow("Attempted at", failedAt)}
+                </dl>
+            </article>
+        </div>
+    `;
+
+    showPage("payment-failed", null);
+}
+
 async function submitDashboardPayment(form) {
     const order = findOrderById(checkoutOrderId);
     const payButton = document.getElementById("dashboardPayButton");
@@ -1026,7 +1089,25 @@ async function submitDashboardPayment(form) {
         }
     } catch (error) {
         console.error("Payment failed:", error);
-        showToast(error.message || "Payment failed. Please try again.", "error");
+        const failureMessage = error.message || "Payment failed. Please try again.";
+        const failedData = {
+            orderId: order.id,
+            trackingNumber: order.trackingNumber || "",
+            totalPrice: Number(order.totalPrice || 0),
+            reason: failureMessage,
+            failedAt: new Date().toISOString()
+        };
+
+        try {
+            localStorage.setItem("dashboardPaymentFailed", JSON.stringify(failedData));
+        } catch (storageError) {
+            console.warn("Dashboard payment failure could not be saved:", storageError);
+        }
+
+        queueDashboardToast("Payment failed. Please review the details and try again.", "error");
+
+        const params = new URLSearchParams({ orderId: String(order.id) });
+        navigateDashboardPage("payment-failed", params);
     } finally {
         if (payButton) {
             payButton.disabled = false;
@@ -1582,6 +1663,10 @@ function hydrateDashboardRoute() {
         openDashboardCheckout(orderId, returnPage || "active");
     }
 
+    if (page === "payment-failed") {
+        renderDashboardPaymentFailed(orderId);
+    }
+
     renderDashboardTitle(currentUser?.username || "User");
 }
 
@@ -1863,6 +1948,16 @@ function showQueuedDashboardToast() {
 
     if (queuedToast?.message) {
         setTimeout(() => showToast(queuedToast.message, queuedToast.type || "info"), 150);
+    }
+}
+
+function readDashboardPaymentFailed() {
+    try {
+        return JSON.parse(localStorage.getItem("dashboardPaymentFailed") || "{}");
+    } catch (error) {
+        console.warn("Dashboard payment failure could not be read:", error);
+        localStorage.removeItem("dashboardPaymentFailed");
+        return {};
     }
 }
 

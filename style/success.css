@@ -67,6 +67,49 @@
     transform: rotate(45deg);
 }
 
+.failed-confirmation::before {
+    background: var(--red-dark);
+}
+
+.failed-mark {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: var(--red-dark);
+    box-shadow: 0 16px 34px var(--red-glow);
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.failed-mark::before,
+.failed-mark::after {
+    content: "";
+    position: absolute;
+    left: 34px;
+    top: 19px;
+    width: 6px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--text-on-accent);
+}
+
+.failed-mark::before {
+    transform: rotate(45deg);
+}
+
+.failed-mark::after {
+    transform: rotate(-45deg);
+}
+
+.failure-box {
+    border-color: rgba(178, 34, 34, 0.45);
+}
+
+.failure-box strong {
+    font-size: clamp(18px, 3vw, 28px);
+    line-height: 1.25;
+}
+
 .success-eyebrow {
     margin: 0 0 9px;
     color: var(--red-light);
