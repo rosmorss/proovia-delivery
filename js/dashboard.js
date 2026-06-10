@@ -1,10 +1,19 @@
 import { bring, bringAuth } from "./fetch.js";
+import {
+    attachNameValidation,
+    attachPhoneValidation,
+    setupPaymentInputFormatting,
+    validateNameField,
+    validatePaymentFields,
+    validatePhoneField
+} from "./validation.js";
 
 /* =========================
    STATE
 ========================= */
 
 const CURRENCY = "\u00A3";
+const DASHBOARD_TOAST_KEY = "queuedDashboardToast";
 const USER_ORDER_FEE_PERCENT = 1.5;
 const ACTIVE_STATUSES = new Set([
     "DRAFT",
@@ -124,7 +133,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     initOrderRows();
     initTrackingControls();
     initCheckoutControls();
+    initSettingsControls();
+    attachNameValidation(document, showToast);
+    attachPhoneValidation(document, showToast);
     await loadDashboardData();
+    showQueuedDashboardToast();
 });
 
 /* =========================
@@ -418,6 +431,23 @@ function hydrateSettings() {
     setValue("settingsEmail", currentUser?.email || "");
     setValue("settingsPhone", currentUser?.phone || "");
     setValue("settingsUsername", currentUser?.username || "");
+    setValue("settingsLastName", currentUser?.lastName || "");
+}
+
+function initSettingsControls() {
+    document.getElementById("settingsProfileUpdate")?.addEventListener("click", () => {
+        const phone = document.getElementById("settingsPhone");
+        const firstName = document.getElementById("settingsUsername");
+        const lastName = document.getElementById("settingsLastName");
+
+        if (!validatePhoneField(phone, showToast)
+            || !validateNameField(firstName, showToast)
+            || !validateNameField(lastName, showToast)) {
+            return;
+        }
+
+        showToast("Profile updated.", "success");
+    });
 }
 
 function hydrateAddressOptions() {
@@ -512,6 +542,13 @@ async function submitCreateOrder() {
 
     if (!selected.length) {
         showToast("Add at least one item.", "error");
+        return;
+    }
+
+    const collectionContactInput = document.getElementById("collectionContact");
+    const deliveryContactInput = document.getElementById("deliveryContact");
+
+    if (!validateNameField(collectionContactInput, showToast) || !validateNameField(deliveryContactInput, showToast)) {
         return;
     }
 
@@ -896,19 +933,20 @@ function renderDashboardCheckout(order) {
                     <div class="form-group">
                         <label class="form-label">Card number</label>
                         <input class="form-input" name="cardNumber" inputmode="numeric" autocomplete="cc-number"
-                            placeholder="1234 1234 1234 1234" required>
+                            maxlength="19" placeholder="1234 1234 1234 1234" required>
                     </div>
 
                     <div class="payment-form-grid">
                         <div class="form-group">
                             <label class="form-label">Expiry date</label>
-                            <input class="form-input" name="expiry" autocomplete="cc-exp"
+                            <input class="form-input" name="expiry" inputmode="numeric" autocomplete="cc-exp"
+                                maxlength="7"
                                 placeholder="MM / YY" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Security code</label>
                             <input class="form-input" name="cvc" inputmode="numeric" autocomplete="cc-csc"
-                                placeholder="CVC" required>
+                                maxlength="3" placeholder="CVC" required>
                         </div>
                     </div>
 
@@ -927,6 +965,8 @@ function renderDashboardCheckout(order) {
             </article>
         </div>
     `;
+
+    setupPaymentInputFormatting(container.querySelector("#dashboardCheckoutForm"), showToast);
 }
 
 async function submitDashboardPayment(form) {
@@ -944,18 +984,18 @@ async function submitDashboardPayment(form) {
         return;
     }
 
-    const cardNumber = String(new FormData(form).get("cardNumber") || "").replace(/\D/g, "");
+    const paymentFields = validatePaymentFields(form, showToast);
+    if (!paymentFields.valid) return;
 
-    if (cardNumber.length < 12) {
-        showToast("Check the card number.", "error");
-        return;
-    }
+    const cardNumber = paymentFields.cardNumber;
 
     try {
         if (payButton) {
             payButton.disabled = true;
             payButton.textContent = "Processing...";
         }
+
+        showToast("Processing payment...", "info");
 
         const result = await bringAuth("/user-payments", {
             method: "POST",
@@ -973,8 +1013,17 @@ async function submitDashboardPayment(form) {
         renderDashboardStats();
         renderOrders();
         renderTrackingPage();
-        showToast("Payment completed. Order is now paid.", "success");
-        openOrderDetails(order.id);
+        const paymentMessage = "Payment completed. Order is now paid.";
+
+        if (currentDashboardPage() === "order-details" && document.getElementById("orderDetailsContainer")) {
+            openOrderDetails(order.id);
+            showToast(paymentMessage, "success");
+        } else if (queueDashboardToast(paymentMessage, "success")) {
+            openOrderDetails(order.id);
+        } else {
+            showToast(paymentMessage, "success");
+            setTimeout(() => openOrderDetails(order.id), 800);
+        }
     } catch (error) {
         console.error("Payment failed:", error);
         showToast(error.message || "Payment failed. Please try again.", "error");
@@ -1786,6 +1835,35 @@ function showToast(message, type = "info") {
     showToast.timer = setTimeout(() => {
         toast.className = "toast";
     }, 3000);
+}
+
+function queueDashboardToast(message, type = "info") {
+    try {
+        localStorage.setItem(DASHBOARD_TOAST_KEY, JSON.stringify({ message, type }));
+        return true;
+    } catch (error) {
+        console.warn("Dashboard toast could not be queued:", error);
+        return false;
+    }
+}
+
+function showQueuedDashboardToast() {
+    let queuedToast = null;
+
+    try {
+        const storedToast = localStorage.getItem(DASHBOARD_TOAST_KEY);
+        if (!storedToast) return;
+
+        localStorage.removeItem(DASHBOARD_TOAST_KEY);
+        queuedToast = JSON.parse(storedToast);
+    } catch (error) {
+        console.warn("Dashboard toast could not be restored:", error);
+        return;
+    }
+
+    if (queuedToast?.message) {
+        setTimeout(() => showToast(queuedToast.message, queuedToast.type || "info"), 150);
+    }
 }
 
 window.showToast = showToast;

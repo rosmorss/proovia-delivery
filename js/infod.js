@@ -1,3 +1,11 @@
+import { showToast } from "./toast.js";
+import {
+  attachEmailValidation,
+  attachImageFileValidation,
+  attachNameValidation,
+  attachPhoneValidation
+} from "./validation.js";
+
 const reveals = document.querySelectorAll(
   ".card, .step, .info-box, .apply-section, .section-header"
 );
@@ -109,6 +117,10 @@ buttons.forEach((btn) => {
 const form = document.querySelector(".apply-form");
 
 if (form) {
+  attachEmailValidation(form, showToast);
+  attachImageFileValidation(form, showToast);
+  attachNameValidation(form, showToast);
+  attachPhoneValidation(form, showToast);
 
   form.addEventListener("submit", (e) => {
 

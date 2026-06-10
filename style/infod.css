@@ -395,6 +395,21 @@
     gap: 14px;
 }
 
+.apply-form .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.apply-form .field-error {
+    margin: 0 2px;
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
 /* INPUTS BASE */
 .apply-form input,
 .apply-form select,

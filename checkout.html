@@ -123,17 +123,20 @@
                 <div class="payment-grid">
                     <div class="form-group card-number">
                         <label>Card number</label>
-                        <input type="text" placeholder="1234 1234 1234 1234" required>
+                        <input type="text" name="cardNumber" inputmode="numeric" autocomplete="cc-number"
+                            maxlength="19" placeholder="1234 1234 1234 1234" required>
                     </div>
 
                     <div class="form-group">
                         <label>Expiry date</label>
-                        <input type="text" placeholder="MM / YY" required>
+                        <input type="text" name="expiry" inputmode="numeric" autocomplete="cc-exp"
+                            maxlength="7" placeholder="MM / YY" required>
                     </div>
 
                     <div class="form-group">
                         <label>Security code</label>
-                        <input type="text" placeholder="CVC" required>
+                        <input type="text" name="cvc" inputmode="numeric" autocomplete="cc-csc"
+                            maxlength="3" placeholder="CVC" required>
                     </div>
                 </div>
 
