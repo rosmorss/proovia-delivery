@@ -1,4 +1,5 @@
 import { bring } from "./fetch.js";
+import { showToast } from "./toast.js";
 
 const saveKey = "orderDraft";
 
@@ -190,10 +191,14 @@ orderForm.addEventListener("submit", async (e) => {
 
         localStorage.setItem("customerId", customer.id);
 
-        window.location.href = "checkout.html";
+        showToast("Details saved. Opening checkout...", "success", { duration: 1200 });
+
+        setTimeout(() => {
+            window.location.href = "checkout.html";
+        }, 650);
 } catch (error) {
     console.error("Customer save failed:", error);
-    alert(error.message || "Could not save customer details.");
+    showToast(error.message || "Could not save customer details.", "error");
     nextBtn.innerHTML = "Continue";
     nextBtn.style.opacity = "1";
 }

@@ -1,3 +1,5 @@
+import { showQueuedToast, showToast } from "./toast.js";
+
 const params = new URLSearchParams(window.location.search);
 
 const trackingNumberEl = document.getElementById("successTrackingNumber");
@@ -80,6 +82,8 @@ async function copyText(value) {
 }
 
 const successData = readSuccessData();
+showQueuedToast();
+
 const trackingNumber =
     params.get("trackingNumber") ||
     successData.trackingNumber ||
@@ -135,9 +139,11 @@ copyTrackingBtn?.addEventListener("click", async () => {
     try {
         await copyText(trackingNumber);
         copyTrackingBtn.textContent = "Copied";
+        showToast("Tracking number copied.", "success", { duration: 1800 });
     } catch (error) {
         console.error("Copy tracking number failed:", error);
         copyTrackingBtn.textContent = "Copy failed";
+        showToast("Could not copy tracking number.", "error");
     }
 
     setTimeout(() => {
