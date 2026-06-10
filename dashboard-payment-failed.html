@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed | Proovia Dashboard</title>
+    <meta name="description" content="Payment failure page for a Proovia dashboard order.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://proovia.co.uk/dashboard-payment-failed.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Payment Failed | Proovia Dashboard">
+    <meta property="og:description" content="Payment failure page for a Proovia dashboard order.">
+    <meta property="og:url" content="https://proovia.co.uk/dashboard-payment-failed.html">
+    <meta property="og:image" content="https://proovia.co.uk/photo/herobg.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Payment Failed | Proovia Dashboard">
+    <meta name="twitter:description" content="Payment failure page for a Proovia dashboard order.">
+    <meta name="twitter:image" content="https://proovia.co.uk/photo/herobg.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem("theme") || "dark";
+                if (theme !== "light" && theme !== "dark") theme = "dark";
+                document.documentElement.setAttribute("data-theme", theme);
+                document.documentElement.classList.add("theme-preload");
+            } catch (error) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="style/dashboard.css">
+</head>
+
+<body data-dashboard-page="payment-failed">
+
+    <div class="layout">
+        <div id="dashboardSidebarMount"></div>
+
+        <main class="main">
+            <div id="dashboardTopbarMount"></div>
+
+            <div class="content">
+                <section class="page active" id="page-payment-failed">
+                    <div id="dashboardPaymentFailedContainer"></div>
+                </section><!-- /page-payment-failed -->
+            </div><!-- /content -->
+        </main><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/dashboard-shell.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
+
+</body>
+
+</html>

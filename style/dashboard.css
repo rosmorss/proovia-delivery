@@ -1270,6 +1270,75 @@ html[data-theme="light"] .theme-toggle-thumb {
     gap: 14px;
 }
 
+.payment-failed-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.55fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.payment-failed-panel,
+.payment-failed-summary {
+    padding: 24px;
+}
+
+.payment-failed-mark {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 14px 30px var(--red-glow);
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.payment-failed-mark::before,
+.payment-failed-mark::after {
+    content: "";
+    position: absolute;
+    left: 29px;
+    top: 17px;
+    width: 6px;
+    height: 30px;
+    border-radius: 999px;
+    background: var(--text-on-accent);
+}
+
+.payment-failed-mark::before {
+    transform: rotate(45deg);
+}
+
+.payment-failed-mark::after {
+    transform: rotate(-45deg);
+}
+
+.payment-failed-reason {
+    display: grid;
+    gap: 8px;
+    margin: 22px 0;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(178, 34, 34, 0.35);
+    background: var(--bg2);
+}
+
+.payment-failed-reason span {
+    color: var(--text3);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.payment-failed-reason strong {
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.btn-submit.as-link {
+    text-decoration: none;
+}
+
 .checkout-check-line {
     display: flex;
     align-items: flex-start;
@@ -2763,6 +2832,7 @@ select[aria-invalid="true"] {
     .order-detail-meta-grid,
     .order-hero-panel,
     .checkout-dashboard-grid,
+    .payment-failed-layout,
     .payment-form-grid {
         grid-template-columns: 1fr;
         gap: 12px;

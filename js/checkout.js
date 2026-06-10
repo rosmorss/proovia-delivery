@@ -257,10 +257,23 @@ checkoutForm.addEventListener("submit", async (e) => {
 
     } catch (error) {
         console.error("Checkout error:", error);
-        showToast(error.message || "Payment failed. Please try again.", "error");
+        const failureMessage = error.message || "Payment failed. Please try again.";
+        const failedData = {
+            ...(checkoutSummary || {}),
+            totalPrice: Number(totalPrice || 0),
+            reason: failureMessage,
+            failedAt: new Date().toISOString()
+        };
 
         payBtn.textContent = `Pay ${formatMoney(totalPrice)}`;
         payBtn.disabled = false;
+
+        localStorage.setItem("checkoutFailed", JSON.stringify(failedData));
+        queueToast("Payment failed. Please review the details and try again.", "error");
+
+        setTimeout(() => {
+            window.location.href = "failed.html";
+        }, 650);
     }
 });
 

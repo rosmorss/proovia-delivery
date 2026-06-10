@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed | Proovia</title>
+    <meta name="description" content="Payment failure page for a Proovia delivery booking.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://proovia.co.uk/failed.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Payment Failed | Proovia">
+    <meta property="og:description" content="Payment failure page for a Proovia delivery booking.">
+    <meta property="og:url" content="https://proovia.co.uk/failed.html">
+    <meta property="og:image" content="https://proovia.co.uk/photo/herobg.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Payment Failed | Proovia">
+    <meta name="twitter:description" content="Payment failure page for a Proovia delivery booking.">
+    <meta name="twitter:image" content="https://proovia.co.uk/photo/herobg.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <script>
+        const _savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", _savedTheme);
+    </script>
+    <link rel="stylesheet" href="style/theme.css">
+    <link rel="stylesheet" href="style/success.css">
+</head>
+
+<body>
+    <div id="mobile-overlay"></div>
+
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <a href="log.html" class="mobile-menu-account">My Account</a>
+    </div>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="photo/logo.png" alt="Proovia Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="infod.html">Drive with us</a></li>
+        </ul>
+        <button id="hamburger" class="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                <div class="theme-toggle-thumb" id="themeThumb">sun</div>
+            </div>
+            <button class="btn-nav" onclick="window.location.href='log.html'">My Account</button>
+        </div>
+    </nav>
+
+    <main class="success-page failed-page">
+        <div class="success-shell">
+            <section class="success-panel confirmation-panel failed-confirmation" aria-labelledby="failedTitle">
+                <div class="failed-mark" aria-hidden="true"></div>
+                <p class="success-eyebrow">Payment not completed</p>
+                <h1 id="failedTitle">Payment failed</h1>
+                <p class="success-lead">
+                    We could not confirm your payment. No successful payment was recorded for this booking attempt.
+                </p>
+
+                <div class="tracking-box failure-box" id="failedReasonBox">
+                    <span>Failure reason</span>
+                    <strong id="failedReason">Payment failed. Please try again.</strong>
+                </div>
+
+                <div class="success-actions">
+                    <a href="checkout.html" id="retryCheckoutBtn" class="success-btn primary">Try payment again</a>
+                    <a href="index.html#home" class="success-btn secondary">Start again</a>
+                </div>
+            </section>
+
+            <aside class="success-panel summary-panel" aria-labelledby="failedSummaryTitle">
+                <div class="summary-header">
+                    <p class="success-eyebrow">Booking attempt</p>
+                    <h2 id="failedSummaryTitle">Payment summary</h2>
+                </div>
+
+                <dl class="summary-list">
+                    <div>
+                        <dt>Total due</dt>
+                        <dd id="failedTotalDue">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Plan</dt>
+                        <dd id="failedPlan">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Items</dt>
+                        <dd id="failedItems">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Route</dt>
+                        <dd id="failedRoute">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Dates</dt>
+                        <dd id="failedDates">Pending</dd>
+                    </div>
+                    <div>
+                        <dt>Attempted at</dt>
+                        <dd id="failedAt">Pending</dd>
+                    </div>
+                </dl>
+
+                <a class="new-booking-link" href="index.html#contact">Contact support</a>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="photo/logo.png" alt="Proovia Logo" class="hero-logo">
+                </a>
+
+                <p>
+                    Reliable nationwide delivery and moving services across England.
+                    Founded in Birmingham in 2014.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#coverage">Coverage</a></li>
+                    <li><a href="index.html#how">How It Works</a></li>
+                    <li><a href="index.html#reviews">Reviews</a></li>
+                    <li><a href="infod.html">Drivers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Support</h5>
+                <ul>
+                    <li><a href="log.html" target="_blank">My Account</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html" target="_blank">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="tel:+441213149848">(+44) 121 314 9848</a></li>
+                    <li><a href="mailto:support@proovia.co.uk">support@proovia.co.uk</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Proovia Couriers LTD. All rights reserved.</p>
+            <p>Built for fast, secure and reliable delivery across England.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/failed.js"></script>
+</body>
+
+</html>
