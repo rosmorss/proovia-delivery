@@ -419,7 +419,7 @@ getQuoteBtn.addEventListener("click", () => {
     const dropoffAddress = document.getElementById("dropoffAddress").value.trim();
 
     if (!pickupAddress || !dropoffAddress) {
-        alert("Please enter both pickup and drop off addresses.");
+        showToast("Please enter both pickup and drop-off addresses.", "error");
         return;
     }
 

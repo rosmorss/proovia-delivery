@@ -1,4 +1,5 @@
 import { bring } from "./fetch.js";
+import { queueToast, showToast } from "./toast.js";
 import {
     calculateItemsSubtotal,
     calculatePlanQuote,
@@ -43,8 +44,10 @@ function formatDate(dateString) {
 
 async function renderCheckout() {
     if (!customerId || !selectedPlanId) {
-        alert("Missing booking data. Please start again.");
-        window.location.href = "index.html";
+        showToast("Missing booking data. Please start again.", "error");
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 900);
         return;
     }
 
@@ -113,6 +116,7 @@ checkoutForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
+        showToast("Processing payment...", "info", { duration: 1400 });
         payBtn.textContent = "Processing...";
         payBtn.disabled = true;
 
@@ -235,11 +239,16 @@ checkoutForm.addEventListener("submit", async (e) => {
         if (trackingNumber) params.set("trackingNumber", trackingNumber);
         if (bookingId) params.set("bookingId", bookingId);
 
-        window.location.href = `success.html${params.toString() ? `?${params.toString()}` : ""}`;
+        queueToast("Payment completed. Your booking is confirmed.", "success");
+        showToast("Payment completed. Booking confirmed.", "success", { duration: 1200 });
+
+        setTimeout(() => {
+            window.location.href = `success.html${params.toString() ? `?${params.toString()}` : ""}`;
+        }, 650);
 
     } catch (error) {
         console.error("Checkout error:", error);
-        alert(error.message || "Payment failed.");
+        showToast(error.message || "Payment failed. Please try again.", "error");
 
         payBtn.textContent = `Pay ${formatMoney(totalPrice)}`;
         payBtn.disabled = false;
@@ -248,5 +257,5 @@ checkoutForm.addEventListener("submit", async (e) => {
 
 renderCheckout().catch(error => {
     console.error("Checkout render error:", error);
-    alert(error.message || "Checkout data could not be loaded.");
+    showToast(error.message || "Checkout data could not be loaded.", "error");
 });

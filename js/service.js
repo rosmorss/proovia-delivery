@@ -1,6 +1,7 @@
 let savedCollectionDate = localStorage.getItem("collectionDate");
 let savedDeliveryDate = localStorage.getItem("deliveryDate");
 import { bring } from "./fetch.js";
+import { showToast } from "./toast.js";
 import {
     calculateItemsSubtotal,
     calculatePlanQuote,
@@ -13,8 +14,10 @@ const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 async function loadSelectedPlan() {
     if (!selectedPlanId) {
-        alert("Please select a plan first.");
-        window.location.href = "plans.html";
+        showToast("Please select a delivery plan first.", "error");
+        setTimeout(() => {
+            window.location.href = "plans.html";
+        }, 900);
         return;
     }
 

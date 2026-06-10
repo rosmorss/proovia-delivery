@@ -1,4 +1,5 @@
 import { bring } from "./fetch.js";
+import { showToast } from "./toast.js";
 
 const cta = document.querySelector(".floating-cta");
 const footer = document.querySelector("footer");
@@ -35,17 +36,15 @@ window.addEventListener("scroll", () => {
 
 
 
-loginForm.addEventListener("submit", async (e) => {
+loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const body = {};
     const formElements = loginForm.elements;
     for (let element of formElements) {
         if (element.tagName.toLowerCase() === "input") {
-            console.log(element.name, element.value);
-            body[element.name] = element.value;
+            body[element.name] = element.value.trim();
         }
     }
-    console.log(body);
    try {
     const response = await bring("/auth/login", {
         method: "POST",
@@ -55,15 +54,17 @@ loginForm.addEventListener("submit", async (e) => {
         body: JSON.stringify(body)
     });
 
-    console.log("RESPONSE:", response);
-
     localStorage.setItem("token", response.token);
     localStorage.setItem("username", response.user?.username || body.username);
 
-    window.location.href = "dashboard.html";
+    showToast("Login successful. Opening dashboard...", "success", { duration: 1200 });
+
+    setTimeout(() => {
+        window.location.href = "dashboard.html";
+    }, 650);
 
 } catch (error) {
     console.error("Login failed:", error);
-    alert("Login failed. Please check your credentials and try again.");
+    showToast("Login failed. Please check your credentials and try again.", "error");
 }
 });
