@@ -21,6 +21,25 @@
     --status-neutral-bg: #5D626B;
 }
 
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: var(--red) !important;
+    box-shadow: 0 0 0 3px var(--red-glow) !important;
+}
+
+.field-error {
+    margin: 3px 0 0;
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.field-error:empty {
+    display: none;
+}
+
 /* ── DARK THEME ── */
 
 html[data-theme="dark"] {

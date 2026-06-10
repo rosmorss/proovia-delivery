@@ -1,4 +1,10 @@
 import { bring } from "./fetch.js";
+import {
+    attachEmailValidation,
+    attachNameValidation,
+    attachPhoneValidation,
+    validateEmailField
+} from "./validation.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -196,7 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
        CONTACT FORM
     ========================= */
 
-    document.getElementById("contactForm")?.addEventListener("submit", async (event) => {
+    const contactForm = document.getElementById("contactForm");
+    attachEmailValidation(contactForm, showToast);
+    attachNameValidation(contactForm, showToast);
+    attachPhoneValidation(contactForm, showToast);
+
+    contactForm?.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const form = event.currentTarget;
@@ -213,6 +224,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!payload.firstName || !payload.email || !payload.message) {
             showToast("Please fill in your name, email and message.", "error");
+            return;
+        }
+
+        if (!validateEmailField(form.querySelector('input[name="email"]'), showToast)) {
             return;
         }
 

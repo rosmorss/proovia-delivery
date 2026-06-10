@@ -1,6 +1,10 @@
 import { bring } from "./fetch.js";
 import { queueToast, showToast } from "./toast.js";
 import {
+    setupPaymentInputFormatting,
+    validatePaymentFields
+} from "./validation.js";
+import {
     calculateItemsSubtotal,
     calculatePlanQuote,
     formatMoney,
@@ -29,6 +33,8 @@ const deliveryDate = localStorage.getItem("deliveryDate");
 
 let totalPrice = Number(localStorage.getItem("totalPrice")) || 0;
 let checkoutSummary = null;
+
+setupPaymentInputFormatting(checkoutForm, showToast);
 
 function formatDate(dateString) {
     if (!dateString) return "Not selected";
@@ -114,6 +120,9 @@ async function renderCheckout() {
 
 checkoutForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const paymentFields = validatePaymentFields(checkoutForm, showToast);
+    if (!paymentFields.valid) return;
 
     try {
         showToast("Processing payment...", "info", { duration: 1400 });

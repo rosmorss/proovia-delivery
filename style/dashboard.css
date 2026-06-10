@@ -1919,6 +1919,25 @@ html[data-theme="light"] .theme-toggle-thumb {
     box-shadow: var(--focus-ring);
 }
 
+.form-input[aria-invalid="true"],
+.form-textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: var(--red);
+    box-shadow: var(--focus-ring);
+}
+
+.field-error {
+    margin: 0;
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.field-error:empty {
+    display: none;
+}
+
 .form-input:disabled {
     opacity: 0.6;
     cursor: not-allowed;

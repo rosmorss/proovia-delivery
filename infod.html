@@ -204,16 +204,26 @@
     <form class="apply-form">
 
       <div class="form-grid">
-        <input type="text" placeholder="First Name" required>
-        <input type="text" placeholder="Last Name" required>
+        <div class="form-field">
+          <input type="text" name="firstName" autocomplete="given-name" data-name-validation placeholder="First Name" required>
+        </div>
+        <div class="form-field">
+          <input type="text" name="lastName" autocomplete="family-name" data-name-validation placeholder="Last Name" required>
+        </div>
       </div>
 
       <div class="form-grid">
-        <input type="text" placeholder="City" required>
-        <input type="tel" placeholder="Phone Number" required>
+        <div class="form-field">
+          <input type="text" name="city" autocomplete="address-level2" data-name-validation placeholder="City" required>
+        </div>
+        <div class="form-field">
+          <input type="tel" name="phone" autocomplete="tel" data-phone-validation placeholder="Phone Number" required>
+        </div>
       </div>
 
-      <input type="email" placeholder="Email Address" required>
+      <div class="form-field">
+        <input type="email" name="email" autocomplete="email" placeholder="Email Address" required>
+      </div>
 
       <select required>
         <option value="">Select Vehicle Type</option>
@@ -226,7 +236,7 @@
       <!-- FILE UPLOAD -->
       <div class="file-upload">
         <label>Upload ID / Driving License</label>
-        <input type="file" required>
+        <input type="file" name="driverDocument" accept="image/*" required>
       </div>
 
       <button type="submit" class="btn-primary">Submit Application</button>

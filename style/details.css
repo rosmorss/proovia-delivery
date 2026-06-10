@@ -173,6 +173,13 @@
     gap: 18px;
 }
 
+.input-grid .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
 .input-grid input,
 .notes-area {
     width: 100%;
@@ -195,6 +202,14 @@
 .notes-area:focus {
     border-color: var(--red);
     box-shadow: 0 0 0 4px rgba(178,34,34,0.10);
+}
+
+.input-grid .field-error {
+    margin: -1px 2px 0;
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
 }
 
 /* CHECKBOX */

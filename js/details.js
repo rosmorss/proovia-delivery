@@ -1,5 +1,10 @@
 import { bring } from "./fetch.js";
 import { showToast } from "./toast.js";
+import {
+    attachEmailValidation,
+    attachNameValidation,
+    attachPhoneValidation
+} from "./validation.js";
 
 const saveKey = "orderDraft";
 
@@ -144,6 +149,10 @@ formInputs.forEach(input => {
 
 const orderForm = document.querySelector(".order-form");
 const nextBtn = document.querySelector(".next-btn");
+
+attachEmailValidation(orderForm, showToast);
+attachNameValidation(orderForm, showToast);
+attachPhoneValidation(orderForm, showToast);
 
 function cleanFieldValue(formData, key) {
     return String(formData.get(key) || "").trim();
