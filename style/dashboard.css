@@ -2372,6 +2372,21 @@ html[data-theme="light"] .theme-toggle-thumb {
     opacity: 1;
 }
 
+.toast-success {
+    background: var(--status-success-bg);
+    color: var(--text-on-accent);
+}
+
+.toast-error {
+    background: var(--red);
+    color: var(--text-on-accent);
+}
+
+.toast-info {
+    background: var(--text);
+    color: var(--text-on-accent);
+}
+
 /* ══════════════════════════════════════
    SCROLLBAR
    ══════════════════════════════════════ */

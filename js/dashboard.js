@@ -158,7 +158,7 @@ async function loadDashboardData() {
         renderAll();
     } catch (error) {
         console.error("Dashboard error:", error);
-        showToast(error.message || "Dashboard data could not be loaded");
+        showToast(error.message || "Dashboard data could not be loaded.", "error");
     }
 }
 
@@ -501,17 +501,17 @@ async function submitCreateOrder() {
     const dropoffAddress = getValue("createDropoffAddress");
 
     if (!isBusinessUser()) {
-        showToast("Only business users can create dashboard orders");
+        showToast("Only business users can create dashboard orders.", "error");
         return;
     }
 
     if (!pickupAddress || !dropoffAddress) {
-        showToast("Collection and delivery addresses are required");
+        showToast("Collection and delivery addresses are required.", "error");
         return;
     }
 
     if (!selected.length) {
-        showToast("Add at least one item");
+        showToast("Add at least one item.", "error");
         return;
     }
 
@@ -544,11 +544,11 @@ async function submitCreateOrder() {
         userAddresses = await bringAuth(`/user-addresses/user/${currentUser.id}`);
         resetCreateOrderForm(false);
         renderAll();
-        showToast(`Order created: ${createdOrder.trackingNumber || `#${createdOrder.id}`}`);
+        showToast(`Order created: ${createdOrder.trackingNumber || `#${createdOrder.id}`}`, "success");
         openDashboardCheckout(createdOrder.id, "active");
     } catch (error) {
         console.error("Create order failed:", error);
-        showToast(error.message || "Order could not be created");
+        showToast(error.message || "Order could not be created.", "error");
     } finally {
         submitButton.disabled = false;
         submitButton.textContent = "Create Order";
@@ -816,7 +816,7 @@ function openDashboardCheckout(orderId, returnPage = "active") {
     const order = findOrderById(orderId);
 
     if (!order) {
-        showToast("Order could not be found");
+        showToast("Order could not be found.", "error");
         return;
     }
 
@@ -831,7 +831,7 @@ function openDashboardCheckout(orderId, returnPage = "active") {
     }
 
     if (hasConfirmedPayment(order)) {
-        showToast("This order is already paid");
+        showToast("This order is already paid.", "success");
         openOrderDetails(order.id);
         return;
     }
@@ -934,12 +934,12 @@ async function submitDashboardPayment(form) {
     const payButton = document.getElementById("dashboardPayButton");
 
     if (!order) {
-        showToast("Order could not be found");
+        showToast("Order could not be found.", "error");
         return;
     }
 
     if (hasConfirmedPayment(order)) {
-        showToast("This order is already paid");
+        showToast("This order is already paid.", "success");
         openOrderDetails(order.id);
         return;
     }
@@ -947,7 +947,7 @@ async function submitDashboardPayment(form) {
     const cardNumber = String(new FormData(form).get("cardNumber") || "").replace(/\D/g, "");
 
     if (cardNumber.length < 12) {
-        showToast("Check the card number");
+        showToast("Check the card number.", "error");
         return;
     }
 
@@ -973,11 +973,11 @@ async function submitDashboardPayment(form) {
         renderDashboardStats();
         renderOrders();
         renderTrackingPage();
-        showToast("Payment completed");
+        showToast("Payment completed. Order is now paid.", "success");
         openOrderDetails(order.id);
     } catch (error) {
         console.error("Payment failed:", error);
-        showToast(error.message || "Payment failed");
+        showToast(error.message || "Payment failed. Please try again.", "error");
     } finally {
         if (payButton) {
             payButton.disabled = false;
@@ -1002,7 +1002,7 @@ function openOrderDetails(orderId) {
     const order = findOrderById(orderId);
 
     if (!order) {
-        showToast("Order could not be found");
+        showToast("Order could not be found.", "error");
         return;
     }
 
@@ -1683,7 +1683,7 @@ function initCalendar() {
                 if (selectedDeliveryDate > collectionDate) {
                     deliveryDate = selectedDeliveryDate;
                 } else {
-                    showToast("Delivery date must be after collection date");
+                    showToast("Delivery date must be after collection date.", "error");
                 }
             }
 
@@ -1775,15 +1775,17 @@ function getValue(id) {
     return document.getElementById(id)?.value.trim() || "";
 }
 
-function showToast(message) {
+function showToast(message, type = "info") {
     const toast = document.getElementById("toast");
     if (!toast) return;
 
     toast.textContent = message;
-    toast.classList.add("show");
+    toast.className = `toast toast-${type} show`;
 
     clearTimeout(showToast.timer);
-    showToast.timer = setTimeout(() => toast.classList.remove("show"), 3000);
+    showToast.timer = setTimeout(() => {
+        toast.className = "toast";
+    }, 3000);
 }
 
 window.showToast = showToast;
