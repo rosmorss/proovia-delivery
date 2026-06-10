@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia - Dashboard</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/dashboard.css">
+
+    <script src="js/theme-init.js"></script>
+</head>
+
+<body data-dashboard-page="support">
+
+    <div class="layout">
+        <div id="dashboardSidebarMount"></div>
+
+        <main class="main">
+            <div id="dashboardTopbarMount"></div>
+
+            <div class="content">
+<section class="page active" id="page-support">
+                    <div class="panel panel-xs panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Support</span>
+                        </div>
+                        <div class="support-inner">
+                            <div class="support-item">
+                                <div class="support-ico">📞</div>
+                                <div>
+                                    <div class="support-label">Phone</div>
+                                    <div class="support-val">+44 121 314 2780</div>
+                                </div>
+                            </div>
+                            <div class="support-item">
+                                <div class="support-ico">✉️</div>
+                                <div>
+                                    <div class="support-label">Email</div>
+                                    <div class="support-val">businesscustomers@proovia.co.uk</div>
+                                </div>
+                            </div>
+                            <div class="support-hours-title">
+                                <div class="support-label">Working Hours</div>
+                                <div class="hours-grid">
+                                    <div class="hours-item">
+                                        <div class="hours-day">Monday – Sunday</div>
+                                        <div class="hours-time">9:00 AM – 8:00 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /page-support -->
+            </div><!-- /content -->
+        </main><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/dashboard-shell.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
+
+</body>
+
+</html>

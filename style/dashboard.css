@@ -331,6 +331,7 @@ body {
     background: var(--red);
     color: var(--text-on-accent);
     border: none;
+    text-decoration: none;
     padding: 12px;
     border-radius: 10px;
     font-family: 'DM Sans', sans-serif;

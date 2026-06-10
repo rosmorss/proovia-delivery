@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia - Dashboard</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/dashboard.css">
+
+    <script src="js/theme-init.js"></script>
+</head>
+
+<body data-dashboard-page="active">
+
+    <div class="layout">
+        <div id="dashboardSidebarMount"></div>
+
+        <main class="main">
+            <div id="dashboardTopbarMount"></div>
+
+            <div class="content">
+<section class="page active" id="page-active">
+                    <div class="panel panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Active Orders</span>
+                            <span class="panel-sub-note">0 in progress</span>
+                        </div>
+                        <div id="activeOrdersContainer"></div>
+                    </div>
+                </section><!-- /page-active -->
+            </div><!-- /content -->
+        </main><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/dashboard-shell.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
+
+</body>
+
+</html>

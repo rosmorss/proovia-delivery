@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia - Dashboard</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/dashboard.css">
+
+    <script src="js/theme-init.js"></script>
+</head>
+
+<body data-dashboard-page="settings">
+
+    <div class="layout">
+        <div id="dashboardSidebarMount"></div>
+
+        <main class="main">
+            <div id="dashboardTopbarMount"></div>
+
+            <div class="content">
+<section class="page active" id="page-settings">
+                    <div class="panel panel-md panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Settings</span>
+                        </div>
+
+                        <!-- Profile -->
+                        <div class="settings-section">
+                            <div class="settings-title">Edit Profile</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input class="form-input" id="settingsEmail" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input class="form-input" id="settingsPhone">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input class="form-input" id="settingsUsername">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input class="form-input" id="settingsLastName">
+                                </div>
+                            </div>
+                            <button class="btn-update" type="button" onclick="showToast('✅ Profile updated!')">Update
+                                Profile</button>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="settings-section">
+                            <div class="settings-title">Security</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Current Password</label>
+                                    <input class="form-input" type="password" placeholder="••••••••">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New Password</label>
+                                    <input class="form-input" type="password" placeholder="••••••••">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-narrow">
+                                <label class="form-label">Confirm New Password</label>
+                                <input class="form-input" type="password" placeholder="••••••••">
+                            </div>
+                            <button class="btn-update" type="button" onclick="showToast('✅ Password updated!')">Update
+                                Password</button>
+                        </div>
+
+                    </div>
+                </section><!-- /page-settings -->
+            </div><!-- /content -->
+        </main><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/dashboard-shell.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
+
+</body>
+
+</html>

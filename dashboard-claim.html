@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proovia - Dashboard</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="photo/logotitle.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/dashboard.css">
+
+    <script src="js/theme-init.js"></script>
+</head>
+
+<body data-dashboard-page="claim">
+
+    <div class="layout">
+        <div id="dashboardSidebarMount"></div>
+
+        <main class="main">
+            <div id="dashboardTopbarMount"></div>
+
+            <div class="content">
+<section class="page active" id="page-claim">
+                    <div class="panel panel-md panel-animated">
+                        <div class="panel-header">
+                            <span class="panel-title">Report a Claim</span>
+                        </div>
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Order Number *</label>
+                                    <input class="form-input" placeholder="Search an order…">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Issue Type *</label>
+                                    <select class="form-input">
+                                        <option value="">Select a type</option>
+                                        <option>Damaged item</option>
+                                        <option>Missing item</option>
+                                        <option>Late delivery</option>
+                                        <option>Wrong address</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-mb">
+                                <label class="form-label">Description *</label>
+                                <textarea class="form-textarea"
+                                    placeholder="Please describe the issue with as much detail as possible…"></textarea>
+                            </div>
+
+                            <div class="upload-area">
+                                <div class="upload-icon">📎</div>
+                                <div class="upload-text">Click to upload supporting photos or documents</div>
+                            </div>
+
+                            <div class="checkbox-row">
+                                <input type="checkbox" id="confirm-check">
+                                <label for="confirm-check">I confirm that the information provided is accurate to the
+                                    best of my knowledge.</label>
+                            </div>
+
+                            <button class="btn-submit" type="button"
+                                onclick="showToast('✅ Claim submitted successfully!')">Submit Claim</button>
+                        </div>
+                    </div>
+                </section><!-- /page-claim -->
+            </div><!-- /content -->
+        </main><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/dashboard-shell.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/theme.js"></script>
+
+</body>
+
+</html>
