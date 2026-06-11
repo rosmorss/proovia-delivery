@@ -26,6 +26,8 @@ const dashboardLinks = {
     settings: "dashboard-settings.html"
 };
 
+const mobilePrimaryPages = new Set(["home", "create", "active"]);
+
 const navGroups = [
     {
         label: "Main",
@@ -104,16 +106,21 @@ const navGroups = [
     }
 ];
 
+function allDashboardNavItems() {
+    return navGroups.flatMap(group => group.items);
+}
+
 function currentDashboardPage() {
     return document.body.dataset.dashboardPage || "home";
 }
 
 function renderNavItem(item, currentPage) {
     const active = item.page === currentPage ? " active" : "";
+    const mobilePrimary = mobilePrimaryPages.has(item.page) ? " mobile-primary" : "";
     const badge = item.badgeId ? `<span class="nav-badge" id="${item.badgeId}">0</span>` : "";
 
     return `
-        <a class="nav-item${active}" href="${dashboardLinks[item.page]}" data-dashboard-nav="${item.page}">
+        <a class="nav-item${mobilePrimary}${active}" href="${dashboardLinks[item.page]}" data-dashboard-nav="${item.page}">
             <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 ${item.icon}
             </svg>
@@ -123,7 +130,22 @@ function renderNavItem(item, currentPage) {
     `;
 }
 
+function renderMobileMoreItem(item, currentPage) {
+    const active = item.page === currentPage ? " active" : "";
+
+    return `
+        <a class="mobile-more-item${active}" href="${dashboardLinks[item.page]}" data-dashboard-nav="${item.page}">
+            <svg class="mobile-more-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                ${item.icon}
+            </svg>
+            <span>${item.label}</span>
+        </a>
+    `;
+}
+
 function renderSidebar(currentPage) {
+    const secondaryItems = allDashboardNavItems().filter(item => !mobilePrimaryPages.has(item.page));
+    const mobileMoreActive = secondaryItems.some(item => item.page === currentPage) ? " active" : "";
     const nav = navGroups.map(group => `
         <div class="nav-section-label ${group.className || ""}">${group.label}</div>
         ${group.items.map(item => renderNavItem(item, currentPage)).join("")}
@@ -150,7 +172,23 @@ function renderSidebar(currentPage) {
 
             <nav class="sidebar-nav">
                 ${nav}
+                <button class="nav-item mobile-more-toggle${mobileMoreActive}" type="button"
+                    aria-expanded="false" aria-controls="dashboardMobileMore" data-mobile-more-toggle>
+                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="2.2" />
+                        <circle cx="12" cy="12" r="2.2" />
+                        <circle cx="19" cy="12" r="2.2" />
+                    </svg>
+                    More
+                </button>
             </nav>
+
+            <div class="mobile-more-panel" id="dashboardMobileMore" aria-hidden="true">
+                <div class="mobile-more-title">More</div>
+                <div class="mobile-more-grid">
+                    ${secondaryItems.map(item => renderMobileMoreItem(item, currentPage)).join("")}
+                </div>
+            </div>
 
             <div class="sidebar-bottom">
                 <a class="btn-new-order${createActive}" href="dashboard-create.html" data-dashboard-nav="create">
@@ -212,5 +250,44 @@ function mountDashboardShell() {
 }
 
 mountDashboardShell();
+
+function setupMobileMoreMenu() {
+    const sidebar = document.querySelector(".sidebar");
+    const toggle = sidebar?.querySelector("[data-mobile-more-toggle]");
+    const panel = sidebar?.querySelector("#dashboardMobileMore");
+
+    if (!sidebar || !toggle || !panel) return;
+
+    const setOpen = open => {
+        sidebar.classList.toggle("mobile-more-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+        panel.setAttribute("aria-hidden", String(!open));
+    };
+
+    toggle.addEventListener("click", event => {
+        event.preventDefault();
+        setOpen(!sidebar.classList.contains("mobile-more-open"));
+    });
+
+    panel.addEventListener("click", event => {
+        if (event.target.closest("a")) {
+            setOpen(false);
+        }
+    });
+
+    document.addEventListener("click", event => {
+        if (!sidebar.contains(event.target)) {
+            setOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            setOpen(false);
+        }
+    });
+}
+
+setupMobileMoreMenu();
 
 window.DASHBOARD_PAGE_TITLES = DASHBOARD_PAGE_TITLES;
