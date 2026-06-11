@@ -83,26 +83,29 @@
         <div class="terms-glow glow-2"></div>
         <div class="auth-box">
             <h2>Create Account</h2>
-            <p>Join Proovia and start moving smarter 🚚</p>
+            <p>Join Proovia and manage deliveries from your dashboard.</p>
 
-            <form id="registerForm">
+            <form id="registerForm" class="auth-form" autocomplete="off" data-lpignore="true" data-1p-ignore="true" novalidate>
                 <div class="form-group">
-                    <input type="text" name="fullName" autocomplete="name" data-name-validation placeholder="Full Name" required>
-                </div>
+                    <label class="form-field" for="registerUsername">
+                        <span>Username</span>
+                        <input type="text" id="registerUsername" name="username" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Choose a username" required>
+                    </label>
 
-                <div class="form-group">
-                    <input type="email" name="email" autocomplete="email" placeholder="Email Address" required>
-                </div>
+                    <label class="form-field" for="registerEmail">
+                        <span>Email address</span>
+                        <input type="email" id="registerEmail" name="email" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="you@example.com" required>
+                    </label>
 
-                <div class="form-group">
-                    <input type="text" placeholder="Username" required name="username">
+                    <label class="form-field" for="password">
+                        <span>Password</span>
+                        <input type="password" id="password" name="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" placeholder="At least 8 letters and numbers" required>
+                    </label>
 
-                    <input type="email" placeholder="Email Address" required name="email">
-
-                    <input type="password" id="password" placeholder="Password" required name="password">
-
-                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required
-                        name="confpassword">
+                    <label class="form-field" for="confirmPassword">
+                        <span>Confirm password</span>
+                        <input type="password" id="confirmPassword" name="confpassword" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" placeholder="Repeat your password" required>
+                    </label>
                 </div>
 
                 <button class="btn" type="submit">
@@ -115,7 +118,6 @@
             </div>
         </div>
 
-    </section>
     </section>
 
 
