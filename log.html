@@ -25,13 +25,13 @@
         const _savedTheme = localStorage.getItem("theme") || "dark";
         document.documentElement.setAttribute("data-theme", _savedTheme);
     </script>
-    <link rel="stylesheet" href="style/log.css">
     <link rel="stylesheet" href="style/theme.css">
     <link rel="stylesheet" href="style/header-footer.css">
+    <link rel="stylesheet" href="style/log.css">
 
 </head>
 
-<body>
+<body class="auth-page">
     <!-- MOBILE OVERLAY -->
     <div id="mobile-overlay"></div>
 
@@ -81,32 +81,38 @@
     <section class="auth-section">
         <div class="terms-glow glow-1"></div>
         <div class="terms-glow glow-2"></div>
-        <div class="auth-box">
-
-    <h2>Welcome Back</h2>
-    <p>Login to your Proovia account 🚚</p>
-
-            <form id="loginForm">
-
-                <div class="form-group">
-                    <input type="text" placeholder="Username or email" name="username" autocomplete="username" required>
-                    <input type="password" placeholder="Password" name="password" autocomplete="current-password" required>
+        <div class="auth-shell">
+            <div class="auth-copy">
+                <span class="auth-eyebrow">Business Portal</span>
+                <h1>Manage every delivery from one calm dashboard.</h1>
+                <p>Sign in to track orders, create new deliveries, manage addresses and keep payments in one secure place.</p>
+                <div class="auth-points">
+                    <span>Live tracking</span>
+                    <span>Saved addresses</span>
+                    <span>Business pricing</span>
                 </div>
-                
-
-                <button class="btn" type="submit">Login</button>
-
-            </form>
-
-            <div class="auth-link">
-                Don’t have an account? <a href="register.html">Sign up</a>
             </div>
 
-        </div>
+            <div class="auth-box">
+                <h2>Welcome Back</h2>
+                <p>Login to your Proovia account.</p>
 
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Username or email" name="username" autocomplete="username" required>
+                        <input type="password" placeholder="Password" name="password" autocomplete="current-password" required>
+                    </div>
+
+                    <button class="btn" type="submit">Login</button>
+                </form>
+
+                <div class="auth-link">
+                    Don't have an account? <a href="register.html">Sign up</a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    
     <footer>
         <div class="footer-top">
 

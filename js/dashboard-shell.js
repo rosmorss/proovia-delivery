@@ -26,6 +26,8 @@ const dashboardLinks = {
     settings: "dashboard-settings.html"
 };
 
+const mobilePrimaryPages = new Set(["home", "create", "active"]);
+
 const navGroups = [
     {
         label: "Main",
@@ -111,9 +113,10 @@ function currentDashboardPage() {
 function renderNavItem(item, currentPage) {
     const active = item.page === currentPage ? " active" : "";
     const badge = item.badgeId ? `<span class="nav-badge" id="${item.badgeId}">0</span>` : "";
+    const mobileHidden = mobilePrimaryPages.has(item.page) ? "" : " mobile-secondary-nav";
 
     return `
-        <a class="nav-item${active}" href="${dashboardLinks[item.page]}" data-dashboard-nav="${item.page}">
+        <a class="nav-item${active}${mobileHidden}" href="${dashboardLinks[item.page]}" data-dashboard-nav="${item.page}">
             <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 ${item.icon}
             </svg>
@@ -123,11 +126,45 @@ function renderNavItem(item, currentPage) {
     `;
 }
 
+function renderMobileMorePanel(currentPage) {
+    const secondaryItems = navGroups
+        .flatMap(group => group.items)
+        .filter(item => !mobilePrimaryPages.has(item.page));
+    const isSecondaryActive = !mobilePrimaryPages.has(currentPage);
+    const moreActive = isSecondaryActive ? " active" : "";
+
+    return `
+        <button class="nav-item mobile-more-toggle${moreActive}" type="button" aria-label="Open more dashboard pages" aria-expanded="false" data-secondary-active="${isSecondaryActive}">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"
+                    d="M5 12h.01M12 12h.01M19 12h.01" />
+            </svg>
+            More
+        </button>
+
+        <div class="mobile-more-panel" aria-hidden="true">
+            <div class="mobile-more-grid">
+                ${secondaryItems.map(item => {
+                    const active = item.page === currentPage ? " active" : "";
+                    return `
+                        <a class="mobile-more-item${active}" href="${dashboardLinks[item.page]}" data-dashboard-nav="${item.page}">
+                            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                ${item.icon}
+                            </svg>
+                            <span>${item.label}</span>
+                        </a>
+                    `;
+                }).join("")}
+            </div>
+        </div>
+    `;
+}
+
 function renderSidebar(currentPage) {
     const nav = navGroups.map(group => `
         <div class="nav-section-label ${group.className || ""}">${group.label}</div>
         ${group.items.map(item => renderNavItem(item, currentPage)).join("")}
-    `).join("");
+    `).join("") + renderMobileMorePanel(currentPage);
 
     const createActive = currentPage === "create" ? " active" : "";
 
@@ -209,8 +246,42 @@ function mountDashboardShell() {
 
     if (sidebarMount) sidebarMount.outerHTML = renderSidebar(currentPage);
     if (topbarMount) topbarMount.outerHTML = renderTopbar(currentPage);
+    setupMobileMoreMenu();
 }
 
 mountDashboardShell();
 
 window.DASHBOARD_PAGE_TITLES = DASHBOARD_PAGE_TITLES;
+
+function setupMobileMoreMenu() {
+    const button = document.querySelector(".mobile-more-toggle");
+    const panel = document.querySelector(".mobile-more-panel");
+
+    if (!button || !panel) return;
+
+    const setOpen = (isOpen) => {
+        const isSecondaryActive = button.dataset.secondaryActive === "true";
+        panel.classList.toggle("mobile-more-open", isOpen);
+        button.classList.toggle("active", isOpen || isSecondaryActive);
+        button.setAttribute("aria-expanded", String(isOpen));
+        panel.setAttribute("aria-hidden", String(!isOpen));
+    };
+
+    button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        setOpen(!panel.classList.contains("mobile-more-open"));
+    });
+
+    document.addEventListener("click", event => {
+        if (!panel.contains(event.target) && !button.contains(event.target)) {
+            setOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            setOpen(false);
+        }
+    });
+}

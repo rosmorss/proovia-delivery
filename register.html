@@ -25,12 +25,12 @@
         const _savedTheme = localStorage.getItem("theme") || "dark";
         document.documentElement.setAttribute("data-theme", _savedTheme);
     </script>
-    <link rel="stylesheet" href="style/register.css">
     <link rel="stylesheet" href="style/theme.css">
+    <link rel="stylesheet" href="style/register.css">
 
 </head>
 
-<body>
+<body class="auth-page">
 
     <!-- MOBILE OVERLAY -->
     <div id="mobile-overlay"></div>
@@ -81,7 +81,19 @@
     <section class="auth-section">
         <div class="terms-glow glow-1"></div>
         <div class="terms-glow glow-2"></div>
-        <div class="auth-box">
+        <div class="auth-shell">
+            <div class="auth-copy">
+                <span class="auth-eyebrow">Start Shipping Smarter</span>
+                <h1>Create your Proovia business workspace.</h1>
+                <p>Open an account to book deliveries faster, save addresses, track orders and manage your business pricing.</p>
+                <div class="auth-points">
+                    <span>Fast booking</span>
+                    <span>Order dashboard</span>
+                    <span>Secure access</span>
+                </div>
+            </div>
+
+            <div class="auth-box">
             <h2>Create Account</h2>
             <p>Join Proovia and manage deliveries from your dashboard.</p>
 
@@ -116,8 +128,8 @@
             <div class="auth-link">
                 Already have an account? <a href="log.html">Login</a>
             </div>
+            </div>
         </div>
-
     </section>
 
 

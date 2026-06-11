@@ -24,6 +24,7 @@ const selectedPlanId = localStorage.getItem("selectedPlanId");
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const serviceDetails = JSON.parse(localStorage.getItem("serviceDetails")) || null;
+const orderDetails = JSON.parse(localStorage.getItem("orderDetails")) || {};
 
 const pickupAddress = localStorage.getItem("pickupAddress");
 const dropoffAddress = localStorage.getItem("dropoffAddress");
@@ -49,7 +50,9 @@ function formatDate(dateString) {
 }
 
 async function renderCheckout() {
-    if (!customerId || !selectedPlanId) {
+    const hasCustomerDetails = orderDetails.customerFullName && orderDetails.customerEmail;
+
+    if ((!customerId && !hasCustomerDetails) || !selectedPlanId) {
         showToast("Missing booking data. Please start again.", "error");
         setTimeout(() => {
             window.location.href = "index.html";
@@ -135,8 +138,13 @@ checkoutForm.addEventListener("submit", async (e) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                customer: {
+                    fullName: orderDetails.customerFullName || "",
+                    email: orderDetails.customerEmail || "",
+                    phone: orderDetails.customerPhone || ""
+                },
                 booking: {
-                    customerId: Number(customerId),
+                    customerId: Number(customerId) || undefined,
                     planId: Number(selectedPlanId),
 
                     pickupAddress: pickupAddress,
@@ -237,7 +245,8 @@ checkoutForm.addEventListener("submit", async (e) => {
             "totalPrice",
             "selectedPlanId",
             "selectedPlanQuote",
-            "orderDetails"
+            "orderDetails",
+            "customerId"
         ].forEach(key => localStorage.removeItem(key));
 
         localStorage.setItem("bookingId", String(bookingId));
