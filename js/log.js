@@ -38,33 +38,69 @@ window.addEventListener("scroll", () => {
 
 loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const body = {};
     const formElements = loginForm.elements;
+
     for (let element of formElements) {
-        if (element.tagName.toLowerCase() === "input") {
+        if (element.tagName.toLowerCase() === "input" && element.name) {
             body[element.name] = element.value.trim();
         }
     }
-   try {
-    const response = await bring("/auth/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-    });
 
-    localStorage.setItem("token", response.token);
-    localStorage.setItem("username", response.user?.username || body.username);
+    const submitButton = loginForm.querySelector('button[type="submit"]');
+    const originalText = submitButton?.textContent.trim() || "Login";
 
-    showToast("Login successful. Opening dashboard...", "success", { duration: 1200 });
+    if (!body.username || !body.password) {
+        showToast("Please enter your username/email and password.", "error");
+        return;
+    }
 
-    setTimeout(() => {
-        window.location.href = "dashboard.html";
-    }, 650);
+    setSubmitState(submitButton, true, "Logging in...");
 
-} catch (error) {
-    console.error("Login failed:", error);
-    showToast("Login failed. Please check your credentials and try again.", "error");
-}
+    try {
+        const response = await bring("/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (!response?.token) {
+            throw new Error("Login response did not include a token");
+        }
+
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("username", response.user?.username || body.username);
+
+        showToast("Login successful. Opening dashboard...", "success", { duration: 1200 });
+
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 650);
+
+    } catch (error) {
+        console.error("Login failed:", error);
+        showToast(getLoginErrorMessage(error), "error");
+    } finally {
+        setSubmitState(submitButton, false, originalText);
+    }
 });
+
+function setSubmitState(button, isLoading, text) {
+    if (!button) return;
+
+    button.disabled = isLoading;
+    button.textContent = text;
+}
+
+function getLoginErrorMessage(error) {
+    const message = error?.message || "";
+
+    if (message && !message.toLowerCase().includes("request failed")) {
+        return message;
+    }
+
+    return "Login failed. Please check your credentials and try again.";
+}
